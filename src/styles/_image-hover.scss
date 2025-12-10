@@ -41,6 +41,11 @@
         margin-bottom: 1.5rem;
       }
     }
+      .floating-text span {
+    display: inline-block;
+    opacity: 0;
+    white-space: nowrap;
+  }
     .text-wrap{
       width: 100%;
       max-width: 95%;

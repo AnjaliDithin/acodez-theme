@@ -3,6 +3,7 @@ import heroCrossfade from "./heroCrossfade.js";
 import { initVideoControls } from "./videoPlayer.js";
 import { initHoverParallax } from "./hoverParallax.js";
 import { initSplittext } from "./splittext.js";
+import { initTextAnimation } from "./textAnimation.js";
 
 
 function initAll() {
@@ -11,6 +12,7 @@ function initAll() {
   initVideoControls();
   initHoverParallax();
   initSplittext();
+  initTextAnimation();
 }
 
 // First load
