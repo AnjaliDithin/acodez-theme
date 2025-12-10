@@ -1,0 +1,65 @@
+@use "variables" as *;
+
+  .video-below-banner {
+    overflow: hidden;
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      max-height: 81rem;
+    }
+
+    .responsive-video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+
+    .video-wrapper.is-expanded {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $theme-black;
+    }
+
+    .video-wrapper.is-expanded .responsive-video {
+      width: 100%;
+      height: auto;
+      max-height: 100vh;
+      object-fit: cover;
+    }
+
+    .video-close-btn {
+      position: absolute;
+      top: 3rem;
+      right: 3rem;
+      background: $theme-lightblue;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 0.5rem;
+      border-radius: 50%;
+      z-index: 12;
+      display: none; /* shown when expanded */
+      cursor: pointer;
+      font-size: 0;
+      width: 3rem;
+      height: 3rem;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+    .video-close-btn[hidden] {
+        display: none;
+    }
+
+    .video-wrapper.is-expanded .video-close-btn {
+      display: flex;
+    }
+  }

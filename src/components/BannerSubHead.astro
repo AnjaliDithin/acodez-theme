@@ -1,8 +1,9 @@
 ---
 const {
   heading = "",
-  align = "center",    // "center" | "left"
-  whiteText = false,  // true | false
+  align = "center",      // "center" | "left"
+  whiteText = false,    // true | false
+  color = "",           // ✅ NEW: custom color option
   className = "",
 } = Astro.props;
 
@@ -14,9 +15,12 @@ const classes = [
 ]
   .filter(Boolean)
   .join(" ");
+
+const style = color ? `color: ${color};` : "";
 ---
 
-<div class={classes}>
+<div class={classes} style={style}>
   {heading}
 </div>
+
 
