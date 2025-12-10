@@ -1,0 +1,29 @@
+---
+import "../styles/herobanner.css";
+import Button from "../components/Button.astro";
+
+---
+<section class="hero-banner-sec sub-banner-sec">
+    <div class="container">
+        <div class="hero-banner-area">
+            <div class="hero-bannerImg-sec">
+                <img  class="desktop-banner" src="/home/banner1.png" alt="Sustainable Water Solutions for a Changing World " title="Sustainable Water Solutions for a Changing World " width="1400" height="610" />
+                <img    class="mobile-banner" src="/home/banner1.png" alt="Sustainable Water Solutions for a Changing World " title="Sustainable Water Solutions for a Changing World " width="355" height="280" />
+            </div>
+            <div class="hero-banner-wrapper flex items-center justify-between md:flex-wrap">
+                <div class="head-wraper">
+                    <h1>Who we are </h1>
+                </div>
+              
+                    <Button 
+                        href="#" 
+                        text="Get Started" 
+                        variant="white-border" 
+                        withArrow={true} 
+                        target="_blank" 
+                    />
+                
+            </div>
+        </div>
+    </div>
+</section>

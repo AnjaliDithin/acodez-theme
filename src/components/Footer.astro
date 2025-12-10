@@ -1,0 +1,148 @@
+---
+import '../styles/footer.css';
+import Button from "../components/Button.astro";
+
+// Simulated dynamic data (replace with props/data fetching later)
+
+const contactNumber = "+91 98765 43210";
+const contactAddress = "123 Water Street, Kochi, Kerala";
+const copyright =
+  "© 2025 Alba Water. All rights reserved.";
+
+const socialLinks = {
+  instagram: "https://instagram.com/yourprofile",
+  facebook: "https://facebook.com/yourprofile",
+  youtube: "https://youtube.com/yourchannel"
+};
+
+const blueCTA = {
+  title: "Partner with Us for Sustainable Water Outcomes.",
+  content: "<p>Whether you’re planning, upgrading, or maintaining — we’re here to help you do it better.</p>",
+   button_url: "/contact",
+  button_text: "Contact Us",
+};
+---
+
+<footer class="main-footer">
+  <span class="layer"></span>
+    {blueCTA?.title && (
+    <div class="footer-bluecta-area">
+        <div class="container">
+        <div class="cta-content-wrapper" data-aos="fade-up" data-aos-duration="1000">
+            <div class="text-wrap">
+            <h3>{blueCTA.title}</h3>
+            <div set:html={blueCTA.content}></div>
+            </div>
+            {blueCTA.button_url && (
+            <div class="btn-wrap">
+                 <Button 
+                    href={blueCTA.button_url} 
+                    text={blueCTA.button_text} 
+                    variant="Hdr-ct-btn" 
+                    withArrow={true} 
+                    target="_blank" 
+                    />
+            </div>
+            )}
+        </div>
+        </div>
+    </div>
+    )}
+
+  <div class="footer-main-area">
+    <div class="container">
+      <div class="footer-main-wrapper">
+        <div class="ftr-logo-wrapper">
+         <a href="/"><img  class="hdr-logo-img" src="/hdr-logo.png" alt="logo of Alba waters" title="Alba waters" width="160" height="55"/></a>
+				
+            <div class="ftr-txt">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            </div>
+        </div>
+
+        <div class="ftr-link-wrapper">
+          <div class="ftr-mainlinks ftr-quick-lnks">
+            <div class="sub-txt">About Us</div>
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="/team">Team</a></li>
+            </ul>
+          </div>
+
+          <div class="ftr-mainlinks ftr-sprt-lnks">
+            <div class="sub-txt">Services</div>
+            <ul>
+              <li><a href="/services/water-treatment">Water Treatment</a></li>
+              <li><a href="/services/maintenance">Maintenance</a></li>
+            </ul>
+          </div>
+
+          <div class="ftr-ct-wraper">
+            <div class="sub-txt">Contact Us</div>
+            <div class="ct-contnt-wrap">
+              <ul>
+                {contactNumber && (
+                  <li>
+                    <a href={`tel:${contactNumber}`}>
+                      <img src="/phone.svg" alt="phone" width="20" height="20" />
+                      <p>{contactNumber}</p>
+                    </a>
+                  </li>
+                )}
+                {contactAddress && (
+                  <li>
+                    <div class="lctn-wrap">
+                      <img src="/location.svg" alt="location" width="20" height="20" />
+                      {contactAddress}
+                    </div>
+                  </li>
+                )}
+                <li>
+                  <div class="ftr-social-media">
+                    <ul>
+                      {socialLinks.instagram && (
+                        <li>
+                          <a href={socialLinks.instagram} target="_blank">
+                            <img src="/insta.svg" alt="instagram" width="24" height="24" />
+                          </a>
+                        </li>
+                      )}
+                      {socialLinks.facebook && (
+                        <li>
+                          <a href={socialLinks.facebook} target="_blank">
+                            <img src="/fb.svg" alt="facebook" width="24" height="24" />
+                          </a>
+                        </li>
+                      )}
+                      {socialLinks.youtube && (
+                        <li>
+                          <a href={socialLinks.youtube} target="_blank">
+                            <img src="/yt.svg" alt="youtube" width="24" height="24" />
+                          </a>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ftr-btm-wrapper">
+        {copyright && (
+          <div class="left-blk">
+            <p>{copyright}</p>
+          </div>
+        )}
+        <div class="rht-blk">
+          <ul class="ftr-btm-links">
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

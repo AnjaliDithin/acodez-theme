@@ -1,0 +1,113 @@
+@use "variables" as *;
+
+.header_block {
+  position: relative;
+  z-index: 10;
+
+  @media (min-width: 1024px) {
+    height: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 3.4rem 0;
+    transition: top 0.25s ease-in-out;
+  }
+
+  nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    li {
+      list-style: none;
+      a{
+        color: $theme-deep-grey;
+        transition: 0.7s ease all;
+        &:visited{
+           color: $theme-deep-grey;
+        }
+        &:hover{
+            color: $theme-white;
+            transition: 0.7s ease all;
+        }
+      }
+    }
+  }
+
+  .mobile-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .desktop-header {
+    display: none;
+  }
+
+  .parent-menu {
+    padding: 0 2rem;
+    position: relative;
+  }
+
+  .sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 30rem;
+    background: transparent;
+    border: 2px solid $theme-lightblue;
+    border-radius: 2rem;
+    z-index:3;
+    padding: 1rem ;
+    
+  }
+
+  .parent-menu.open-sub > .sub-menu {
+    display: block;
+  }
+
+  .submenu-toggle {
+    background-color: transparent;
+    background: url("/images/arrow.svg") center no-repeat;
+    background-size: contain;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: none;
+    position: absolute;
+    right: -1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  /* ================= DESKTOP LAYOUT ================= */
+  @media (min-width: 1024px) {
+    .desktop-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-header {
+      display: none;
+    }
+
+    .main-navigation {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+  }
+
+  /* ================= MOBILE SUBMENU FIX ================= */
+  @media (max-width: 1023px) {
+    .sub-menu {
+      position: static;
+      min-width: 100%;
+      box-shadow: none;
+      padding-left: 1rem;
+    }
+  }
+}

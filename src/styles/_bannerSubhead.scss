@@ -1,0 +1,14 @@
+@use "variables" as *;
+
+.banner-subhead {
+    font-size: 2rem;
+    color:$theme-lightblue;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    margin-bottom: clamp(1.6rem, 2vw, 2.8rem);
+    font-size: clamp(1.6rem, 2.2vw, 3rem);
+    @media (min-width: 1350px) {
+        font-size: 3rem;
+        margin-bottom: 2.8rem;
+    }
+}

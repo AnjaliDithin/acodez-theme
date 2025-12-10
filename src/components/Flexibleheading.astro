@@ -1,0 +1,43 @@
+  ---
+// Props
+interface Props {
+  title: string;
+  topText?: string;
+  topIcon?: string;
+  align?: 'center' | 'left-align-txt';
+  maxWidthClass?: string;
+}
+
+const {
+  title,
+  topText = '',
+  topIcon = '',
+  align = 'center',
+  maxWidthClass = 'max-w-[80rem]',
+} = Astro.props as Props;
+
+const alignmentClass = align === 'center' ? 'text-center mx-auto' : 'left-align-txt';
+---
+<div class="heading-block ">
+  <div class="container">
+    <div class={`center-hdg2-blk flex gap-2 flex-col ${alignmentClass} ${maxWidthClass}`}>
+      {topText && (
+        <div class="top-head flex items-center gap-2 ">
+          {topIcon && (
+            <img
+              src={topIcon}
+              alt={topText}
+              width="20"
+              height="20"
+              class="heading-logo"
+            />
+          )}
+          <div class="top-txt ">{topText}</div>
+        </div>
+      )}
+      <h2>
+        {title}
+      </h2>
+    </div>
+  </div>
+</div>

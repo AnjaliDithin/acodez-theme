@@ -1,0 +1,65 @@
+@use "variables" as *;
+
+.primary-ct-btn{
+    border: 2px solid $theme-lightblue;
+    font-size: 1.4rem;
+    color:$theme-white;
+    font-weight: 500;
+    border-radius: 3rem;
+    padding: 1.1rem 1.7rem;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    background: transparent;
+    padding-left: 2rem;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    height: 4.5rem;
+    padding-right: 4rem;
+    &:visited{
+        color:$theme-white;
+    }
+    .arrowblk{
+        margin-left: 1em;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2rem;
+        width: 2rem;
+        right: 1.1rem;
+        transition: all 0.3s;
+        background: url('/images/arrow-right1.svg') center no-repeat;
+        background-size: contain;
+    }
+    &:hover {
+        color: black;
+    }
+    &::after {
+        content: "";
+        background: white;
+        position: absolute;
+        z-index: -1;
+        left: -20%;
+        right: -20%;
+        top: 0;
+        bottom: 0;
+        transform: skewX(-45deg) scale(0, 1);
+         transition: 0.7s ease all;
+    }
+    &:hover:after {
+        transform: skewX(-45deg) scale(1, 1);
+        transition: 0.7s ease all;
+    }
+    &.hdr-ct-btn{
+        font-size: 1.5rem;
+        padding-right: 2.4rem;
+        padding-left: 2.4rem;
+    }
+
+
+}

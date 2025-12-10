@@ -1,0 +1,200 @@
+---
+/* Pure Astro Component */
+import Button from "../components/Button.astro";
+---
+
+<header class="header_block header_sticky">
+  <div class="container">
+
+    <!-- ================= DESKTOP HEADER ================= -->
+    <div class="header_area desktop-header">
+
+      <div class="logo-block">
+        <a href="/">
+          <img src="/images/logo-header.svg" alt="acodez" width="186" height="54" />
+        </a>
+      </div>
+
+      <nav class="main-navigation">
+        <ul class="hdr_menu">
+
+          <li class="parent-menu" id="companyMenu">
+            <a href="/company" class="nav-link"  data-cursor="-opaque">Company</a>
+
+            <button class="submenu-toggle" id="companyToggle" aria-label="Toggle submenu"></button>
+
+            <ul class="sub-menu">
+              <li><a href="/company/company-1" astro:prefetch>Company 1</a></li>
+              <li><a href="/company/company-2" astro:prefetch>Company 2</a></li>
+              <li><a href="/company/company-3" astro:prefetch>Company 3</a></li>
+            </ul>
+          </li>
+
+          <li class="parent-menu">
+            <a href="/services" astro:prefetch data-cursor="-opaque">Services</a>
+          </li>
+
+          <li class="parent-menu">
+            <a href="/work" astro:prefetch data-cursor="-opaque">Work</a>
+          </li>
+
+          <li class="parent-menu">
+            <a href="/products" astro:prefetch data-cursor="-opaque">Products</a>
+          </li>
+
+          <li class="parent-menu">
+            <a href="/blog" astro:prefetch data-cursor="-opaque">Blog</a>
+          </li>
+
+        </ul>
+
+       <Button href="#contact" text="Start a Project" variant="primary" extraClass="hdr-ct-btn" />
+       
+      </nav>
+    </div>
+
+    <!-- ================= MOBILE HEADER ================= -->
+    <div class="header_area mobile-header">
+
+      <div class="logo-block">
+        <a href="/" astro:prefetch>
+          <img src="/images/logo-header.svg" alt="acodez" width="186" height="54" />
+        </a>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenuBtn">
+        <div class="menu-icon">
+          <img class="mobile-open" src="/images/arrow.svg" width="32" alt="open menu" />
+          <img class="mobile-close" src="/images/arrow.svg" width="32" alt="close menu" />
+        </div>
+      </div>
+
+      <nav class="mobile-nav" id="mobileNav">
+        <ul class="hdr_menu">
+
+          <li class="parent-menu" id="mobileCompanyMenu">
+            <a href="/company" class="nav-link" id="mobileCompanyToggle" astro:prefetch>Company</a>
+
+            <ul class="sub-menu">
+              <li><a href="/company/company-1" astro:prefetch>Company 1</a></li>
+              <li><a href="/company/company-2" astro:prefetch>Company 2</a></li>
+              <li><a href="/company/company-3" astro:prefetch>Company 3</a></li>
+            </ul>
+          </li>
+
+          <li><a href="/services" astro:prefetch>Services</a></li>
+          <li><a href="/work" astro:prefetch>Work</a></li>
+          <li><a href="/products" astro:prefetch>Products</a></li>
+          <li><a href="/blog" astro:prefetch>Blog</a></li>
+
+        </ul>
+      </nav>
+    </div>
+
+  </div>
+</header>
+
+
+<script is:inline>
+  function initHeader() {
+    console.log("✅ Header script running");
+
+    /* ================= STICKY HEADER ================= */
+    const header = document.querySelector(".header_sticky");
+    if (!header) {
+      console.warn("❌ .header_sticky not found");
+      return;
+    }
+
+    let lastScroll = 0;
+
+    window.addEventListener("scroll", () => {
+      const scrollPos = window.pageYOffset;
+      const headerHeight = header.offsetHeight;
+
+      if (scrollPos <= 0) {
+        header.style.top = "0px";
+        header.classList.remove("scrolled");
+      } 
+      else if (scrollPos > lastScroll) {
+        header.style.top = `-${headerHeight}px`;
+      } 
+      else {
+        header.style.top = "0px";
+        header.classList.add("scrolled");
+      }
+
+      lastScroll = scrollPos;
+    });
+
+    /* ================= DESKTOP SUBMENU ================= */
+
+    const companyMenu = document.getElementById("companyMenu");
+    const companyToggle = document.getElementById("companyToggle");
+
+    console.log("Desktop submenu:", companyMenu, companyToggle);
+
+    if (companyMenu && companyToggle) {
+      // Hover (desktop only)
+      companyMenu.addEventListener("mouseenter", () => {
+        if (window.innerWidth >= 1024) {
+          companyMenu.classList.add("open-sub");
+        }
+      });
+
+      companyMenu.addEventListener("mouseleave", () => {
+        if (window.innerWidth >= 1024) {
+          companyMenu.classList.remove("open-sub");
+        }
+      });
+
+      // Click toggle
+      companyToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        companyMenu.classList.toggle("open-sub");
+      });
+    }
+
+    /* ================= MOBILE MENU ================= */
+
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileNav = document.getElementById("mobileNav");
+
+    console.log("Mobile nav:", mobileMenuBtn, mobileNav);
+
+    if (mobileMenuBtn && mobileNav) {
+      mobileMenuBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        mobileNav.classList.toggle("open");
+      });
+    }
+
+    /* ================= MOBILE SUBMENU ================= */
+
+    const mobileCompanyToggle = document.getElementById("mobileCompanyToggle");
+    const mobileCompanyMenu = document.getElementById("mobileCompanyMenu");
+
+    console.log("Mobile submenu:", mobileCompanyToggle, mobileCompanyMenu);
+
+    if (mobileCompanyToggle && mobileCompanyMenu) {
+      mobileCompanyToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        mobileCompanyMenu.classList.toggle("open-sub");
+      });
+    }
+  }
+
+  /* ✅ Run on first load */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHeader);
+  } else {
+    initHeader();
+  }
+
+  /* ✅ Run on Astro navigation */
+  document.addEventListener("astro:page-load", initHeader);
+</script>
+
+

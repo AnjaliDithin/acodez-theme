@@ -1,0 +1,66 @@
+---
+import BannerSubhead from "./BannerSubHead.astro";
+import InteractiveGlobe from "./InteractiveGlobe.astro";
+---
+
+<section class="banner-block bg-change" data-color="#0E1216">
+    <div class="overlay-pattern"></div>
+  <div class="container">
+    <div class="banner-area">
+        <div class="banner-content">
+
+            <div class="hero-head">
+                <BannerSubhead heading="Digital Design Partner" align="left" />
+                <div class="heading-group">
+                    <h1>
+                        <div class="heading-wrap">
+                            <span>We Craft Great </span>
+                        </div>
+                        <div class="heading-wrap">
+                            <span>User</span>
+                            <div class="cross-fade-wrap">
+                                <div id="images-wrap" class="images-wrap">
+                                    <img class="fade-img" src="/images/home/cross1.png" alt="fade-img" title=" fade-img">
+                                    <img class="fade-img"  src="/images/home/cross2.png" alt="fade-img" title=" fade-img">
+                                    <img class="fade-img" src="/images/home/cross3.png" alt="fade-img" title=" fade-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="heading-wrap">   
+                            <span>Experiences</span>
+                        </div> 
+                    </h1>
+                </div>
+            </div>
+            <div class="hero-logo-head">
+                <div class="logo-wrap">
+                    <img src="/images/home/aw1.svg" alt="International Awards" title="International Awards">
+                    <div class="text-blk">
+                        <span class="awd-count inline-block w-full text-[#FFFFFF] text-[2.4rem] font-bold">16+</span>
+                        <span class="aw-txt inline-block w-full text-[#ADADAD]">International Awards</span>
+                    </div>
+                </div>
+                <div class="logo-wrap">
+                    <img src="/images/home/aw2.svg" alt="Partner" title="Partner">
+                    <div class="text-blk">
+                        <span class="awd-count inline-block w-full text-[#FFFFFF] text-[1.8rem] font-medium">Google</span>
+                        <span class="aw-txt inline-block w-full text-[#FFFFFF] text-[2.4rem] font-semibold">Partner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <InteractiveGlobe 
+        innerColor="#000000"     
+        outerColor1="#00F5FF"   
+        outerColor2="#7C3AED"   
+        />
+
+     </div>
+     <div class="scroll-downblk">
+        <div class="mouse-scroll">
+            <div class="mouse-text">Scroll down</div>
+            <div class="mouse-icon"></div>
+        </div>
+    </div>
+  </div>
+</section>

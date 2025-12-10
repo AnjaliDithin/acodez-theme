@@ -1,11 +1,65 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BannerSection from "../components/HeroBanner.astro";
+import ServicesSection from "../components/ServicesSection.astro";
+import TestimonialSection from "../components/TestimonialSection.astro";
+import GsapBgChange from "../components/GsapBgChange.jsx";
+import ImageHoverSection from "../components/ImageHoverSection.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+  <BannerSection />
+  
+  <section class="video-below-banner bg-change" data-cursor-text="play video">
+    <div class="video-wrapper" >
+      <video class="responsive-video" poster="/images/home/banner-image.png" autoplay muted loop playsinline preload="metadata">
+        <source src="/images/video1.mp4" type="video/mp4" />
+        <!-- Optional WebM fallback -->
+        <source src="/images/video1.mp4" type="video/webm" />
+        Your browser does not support the video tag.
+      </video>
+
+      <a class="video-play-btn" aria-pressed="false" aria-label="Play video" data-cursor-text="CLICK">
+      </a>
+
+      <button class="video-close-btn" aria-label="Close video" hidden>
+        ✕
+      </button>
+    </div>
+  </section>
+  <ImageHoverSection />
+  
+  <ServicesSection />
+  <TestimonialSection />
+  <GsapBgChange client:load />
+
+  <script>
+    import { initMouseFollower } from "../js/mouseFollower.js";
+    import heroCrossfade from "../js/heroCrossfade.js";
+    import { initVideoControls } from "../js/videoPlayer.js";
+    import { initHoverParallax } from "../js/hoverParallax.js";
+    
+
+    function initCrossfade() {
+      heroCrossfade();
+    }
+
+    function initAll() {
+      initMouseFollower();  
+      heroCrossfade();   // ✅ crossfade images
+      initVideoControls(); // ✅ video play button controls
+       initHoverParallax();
+    }
+
+    // ✅ Run on first load
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initAll);
+    } else {
+      initAll();
+    }
+
+    // ✅ Run on Astro route changes
+    document.addEventListener("astro:page-load", initAll);
+  </script>
+ 
+</BaseLayout>

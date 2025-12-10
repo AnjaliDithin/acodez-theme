@@ -1,0 +1,22 @@
+---
+const {
+  heading = "",
+  align = "center",    // "center" | "left"
+  whiteText = false,  // true | false
+  className = "",
+} = Astro.props;
+
+const classes = [
+  "banner-subhead",
+  align === "left" ? "left-align" : "center-align",
+  whiteText ? "white-text" : "",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div class={classes}>
+  {heading}
+</div>
+

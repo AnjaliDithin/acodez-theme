@@ -1,0 +1,284 @@
+@use "variables" as *;
+
+:root {
+  --font-primary: "DM Sans", sans-serif;
+}
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+audio, canvas, video {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+audio:not([controls]) {
+	display: none;
+}
+[hidden] {
+	display: none;
+}
+
+html{
+	color: $primary-color;
+	font-size: 10px;	
+	overflow-x: hidden;
+}
+
+  
+body {
+	margin: 0;
+	font-size: 1.7rem;
+ 	font-family: var(--font-primary);
+	color:$primary-color;
+	overflow-x: hidden;
+	background: $theme-white;
+	// &.header-scrolled{
+	// 	overflow-x: visible;
+	// }
+}
+::-moz-selection {
+	background:$theme-lightblue;
+	color:$theme-white;
+	text-shadow: none;
+	
+}
+::selection {
+	background:$theme-lightblue;
+	color:$theme-white;
+	text-shadow: none;
+}
+
+a {
+	color: inherit;
+	outline: none;
+	text-decoration:none;
+	&:visited {
+		color: inherit;
+	}
+
+	&:hover,
+	&:active {
+		color: inherit;
+		&:visited {
+			color: inherit;
+	   }
+	}
+	&:focus {
+		outline: 0;
+	}
+	&:hover,
+	&:active {
+		outline: 0;
+	}
+}
+
+
+b, strong {font-weight: bold;}
+
+
+
+hr {
+	display: block;
+	height: 0.15rem;
+	border: 0;
+	margin: 1em 0;
+	padding: 0;
+}
+nav{
+	ul,ol{
+		list-style: none;
+		list-style-image: none;
+		margin: 0;
+		padding: 0;
+	}
+}
+img {
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+	vertical-align: middle;
+	max-width: 100%;
+	height: auto; 
+}
+svg:not(:root) {
+	overflow: hidden;
+}
+figure {
+	margin: 0;
+}
+form {
+	margin: 0;
+}
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+label {
+	cursor: pointer;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
+	font-family: var(--font-primary);
+}
+
+button[disabled], input[disabled] {
+	cursor: default;
+}
+input[type="checkbox"], input[type="radio"] {
+	box-sizing: border-box;
+	padding: 0;
+	width: 1.65rem;
+	height: 1.65rem;
+	cursor: pointer;
+}
+
+input[type="search"] {
+	// -webkit-appearance: textfield;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+}
+
+input:invalid, textarea:invalid {
+	background-color: $theme-white;
+}
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: 0 0 1.5em;
+	width: 100%;
+	background: $theme-white;
+}
+td {
+	vertical-align: top;
+}
+th {background: $theme-white;}
+.chromeframe {
+	margin: 0.2em 0;
+	background: $theme-white;
+	padding: 0.2em 0;
+}
+ul,ol {
+	margin: 0 0 1em 0.75em;
+	padding: 0 0 1em 0.75em;
+}
+ul {
+	list-style: disc;
+}
+ol {
+	list-style: decimal;
+}
+li > ul,
+li > ol {
+	margin-bottom: 0;
+	margin-left: 0.5em;
+	padding-bottom: 0;
+}
+
+.container {
+	width: 100%;
+	padding: 0 2rem;
+	margin: 0 auto;
+    max-width:134rem;
+}
+.fullcontainer {
+	width: 100%;
+	padding: 0 2.5rem;
+	margin: 0 auto;
+    max-width:160rem;
+}
+
+.clearfix:before, .clearfix:after {clear: both;
+	content: "";
+	display: table;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	*zoom: 1;
+}
+h1,h2, h3, h4, h5, h6 {
+	margin:0;
+	padding:0;
+	color:$secondary-color;
+	font-weight: 500;
+}
+
+p {font-size: 1.7rem; margin:0;padding:0;font-weight: 300;}
+
+h1{
+	// font-size: 6rem;
+	font-size: clamp(3rem, 4vw, 5rem);
+	line-height: 1.3;
+	@media screen and (min-width: 991px) {
+		line-height: 1.08;
+	}
+	@media screen and (min-width: 1300px) {
+		font-size: 5rem;
+	}
+
+}
+h2{
+	font-size: clamp(3.5rem, 4vw, 6rem);
+	@media screen and (min-width: 1300px) {
+		font-size: 6rem;
+	}
+}
+h3{
+	font-size: clamp(3rem, 2.5vw + 1rem, 5rem);
+	@media screen and (min-width: 1300px) {
+		font-size: 5rem;
+	}
+}
+h4{
+	 font-size: clamp(2.6rem, 1.5vw + 1.5rem, 4rem);
+	@media screen and (min-width: 1300px) {
+		font-size: 4rem;
+	}
+}
+h5{
+	font-size: clamp(2.4rem, 1.2vw + 1.5rem, 3rem);
+	@media screen and (min-width: 1300px) {
+		font-size: 3rem;
+	}
+}
+h6{
+	font-size: clamp(1.8rem, 1vw + 1.2rem, 2rem);
+	@media screen and (min-width: 1300px) {
+		font-size: 2rem;
+	}
+	  
+}
+p,li{
+	font-size: clamp(1.5rem, 1vw ,1.7rem);
+	color: $primary-color;
+	line-height: 1.5;
+	@media screen and (min-width: 1300px) {
+		line-height: 1.7;
+		font-size: 1.7rem;
+	}
+}
+.bg-change {
+//   padding: 150px 0; 
+  min-height: auto;
+}
+section{
+//  height: 100svh;
+  transition: background-color 0.4s ease;
+}
+
+

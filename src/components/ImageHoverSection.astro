@@ -1,0 +1,44 @@
+---
+const images = [
+  { src: "/images/hover/about1.png", alt: "Image 1" },
+  { src: "/images/hover/about2.png", alt: "Image 2" },
+  { src: "/images/hover/about3.png", alt: "Image 3" },
+  { src: "/images/hover/about4.png", alt: "Image 4" },
+  { src: "/images/hover/about5.png", alt: "Image 5" },
+];
+---
+
+<section class="image-hover-section bg-change" data-color="#FFFFFF">
+  <div class="image-hover-wrap" id="imageHoverWrap">
+
+    <!-- ✅ TOP ROW -->
+    <div class="image-row top-row">
+      {images.slice(0, 2).map((img, i) => (
+        <div class="img-box" key={`top-${i}`}>
+          <img src={img.src} alt={img.alt} loading="lazy" />
+        </div>
+      ))}
+    </div>
+
+    <!-- ✅ CENTER CONTENT -->
+    <div class="center-content">
+      <p class="small-title">Our Work</p>
+      <h1 class="main-title">Featured Projects</h1>
+      <p class="desc">
+        We create award-winning digital experiences with motion.
+      </p>
+    </div>
+
+    <!-- ✅ BOTTOM ROW -->
+    <div class="image-row bottom-row">
+      {images.slice(2).map((img, i) => (
+        <div class="img-box" key={`bottom-${i}`}>
+          <img src={img.src} alt={img.alt} loading="lazy" />
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+

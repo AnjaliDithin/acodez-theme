@@ -1,0 +1,46 @@
+---
+type Variant = "primary" | "Hdr-ct-btn" | "Small-icon-btn" | "Large-icon-btn";
+
+interface Props {
+  href?: string;
+  text?: string;
+  variant?: Variant;
+  withArrow?: boolean;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  extraClass?: string;
+}
+
+// ✅ Typed props with safe defaults
+const {
+  href = "#",
+  text = "Click Me",
+  variant = "primary",
+  withArrow = false,
+  target = "_self",
+  extraClass = "",
+} = Astro.props as Props;
+
+// ✅ Strongly typed variant → class map
+const variantClassMap: Record<Variant, string> = {
+  primary: "primary-ct-btn",
+  "Hdr-ct-btn": "hdr-ct-btn",
+  "Small-icon-btn": "small-icon-btn",
+  "Large-icon-btn": "large-icon-btn",
+};
+---
+
+<div class="common-btn-block" data-cursor="-opaque">
+  <a
+    href={href}
+    target={target}
+    class:list={[
+      variantClassMap[variant],  // ✅ main variant class
+      withArrow && "with-arrow", // ✅ optional arrow class
+      extraClass                 // ✅ additional custom class
+    ]}
+  >
+    {text}
+    {withArrow && <span class="arrowblk"></span>}
+  </a>
+</div>
+

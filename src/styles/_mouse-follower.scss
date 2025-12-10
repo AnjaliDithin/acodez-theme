@@ -1,0 +1,63 @@
+@use "variables" as *;
+
+.mf-cursor {
+  width: 40px;
+  height: 40px;
+  border: 2px solid $theme-lightblue;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9;
+
+  background: rgba($theme-lightblue, 0.12);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: transparent; // ✅ Hide text by default
+
+  line-height: 1;
+  overflow: hidden;
+
+  transition:
+    width 0.2s ease,
+    height 0.2s ease,
+    font-size 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+
+  // ✅ Disable Cuberto default dot
+  &::before {
+    opacity: 0 !important;
+  }
+
+  /* ✅ TEXT MODE (Triggered by data-cursor-text) */
+  &.-text {
+    background: $theme-lightblue;
+    color: $theme-white;
+    border-color: $theme-lightblue;
+    width: 80px;
+    height: 80px;
+    @media (min-width: 768px) {
+        width: 150px;
+        height: 150px;
+    }
+  }
+
+  /* ✅ TEXT ELEMENT ITSELF */
+  &-text {
+    font-size: 16px!important;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    @media (min-width: 768px) {
+        font-size: 20px!important;
+    }
+  }
+}
