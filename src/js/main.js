@@ -3,7 +3,7 @@ import heroCrossfade from "./heroCrossfade.js";
 import { initVideoControls } from "./videoPlayer.js";
 import { initHoverParallax } from "./hoverParallax.js";
 import { initSplittext } from "./splittext.js";
-import { initTextAnimation } from "./textAnimation.js";
+import { initTextAnimation } from "./textanimation.js";
 import { initScrollAccordion } from "./scrolltrigger-accordion.js";
 
 

@@ -32,24 +32,29 @@ const services = [
     features: ["SEO Optimization", "Social Media Marketing", "Content Marketing", "PPC Campaigns"],
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
   },
-  // {
-  //   id: "05",
-  //   title: "Branding",
-  //   description: "Our highly creative team of designers always excels in creating unique brand identity and out-of-the-box designs that speaks on its own!",
-  //   features: ["Brand Identity", "Logo Design", "Brand Guidelines", "Visual Identity"],
-  //   image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=80"
-  // },
-  // {
-  //   id: "06",
-  //   title: "Mobile App",
-  //   description: "Our profound knowledge of mobile technologies & frameworks help us create secure & scalable Mobile Apps with great UX.",
-  //   features: ["iOS Development", "Android Development", "Cross-platform Apps", "App Design"],
-  //   image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80"
-  // }
+  {
+    id: "05",
+    title: "Branding",
+    description: "Our highly creative team of designers always excels in creating unique brand identity and out-of-the-box designs that speaks on its own!"
+  },
+  {
+    id: "06",
+    title: "Mobile App",
+    description: "Our profound knowledge of mobile technologies & frameworks, help us create secure & scalable Mobile Apps with great UX."
+  },
+    {
+    id: "07",
+    title: "Video Productions",
+    description: "We create awesome explainer videos of all types, that'd improve your brand story telling & user engagement which results in higher conversions"
+  }
 ];
+
+const topServices = services.slice(0, 4);
+
+const bottomServices = services.slice(4);
 ---
 
-<section class="serviceScrollsection " >
+<section class="serviceScrollsection bg-change" data-color="#F6F8FA">
   <div class="container">
     <div class="service-area">
 
@@ -57,41 +62,67 @@ const services = [
        
         <SplitTextGlobal client:load />
 
-    <div class="service-accordion-area" id="service-scroll-wrapper">
-      <div id="grid_container">
-        {services.map((service) => (
-          <div class="scroll-accordion">
-            <div class="title-row">
-              <div class="heading-row">
-                <h6 class="title__number">({service.id})</h6>
-                <h2>{service.title}</h2>
-              </div>
-              <div class="featured-img-row">
-                <img class="featured-img" src={service.image} alt={service.title} />
-              </div>
-            </div>
+       <div class="service-accordion-area" id="service-scroll-wrapper">
+        <div id="grid_container">
 
-            <div class="text__wrapper">
-              <div class="content-box">
-                <p>{service.description}</p>
-
-                <div class="features-list">
-                  {service.features.map((f) => (
-                    <div class="feature-item">{f}</div>
-                  ))}
+          { /* TOP: only first 4 services in scroll-accordion */ }
+          {topServices.map((service) => (
+            <div class="scroll-accordion" key={service.id}>
+                <div class="title-row">
+                  <div class="heading-row">
+                    <h6 class="title__number">({service.id})</h6>
+                    <h2>{service.title}</h2>
+                  </div>
                 </div>
 
-                <Button href="#contact" text="Start a Project" variant="primary" extraClass="small-icon-btn" withArrow />
+                <div class="text__wrapper">
+                  <div class="featured-img-col">
+                    <div class="featured-img-row">
+                      <img class="featured-img" src={service.image} alt={service.title} />
+                    </div>
+                  </div>
 
-              </div>
+                  <div class="content-box-col">
+                    <div class="content-box">
+                      <p>{service.description}</p>
+                    <ul class="features-list">
+                        {service.features.map((f, idx) => (
+                          <li class="feature-item" key={idx}>{f}</li>
+                        ))}
+                      </ul>
+                      <Button href="#contact" text="Start a Project" variant="primary" extraClass="small-icon-btn" withArrow />
+                    </div>
+                  </div>
+                </div>
+
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
+          ))}
 
+          { /* BOTTOM: render remaining services after the first 4 */ }
+          {bottomServices.length > 0 && (
+            <div class="scroll-bttom-row" id="scroll-bttom-row">
+              {bottomServices.map((s) => (
+                <div class="btm-col" key={s.id}>
+                  <div class="title-btm-row">
+                    <div class="heading-btm-row">
+                      <h6 class="title__number">({s.id})</h6>
+                      <h4>{s.title}</h4>
+                    </div>
+                    <div class="content-btmbox-col">
+                      <div class="content-box">
+                        <p>{s.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
+        </div> 
+      </div> 
 
     </div>
   </div>
 </section>
+<!-- <div class="pin-spacer-footer"></div> -->

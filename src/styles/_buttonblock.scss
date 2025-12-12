@@ -17,6 +17,8 @@
     align-items: center;
     height: 4.5rem;
     padding-right: 4rem;
+    width: fit-content;
+
     &:visited{
         color:#282828;
     }
@@ -34,11 +36,14 @@
         background-size: contain;
     }
     &:hover {
-        color: black;
+        color: $theme-white;
+        &:visited{
+             color: $theme-white;
+        }
     }
     &::after {
         content: "";
-        background: white;
+        background: #282828;
         position: absolute;
         z-index: -1;
         left: -20%;
@@ -61,6 +66,16 @@
          color:$theme-white;
          &:visited{
             color:$theme-white;
+        }
+         &:hover {
+            color: #282828;
+            &:visited{
+                color:#282828;
+            }
+        }
+         &::after {
+            content: "";
+            background: white;
         }
     }
     &.small-icon-btn{

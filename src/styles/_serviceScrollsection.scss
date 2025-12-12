@@ -1,7 +1,6 @@
 @use "variables" as *;
 
 .serviceScrollsection{
-    background-color: #F6F8FA!important;
     opacity: 1!important;
     padding: 12rem 0 ;
     position: relative;
@@ -9,7 +8,6 @@
         font-weight: 200;
         line-height: 1.4;
     }
-  
   
    .highlight-img{
         width: clamp(8rem, 8vw, 15rem);
@@ -24,228 +22,151 @@
             object-position: center;
     }
    }
-  // .service-accordion-area{
-  //   .title__number{
-  //     color:#3174F1;
-  //     font-weight: 400;
-  //   }
-  //   .heading-row{
-  //     display: flex;
-  //     align-items: center;
-  //     gap: 3.5rem;
-  //   }
-  //   .featured-img-row{
-  //     width: 59.4rem;
-  //     height: 23rem;
-  //   }
-  //    .featured-img{
-  //     width: 100%;
-  //     height: 100%;
-  //     max-height: 23rem;
-  //     object-fit: cover;
-  //     transform-origin: center;
-  //     display: block;
-  //   }
-   
-  //   .scroll-accordion .title-row {
-  //     display: flex; 
-  //     flex-direction: column;;
-  //     padding: 18px 12px;
-  //   }
-  //   .scroll-accordion{
-  //     display: grid;
-  //     grid-template-columns: 1.4fr 1fr;
-  //   }
 
-  //   .scroll-accordion .text__wrapper {
-  //      height: auto;
-  //       overflow: visible; /* JS will set overflow:hidden inline for animation */
-  //       opacity: 1;
-  //       transition: none;
-  //   }
-
-  //   .features-list { 
-  //     display:flex; 
-  //     gap: 8px; 
-  //     flex-wrap: wrap; 
-  //     margin: 10px 0; 
-  //   }
-
-
-  
-  //  }
-   .service-accordion-area {
-      position: relative;
-      width: 100%;
-      padding: 40px 5%;
-    }
-
-    .service-accordion-area .title__number {
+  .service-accordion-area {
+    .title__number {
       color: #3174F1;
       font-weight: 400;
-      font-size: 1.2rem;
     }
 
-    .service-accordion-area .heading-row {
+    .content-box-col {
+      margin-top: -8rem;
+      z-index: 2;    
+      position: relative;
+    }
+
+    .heading-row {
       display: flex;
       align-items: center;
       gap: 3.5rem;
-      padding: 30px 0;
-      position: relative;
-      z-index: 10;
     }
-
-    .service-accordion-area .heading-row h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #1a202c;
-      line-height: 1.2;
-      margin: 0;
+    .heading-btm-row {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
     }
+    .title-btm-row{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .btm-col{
+      width: 30%;
+    }
+    h6{
+      line-height: 1;
+    }
+    h2 {
+        line-height: 1.15;
+      }
+      h4{
+        line-height: 1.15;
+      }
 
-    .service-accordion-area .featured-img-row {
+    .featured-img-row {
       width: 59.4rem;
       height: 23rem;
-      border-radius: 12px;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(50px);
     }
+  
 
-    .service-accordion-area .featured-img {
+    .featured-img {
       width: 100%;
       height: 100%;
       max-height: 23rem;
       object-fit: cover;
       transform-origin: center;
       display: block;
+      transition: opacity 0.7s ease;
     }
 
-    .service-accordion-area .scroll-accordion .title-row {
+    .scroll-accordion .title-row {
       display: flex;
-      flex-direction: column;
-      padding: 18px 12px;
-    }
-
-    .service-accordion-area .scroll-accordion {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 3rem;
-      // min-height: 100vh;
-      align-items: start;
-      padding: 40px 0;
-      position: relative;
-    }
-
-    .service-accordion-area .scroll-accordion .text__wrapper {
-      height: auto;
-      overflow: visible;
-      opacity: 0;
-      transition: none;
-      transform: translateY(50px);
-    }
-
-    .service-accordion-area .text__wrapper .content-box {
-      padding: 40px;
-      border-radius: 16px;
-    }
-
-    .service-accordion-area .content-box p {
-      font-size: 1.125rem;
-      line-height: 1.8;
-      color: #4a5568;
-      margin-bottom: 30px;
-    }
-
-    .service-accordion-area .features-list {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin: 10px 0;
-    }
-
-    .service-accordion-area .feature-item {
-      padding: 12px 20px;
-      background: #f0f4ff;
-      border: 1px solid #e0e7ff;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      color: #2d3748;
-      transition: all 0.3s ease;
-    }
-
-    .service-accordion-area .feature-item:hover {
-      background: #e0e7ff;
-      border-color: #3174F1;
-      transform: translateY(-2px);
-    }
-
-    .btn {
-      display: inline-flex;
+      justify-content: flex-start;
       align-items: center;
-      gap: 10px;
-      padding: 14px 30px;
-      background: #3174F1;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(49, 116, 241, 0.3);
-      margin-top: 20px;
+      // padding: 3.5rem 0 0;
+      position: relative;
+      z-index: 2;
     }
 
-    .btn:hover {
-      background: #2563eb;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(49, 116, 241, 0.4);
+    .scroll-accordion {
+      display: block;
+      position: relative !important;
+      // border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background-clip: padding-box;
+
+      // background-color: #F6F8FA;
+      will-change: transform;
+      overflow: hidden;
+      padding: 3.7rem 0;
+    }
+    .scroll-accordion::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;              
+      height: 1px;
+      background: rgba(0,0,0,0.06);
+      pointer-events: none;
+      z-index: 2;            
+    }
+    .text__wrapper {
+      // overflow: hidden;
+      overflow: visible!important;
+      display: grid;
+      // grid-template-columns: 47% 55%;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 3.5rem;
+      // padding: 3.7rem 0 8rem;
+      will-change: height, opacity;
+      transition: none !important; 
     }
 
-    .btn svg {
-      width: 18px;
-      height: 18px;
+    .text__wrapper.is-open {
+      visibility: visible;
+      pointer-events: auto;
+      // padding: 3.7rem 0 8rem;
+      padding: 3.7rem 0  0;
+    }
+    .text__wrapper:not(.is-open) {
+      visibility: hidden;
+      pointer-events: none;
+      // padding: 3.7rem 0 0;
     }
 
-    /* Responsive */
-    @media (max-width: 1200px) {
-      .service-accordion-area .scroll-accordion {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .service-accordion-area .featured-img-row {
-        width: 100%;
-        max-width: 59.4rem;
-      }
-
-      .service-accordion-area .heading-row {
-        gap: 2rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .service-accordion-area .heading-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-
-      .service-accordion-area .heading-row h2 {
-        font-size: 1.8rem;
-      }
-
-      .service-accordion-area .featured-img-row {
-        height: 18rem;
-      }
-
-      .service-accordion-area .text__wrapper .content-box {
-        padding: 25px;
-      }
-
-      .service-accordion-area .features-list {
-        gap: 6px;
+    .features-list {
+      column-count: 2;
+      margin: 0;
+      padding: 0;
+      padding: 2.4rem 0;
+      list-style: none;
+      li{
+        padding-left: 1.5rem;
+        position: relative;
+        margin: 0 0 2.4rem 0;
+        &::before{
+          content: "";
+          background-color: transparent;
+          width: 0.9rem;
+          height: 0.9rem;
+          border: 2px solid #3902FFF2;
+          border-radius: 50%;
+          position: absolute;
+          top: 1rem;
+          left: 0;
+        }
       }
     }
+    .scroll-bttom-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-top: 3.5rem;
+      opacity: 1; /* visible */
+      transform: translateY(0);
+      visibility: visible;
+      transition: opacity 420ms cubic-bezier(.22,.9,.3,1), transform 420ms cubic-bezier(.22,.9,.3,1);
+    }
+  }
     
 }

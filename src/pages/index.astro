@@ -33,7 +33,11 @@ import ServicesScrolleffect from "../components/ServicesScrolleffect.astro";
   <ServicesScrolleffect />
   <GsapBgChange client:load />
 
-  <script type="module" src="/src/js/main.js"></script>
+  <script type="module" client:visible>
+    import('/src/js/main.js').catch(err => {
+      console.error('Failed to import /src/js/main.js:', err);
+    });
+  </script>
 
  
 </BaseLayout>

@@ -1,211 +1,316 @@
-// import { gsap } from 'gsap';
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// gsap.registerPlugin(ScrollTrigger);
-
-// // Initialize the scroll animation
-// export function initScrollAccordion() {
-//   const accordions = document.querySelectorAll('.scroll-accordion');
-  
-//   accordions.forEach((accordion, index) => {
-//     const headingRow = accordion.querySelector('.heading-row');
-//     const featuredImgRow = accordion.querySelector('.featured-img-row');
-//     const textWrapper = accordion.querySelector('.text__wrapper');
-    
-//     // Set initial state - hidden by default
-//     gsap.set(featuredImgRow, { opacity: 0, y: 30 });
-//     gsap.set(textWrapper, { opacity: 0, y: 30 });
-    
-//     // Pin the heading row while scrolling through this section
-//     ScrollTrigger.create({
-//       trigger: accordion,
-//       start: 'top top+=100',
-//       endTrigger: textWrapper,
-//       end: 'bottom center',
-//       pin: headingRow,
-//       pinSpacing: false,
-//       anticipatePin: 1,
-//     });
-    
-//     // Animate featured image on scroll - OPEN on enter, CLOSE on leave
-//     gsap.to(featuredImgRow, {
-//       y: 0,
-//       opacity: 1,
-//       ease: 'power2.out',
-//       scrollTrigger: {
-//         trigger: accordion,
-//         start: 'top center+=100',
-//         end: 'top top+=200',
-//         scrub: 1,
-//         onLeave: () => {
-//           // Close when scrolling to next section
-//           gsap.to(featuredImgRow, { opacity: 0, y: -30, duration: 0.3 });
-//         },
-//         onEnterBack: () => {
-//           // Re-open when scrolling back
-//           gsap.to(featuredImgRow, { opacity: 1, y: 0, duration: 0.3 });
-//         }
-//       }
-//     });
-    
-//     // Animate text content on scroll - OPEN on enter, CLOSE on leave
-//     gsap.to(textWrapper, {
-//       y: 0,
-//       opacity: 1,
-//       ease: 'power2.out',
-//       scrollTrigger: {
-//         trigger: accordion,
-//         start: 'top center+=50',
-//         end: 'top top+=150',
-//         scrub: 1,
-//         onLeave: () => {
-//           // Close when scrolling to next section
-//           gsap.to(textWrapper, { opacity: 0, y: -30, duration: 0.3 });
-//         },
-//         onEnterBack: () => {
-//           // Re-open when scrolling back
-//           gsap.to(textWrapper, { opacity: 1, y: 0, duration: 0.3 });
-//         }
-//       }
-//     });
-//   });
-// }
-
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-export function initScrollAccordion() {
-  const accordions = Array.from(document.querySelectorAll('.scroll-accordion'));
-  if (!accordions.length) return;
+export function initScrollAccordion({ debug = false } = {}) {
+  // Prevent double-init
+  if (window.__accordionInitiated) {
+    if (debug) console.info("[accordion] already initiated — skipping");
+    return;
+  }
+  window.__accordionInitiated = true;
 
-  // Clean up previous ScrollTriggers for safety (optional)
-  ScrollTrigger.getAll().forEach(t => {
-    if (t && t.trigger && t.trigger.classList && t.trigger.classList.contains('scroll-accordion')) {
-      try { t.kill(true); } catch (e) {}
+  if (debug) console.info("[accordion] init start");
+
+  const items = Array.from(document.querySelectorAll(".scroll-accordion"));
+  if (!items.length) {
+    if (debug) console.warn("[accordion] no .scroll-accordion items found");
+    return;
+  }
+
+  const contents = items.map((it) => it.querySelector(".text__wrapper"));
+  const images = items.map((it) => it.querySelector(".featured-img"));
+
+  const wrapper =
+    document.getElementById("service-scroll-wrapper") ||
+    document.getElementById("grid_container") ||
+    document.querySelector(".service-accordion-area");
+
+  // bottom-row element (optional)
+  const bottomRow = document.querySelector(".scroll-bttom-row");
+
+  function getNaturalHeight(el) {
+    if (!el) return 0;
+    const clone = el.cloneNode(true);
+    clone.style.height = "auto";
+    clone.style.opacity = "0";
+    clone.style.position = "absolute";
+    clone.style.visibility = "hidden";
+    clone.style.pointerEvents = "none";
+    clone.style.zIndex = "-1";
+    // append to same parent so width/layout matches
+    el.parentNode.appendChild(clone);
+    const h = clone.offsetHeight;
+    clone.remove();
+    return h;
+  }
+
+  contents.forEach((c, i) => {
+    if (!c) return;
+    c.style.overflow = "hidden";
+    if (i === 0) {
+      c.style.height = "auto";
+      c.style.opacity = "1";
+      c.classList.add("is-open");
+      if (images[i]) images[i].style.opacity = "1";
+    } else {
+      c.style.height = "0px";
+      c.style.opacity = "0";
+      c.classList.remove("is-open");
+      if (images[i]) images[i].style.opacity = "0";
     }
   });
 
-  // Helper: set spacer padding for a given headingRow (safe lookup of the spacer element)
-  function setSpacerPaddingFor(headingRow, paddingPx) {
-    try {
-      // try common placements
-      let spacer = headingRow.closest('.gsap-pin-spacer') ||
-                   (headingRow.parentElement && headingRow.parentElement.closest('.gsap-pin-spacer')) ||
-                   Array.from(document.querySelectorAll('.gsap-pin-spacer')).find(sp => sp.contains(headingRow) || sp === headingRow.parentElement);
+  function setBottomRowVisible(visible) {
+    if (!bottomRow) return;
+    if (visible) bottomRow.classList.add("is-visible");
+    else bottomRow.classList.remove("is-visible");
+    if (debug) console.info("[accordion] bottomRow visible ->", visible);
+  }
+  // ensure initial bottom row hidden
+  if (bottomRow) setBottomRowVisible(false);
 
-      if (spacer) {
-        spacer.style.paddingBottom = paddingPx + 'px';
-      }
-    } catch (e) {
-      // ignore
-    }
+  // pointer events toggle (to avoid hover interactions causing reflow)
+  function togglePointerEvents(enable) {
+    if (!wrapper) return;
+    wrapper.style.pointerEvents = enable ? "auto" : "none";
   }
 
-  // For each accordion item create its ScrollTrigger (pin heading and reveal content)
-  accordions.forEach((accordion) => {
-    const headingRow = accordion.querySelector('.heading-row');
-    const featuredImgRow = accordion.querySelector('.featured-img-row');
-    const textWrapper = accordion.querySelector('.text__wrapper');
+  function ensureVisibleBeforeAnimate(el) {
+    if (!el) return;
+    el.style.display = "grid"; // matches SCSS usage
+    el.style.visibility = "visible";
+    el.classList.add("is-open");
+    // freeze pixel height so GSAP animates from a stable start
+    gsap.set(el, { height: el.offsetHeight + "px" });
+  }
 
-    if (!headingRow || !textWrapper) return;
+  let lastOpened = -1;
+  const lastIndex = items.length - 1;
 
-    // Ensure textWrapper measured properly: set auto then measure when needed.
-    // We will NOT rely on a single measured value: end() will compute scrollHeight dynamically
-    // so if images load later, the new height will be used on refresh.
-    textWrapper.style.height = '0px'; // start collapsed
-    textWrapper.style.overflow = 'hidden';
-
-    // Set featured image initial state
-    if (featuredImgRow) {
-      gsap.set(featuredImgRow, { opacity: 0, y: 20, willChange: 'transform,opacity' });
+  function openAccordion(activeIndex, { force = false } = {}) {
+    if (activeIndex === lastOpened && !force) {
+      if (debug) console.debug("[accordion] openAccordion skipped (already open)", activeIndex);
+      return;
     }
+    lastOpened = activeIndex;
 
-    // Extra padding to reserve while pinned (compute or set fixed)
-    // You can compute per-item (e.g., based on image height). Here we compute a default using image (if exists) else fallback.
-    const baseExtra = 120;
-    let computedExtra = baseExtra;
-    if (featuredImgRow) {
-      const imgEl = featuredImgRow.querySelector('img');
-      if (imgEl && imgEl.naturalHeight) {
-        // approximate visible img height (scaled). This is just a hint — end() computes dynamically anyway.
-        computedExtra = Math.max(baseExtra, Math.round((imgEl.naturalHeight * (featuredImgRow.offsetWidth / (imgEl.naturalWidth || 1))) || baseExtra));
-      }
-    }
+    if (debug) console.info("[accordion] opening index", activeIndex);
 
-    // Create ScrollTrigger
-    const st = ScrollTrigger.create({
-      trigger: accordion,
-      start: () => `top top`, // can be tweaked
-      // end calculates from the *current* textWrapper.scrollHeight so lazy-loaded images are accounted for after refresh
-      end: () => `+=${(textWrapper && textWrapper.scrollHeight) || 0 + computedExtra}`,
-      pin: headingRow,
-      pinSpacing: true,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onRefresh: (self) => {
-        // onRefresh runs after ScrollTrigger recalculates sizes.
-        // update spacer padding so the pinned area has extra reserved space.
-        // Use a responsive rule: larger padding on wider screens
-        const paddingForViewport = window.innerWidth >= 1024 ? 80 : 40; // adjust to taste
-        setSpacerPaddingFor(headingRow, paddingForViewport);
-      },
-      onEnter: () => {
-        // compute natural height on enter (in case it changed since init)
-        const naturalHeight = textWrapper.scrollHeight || 0;
-        gsap.to(textWrapper, {
+    // briefly disable pointer events to reduce interactive reflows
+    togglePointerEvents(false);
+
+    contents.forEach((c, i) => {
+      if (!c) return;
+      const naturalHeight = getNaturalHeight(c);
+
+      // stop any current tween on this content
+      gsap.killTweensOf(c);
+
+      // ensure pixel start to avoid auto->px jump
+      ensureVisibleBeforeAnimate(c);
+
+      if (i === activeIndex) {
+        // OPEN
+        gsap.to(c, {
           height: naturalHeight,
           opacity: 1,
           duration: 0.6,
-          ease: 'power2.out'
+          ease: "power3.out",
+          overwrite: "auto",
+          onComplete: () => {
+            // switch to auto to allow responsiveness
+            c.style.height = "auto";
+            // slight delay so sibling closes finish
+            setTimeout(() => togglePointerEvents(true), 60);
+            // refresh ScrollTrigger measurements after final layout
+            ScrollTrigger.refresh();
+          }
         });
-        if (featuredImgRow) {
-          gsap.to(featuredImgRow, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+
+        if (images[i]) {
+          gsap.killTweensOf(images[i]);
+          gsap.to(images[i], { opacity: 1, duration: 0.45, ease: "power3.out", overwrite: "auto" });
         }
-      },
-      onLeave: () => {
-        gsap.to(textWrapper, { height: 0, opacity: 0, duration: 0.35, ease: 'power2.in' });
-        if (featuredImgRow) gsap.to(featuredImgRow, { opacity: 0, y: -20, duration: 0.35, ease: 'power2.in' });
-      },
-      onEnterBack: () => {
-        const naturalHeight = textWrapper.scrollHeight || 0;
-        gsap.to(textWrapper, { height: naturalHeight, opacity: 1, duration: 0.6, ease: 'power2.out' });
-        if (featuredImgRow) gsap.to(featuredImgRow, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
-      },
-      onLeaveBack: () => {
-        gsap.to(textWrapper, { height: 0, opacity: 0, duration: 0.35, ease: 'power2.in' });
-        if (featuredImgRow) gsap.to(featuredImgRow, { opacity: 0, y: -20, duration: 0.35, ease: 'power2.in' });
+      } else {
+        // CLOSE
+        gsap.to(c, {
+          height: 0,
+          opacity: 0,
+          duration: 0.45,
+          ease: "power3.out",
+          overwrite: "auto",
+          onComplete: () => {
+            c.style.height = "0px";
+            c.style.visibility = "hidden";
+            c.classList.remove("is-open");
+          }
+        });
+
+        if (images[i]) {
+          gsap.killTweensOf(images[i]);
+          gsap.to(images[i], { opacity: 0, duration: 0.38, ease: "power3.out", overwrite: "auto" });
+        }
       }
     });
 
-    // If textWrapper contains images that may load after init, refresh ScrollTrigger when images load.
-    const imgs = Array.from(textWrapper.querySelectorAll('img'));
-    if (imgs.length) {
-      let remaining = imgs.length;
-      imgs.forEach(img => {
-        if (img.complete) {
-          remaining--;
-        } else {
-          img.addEventListener('load', () => {
-            remaining--;
-            if (remaining <= 0) {
-              // All images inside textWrapper loaded — refresh triggers so end() and layout are recalculated.
-              ScrollTrigger.refresh();
-            }
-          }, { once: true });
-          img.addEventListener('error', () => {
-            remaining--;
-            if (remaining <= 0) ScrollTrigger.refresh();
-          }, { once: true });
+    // Bottom row logic: show when last index is open; hide otherwise
+    if (activeIndex === lastIndex) {
+      setBottomRowVisible(true);
+    } else {
+      setBottomRowVisible(false);
+    }
+  }
+
+  // PER-ITEM ScrollTrigger setups
+  items.forEach((item, index) => {
+    ScrollTrigger.create({
+      trigger: item,
+      start: "top bottom",
+      toggleActions: "restart none none reverse",
+      onEnter: () => openAccordion(index),
+      onEnterBack: () => openAccordion(index)
+    });
+  });
+
+  // SECTION-LEVEL ScrollTrigger: open first on enter, last on leave
+  if (wrapper) {
+    ScrollTrigger.create({
+      trigger: wrapper,
+      start: "top bottom",
+      end: `bottom+=${window.innerHeight} top`, // slack so leave has time to animate
+      onEnter: () => {
+        openAccordion(0, { force: true });
+        setBottomRowVisible(false);
+      },
+      onEnterBack: () => {
+        openAccordion(0, { force: true });
+        setBottomRowVisible(false);
+      },
+      onLeave: () => {
+        openAccordion(lastIndex, { force: true });
+        // show bottom row when leaving the entire section
+        setBottomRowVisible(true);
+      },
+      onLeaveBack: () => {
+        openAccordion(lastIndex, { force: true });
+        setBottomRowVisible(true);
+      }
+    });
+  }
+
+  // NEAREST-TO-CENTER scanner (debounced + rAF)
+  let scanTimer = null;
+  function scanNearestDebounced() {
+    if (scanTimer) clearTimeout(scanTimer);
+    scanTimer = setTimeout(() => {
+      requestAnimationFrame(() => {
+        const viewportCenter = window.innerHeight / 2;
+        let closestIdx = -1;
+        let closestDist = Infinity;
+
+        items.forEach((it, idx) => {
+          const rect = it.getBoundingClientRect();
+          const elCenter = rect.top + rect.height / 2;
+          const dist = Math.abs(elCenter - viewportCenter);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestIdx = idx;
+          }
+        });
+
+        // threshold for sensitivity (tune if needed)
+        const threshold = 220;
+        if (closestIdx >= 0) {
+          if (closestIdx === lastIndex || closestDist < threshold) {
+            openAccordion(closestIdx);
+          }
         }
       });
-      // If all images were already complete, trigger a refresh to ensure calculations are current.
-      if (remaining <= 0) ScrollTrigger.refresh();
-    }
-  }); // end accordions.forEach
+    }, 120); // debounce window (ms)
+  }
 
-  // After creating triggers, one final refresh to ensure everything is aligned
-  ScrollTrigger.refresh();
+  if (wrapper) {
+    // initial scan so direct navigation opens proper panel
+    scanNearestDebounced();
+    window.addEventListener("scroll", scanNearestDebounced, { passive: true });
+    window.addEventListener("resize", scanNearestDebounced);
+  }
+
+  // Refresh ScrollTrigger when images load and on window load
+  function refreshAfterImagesAndLoad() {
+    const imgs = wrapper ? wrapper.querySelectorAll("img") : document.querySelectorAll(".scroll-accordion img");
+    let pending = 0;
+    imgs.forEach((img) => {
+      if (!img.complete) {
+        pending++;
+        img.addEventListener(
+          "load",
+          () => {
+            pending--;
+            if (pending === 0) ScrollTrigger.refresh();
+          },
+          { once: true }
+        );
+      }
+    });
+
+    window.addEventListener(
+      "load",
+      () => {
+        ScrollTrigger.refresh();
+      },
+      { once: true }
+    );
+
+    // safety refresh if lazy loads later
+    setTimeout(() => ScrollTrigger.refresh(), 400);
+  }
+  refreshAfterImagesAndLoad();
+
+  // Programmatic API
+  window.openServiceAccordion = (idx) => {
+    if (typeof idx !== "number") return;
+    if (idx < 0 || idx > lastIndex) return;
+    openAccordion(idx, { force: true });
+    // intentionally NOT calling scrollIntoView here to avoid interrupting animation;
+    // callers can scroll after a short delay if desired.
+  };
+
+  // Debug probe (if debug flag true, log key events)
+  if (debug) {
+    console.info("[accordion] debug enabled");
+    // wrap openAccordion to log opens
+    const _origOpen = openAccordion;
+    openAccordion = function (idx, opts = {}) {
+      console.groupCollapsed(`[accordion debug] open -> ${idx}`);
+      const c = contents[idx];
+      if (c) {
+        console.log("computed:", getComputedStyle(c).height, getComputedStyle(c).opacity, getComputedStyle(c).display);
+        console.log("inline height:", c.style.height, "offsetHeight:", c.offsetHeight);
+        console.log("naturalHeight:", getNaturalHeight(c));
+      }
+      console.groupEnd();
+      return _origOpen.call(this, idx, opts);
+    };
+
+    // log bottom row visibility changes
+    const _origSetBottom = setBottomRowVisible;
+    setBottomRowVisible = function (v) {
+      console.info("[accordion debug] bottomRow visible ->", v);
+      return _origSetBottom(v);
+    };
+  }
+
+  if (debug) console.info("[accordion] init complete");
+
+  // expose small programmatic API object
+  return {
+    open: (i) => window.openServiceAccordion(i),
+    refresh: () => ScrollTrigger.refresh()
+  };
 }
+
 
 
