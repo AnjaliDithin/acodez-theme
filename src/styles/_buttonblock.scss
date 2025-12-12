@@ -1,9 +1,8 @@
 @use "variables" as *;
 
 .primary-ct-btn{
-    border: 2px solid $theme-lightblue;
     font-size: 1.4rem;
-    color:$theme-white;
+    color:#282828;
     font-weight: 500;
     border-radius: 3rem;
     padding: 1.1rem 1.7rem;
@@ -11,17 +10,15 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
-    background: transparent;
+    background: $theme-white;
     padding-left: 2rem;
     letter-spacing: 0.05em;
     display: flex;
     align-items: center;
-    overflow: hidden;
-    position: relative;
     height: 4.5rem;
     padding-right: 4rem;
     &:visited{
-        color:$theme-white;
+        color:#282828;
     }
     .arrowblk{
         margin-left: 1em;
@@ -59,6 +56,15 @@
         font-size: 1.5rem;
         padding-right: 2.4rem;
         padding-left: 2.4rem;
+        border: 2px solid $theme-lightblue;
+        background: transparent;
+         color:$theme-white;
+         &:visited{
+            color:$theme-white;
+        }
+    }
+    &.small-icon-btn{
+
     }
 
 

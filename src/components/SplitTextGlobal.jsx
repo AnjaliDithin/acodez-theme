@@ -105,7 +105,7 @@ export default function SplitTextGlobal() {
   return (
     <div className="smooth-wrapper">
       <div ref={containerRef} className="smooth-content">
-        <h2 ref={textRef} className="scroll-opacity-text">
+        <h3 ref={textRef} className="scroll-opacity-text">
 
           {words.map((word, index) => {
             const cleanWord = word.replace(/[.,]/g, "").toLowerCase();
@@ -144,7 +144,7 @@ export default function SplitTextGlobal() {
             );
           })}
 
-        </h2>
+        </h3>
       </div>
     </div>
   );

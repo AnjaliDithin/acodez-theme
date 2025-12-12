@@ -4,6 +4,7 @@ import { initVideoControls } from "./videoPlayer.js";
 import { initHoverParallax } from "./hoverParallax.js";
 import { initSplittext } from "./splittext.js";
 import { initTextAnimation } from "./textAnimation.js";
+import { initScrollAccordion } from "./scrolltrigger-accordion.js";
 
 
 function initAll() {
@@ -13,6 +14,7 @@ function initAll() {
   initHoverParallax();
   initSplittext();
   initTextAnimation();
+  initScrollAccordion();
 }
 
 // First load

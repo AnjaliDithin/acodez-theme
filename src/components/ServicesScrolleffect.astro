@@ -1,11 +1,13 @@
 ---
 import ContentSubHead from "./ContentSubHead.astro";
 import SplitTextGlobal from "./SplitTextGlobal.jsx";
+import Button from "../components/Button.astro";
+
 const services = [
   {
     id: "01",
     title: "UI/UX Design",
-    description: "Any part of a design that affects the user is UX design. At Acodez, we take into accountability each and every minutest aspect of the design software development experience and take the extensive care to make sure the UX design, UX design for SAAS, Product UX design for startups while ensuring that the end user enjoys a great value added experience.",
+    description: "Any part of a design that affects the user is UX design. At Acodez, we take into accountability each and every minutest aspect of this design variant to provide compelling and intuitive user experience. We offer mobile UX design, UX design for SAAS, Product UX design for startups and more, while ensuring that the end user enjoys a great value-added experience.",
     features: ["UX Research", "Information Architecture", "Mood Boards", "Wire framing", "Interaction design", "UX Testing"],
     image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
   },
@@ -30,20 +32,20 @@ const services = [
     features: ["SEO Optimization", "Social Media Marketing", "Content Marketing", "PPC Campaigns"],
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
   },
-  {
-    id: "05",
-    title: "Branding",
-    description: "Our highly creative team of designers always excels in creating unique brand identity and out-of-the-box designs that speaks on its own!",
-    features: ["Brand Identity", "Logo Design", "Brand Guidelines", "Visual Identity"],
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=80"
-  },
-  {
-    id: "06",
-    title: "Mobile App",
-    description: "Our profound knowledge of mobile technologies & frameworks help us create secure & scalable Mobile Apps with great UX.",
-    features: ["iOS Development", "Android Development", "Cross-platform Apps", "App Design"],
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80"
-  }
+  // {
+  //   id: "05",
+  //   title: "Branding",
+  //   description: "Our highly creative team of designers always excels in creating unique brand identity and out-of-the-box designs that speaks on its own!",
+  //   features: ["Brand Identity", "Logo Design", "Brand Guidelines", "Visual Identity"],
+  //   image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=80"
+  // },
+  // {
+  //   id: "06",
+  //   title: "Mobile App",
+  //   description: "Our profound knowledge of mobile technologies & frameworks help us create secure & scalable Mobile Apps with great UX.",
+  //   features: ["iOS Development", "Android Development", "Cross-platform Apps", "App Design"],
+  //   image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80"
+  // }
 ];
 ---
 
@@ -55,176 +57,41 @@ const services = [
        
         <SplitTextGlobal client:load />
 
-      <div class="service-tab-container">
-    {services.map((service, index) => (
-      <div class={`service-item ${index === 0 ? 'active' : ''}`} data-service={service.id} data-index={index}>
-        <div class="service-header">
-          <span class="service-number">({service.id})</span>
-          <h2 class="service-title">{service.title}</h2>
-          <div class="scroll-indicator">↓</div>
-        </div>
-        <div class="service-content">
-          <div class="service-content-inner">
-            <div class="content-grid">
-              <div class="service-image-wrapper">
-                <img src={service.image} alt={service.title} />
-                <div class="image-dimensions">{service.dimensions}</div>
+    <div class="service-accordion-area" id="service-scroll-wrapper">
+      <div id="grid_container">
+        {services.map((service) => (
+          <div class="scroll-accordion">
+            <div class="title-row">
+              <div class="heading-row">
+                <h6 class="title__number">({service.id})</h6>
+                <h2>{service.title}</h2>
               </div>
-              <div class="service-details">
-                <p class="service-description">{service.description}</p>
-                <div class="service-features">
-                  {service.features.map((feature) => (
-                    <div class="feature-item">{feature}</div>
+              <div class="featured-img-row">
+                <img class="featured-img" src={service.image} alt={service.title} />
+              </div>
+            </div>
+
+            <div class="text__wrapper">
+              <div class="content-box">
+                <p>{service.description}</p>
+
+                <div class="features-list">
+                  {service.features.map((f) => (
+                    <div class="feature-item">{f}</div>
                   ))}
                 </div>
-                <button class="know-more-btn">
-                  <span>KNOW MORE</span>
-                  <span class="btn-icon">→</span>
-                </button>
+
+                <Button href="#contact" text="Start a Project" variant="primary" extraClass="small-icon-btn" withArrow />
+
               </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
-    ))}
-  </div>
+    </div>
 
-  <div class="scroll-hint">Keep scrolling to explore more services ↓</div>
+
 
     </div>
   </div>
 </section>
-   <script>
-    import { gsap } from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const serviceItems = document.querySelectorAll('.service-item');
-    const scrollHint = document.querySelector('.scroll-hint');
-    let activeItem: Element | null = null;
-    let isAnimating = false;
-
-    // Show scroll hint initially
-    setTimeout(() => {
-      scrollHint?.classList.add('show');
-      setTimeout(() => {
-        scrollHint?.classList.remove('show');
-      }, 3000);
-    }, 1000);
-
-    function openItem(item: Element) {
-      if (isAnimating || activeItem === item) return;
-      isAnimating = true;
-
-      const content = item.querySelector('.service-content');
-      const contentInner = item.querySelector('.service-content-inner');
-      const image = item.querySelector('.service-image-wrapper');
-      const details = item.querySelector('.service-details');
-      const features = item.querySelectorAll('.feature-item');
-      const button = item.querySelector('.know-more-btn');
-
-      // Close previous item first
-      if (activeItem && activeItem !== item) {
-        activeItem.classList.remove('active');
-        const prevContent = activeItem.querySelector('.service-content');
-        gsap.to(prevContent, {
-          height: 0,
-          opacity: 0,
-          duration: 0.3,
-          ease: 'power2.in'
-        });
-      }
-
-      // Open current item
-      activeItem = item;
-      item.classList.add('active');
-      
-      const targetHeight = contentInner?.offsetHeight || 0;
-
-      const tl = gsap.timeline({
-        onComplete: () => {
-          gsap.set(content, { height: 'auto' });
-          isAnimating = false;
-        }
-      });
-
-      tl.to(content, {
-        height: targetHeight,
-        opacity: 1,
-        duration: 0.6,
-        ease: 'power3.out'
-      })
-      .to(image, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: 'power3.out'
-      }, '-=0.4')
-      .to(details, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: 'power3.out'
-      }, '-=0.6')
-      .to(features, {
-        opacity: 1,
-        x: 0,
-        duration: 0.5,
-        stagger: 0.04,
-        ease: 'power2.out'
-      }, '-=0.5')
-      .to(button, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out'
-      }, '-=0.4');
-    }
-
-    serviceItems.forEach((item, index) => {
-      const content = item.querySelector('.service-content');
-      const image = item.querySelector('.service-image-wrapper');
-      const details = item.querySelector('.service-details');
-      const features = item.querySelectorAll('.feature-item');
-      const button = item.querySelector('.know-more-btn');
-
-      // Set initial state for first item
-      if (index === 0) {
-        activeItem = item;
-        gsap.set(content, { height: 'auto', opacity: 1 });
-        gsap.set(image, { opacity: 1, y: 0 });
-        gsap.set(details, { opacity: 1, y: 0 });
-        gsap.set(features, { opacity: 1, x: 0 });
-        gsap.set(button, { opacity: 1, y: 0 });
-      } else {
-        gsap.set(content, { height: 0, opacity: 0 });
-        gsap.set(image, { opacity: 0, y: 20 });
-        gsap.set(details, { opacity: 0, y: 20 });
-        gsap.set(features, { opacity: 0, x: -10 });
-        gsap.set(button, { opacity: 0, y: 10 });
-      }
-
-      // Create ScrollTrigger for each service item
-      ScrollTrigger.create({
-        trigger: item,
-        start: 'top 60%',
-        end: 'bottom 40%',
-        onEnter: () => openItem(item),
-        onEnterBack: () => openItem(item)
-      });
-    });
-
-    // Handle window resize
-    let resizeTimer: number;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        if (activeItem) {
-          const content = activeItem.querySelector('.service-content');
-          gsap.set(content, { height: 'auto' });
-        }
-        ScrollTrigger.refresh();
-      }, 250);
-    });
-  </script>
