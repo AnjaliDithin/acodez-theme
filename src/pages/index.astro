@@ -5,6 +5,8 @@ import TestimonialSection from "../components/TestimonialSection.astro";
 import GsapBgChange from "../components/GsapBgChange.jsx";
 import ImageHoverSection from "../components/ImageHoverSection.astro";
 import ServicesScrolleffect from "../components/ServicesScrolleffect.astro";
+import Col3CardGrid from "../components/Col3CardGrid.astro";
+import CtaSection from "../components/CtaSection.astro";
 ---
 
 <BaseLayout>
@@ -32,6 +34,9 @@ import ServicesScrolleffect from "../components/ServicesScrolleffect.astro";
   
   <ServicesScrolleffect />
   <GsapBgChange client:load />
+  <Col3CardGrid />
+  <CtaSection />
+
 
   <script type="module" client:visible>
     import('/src/js/main.js').catch(err => {

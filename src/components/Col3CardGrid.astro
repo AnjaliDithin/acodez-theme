@@ -1,0 +1,67 @@
+---
+import Button from '../components/Button.astro';
+const posts = [
+  {
+    image: "/images/home/article1.png",
+    date: " Jun 12, 2025",
+    category: "Web Design",
+    title: "Web Design for 8K Displays: Challenges and Opportunities",
+    excerpt:
+      "8K displays, boasting 33 million pixels and a resolution of 7680 × 4320, are transforming..."
+  },
+  {
+    image: "/images/home/article2.png",
+    date: "Jun 12, 2025",
+    category: "Web Design",
+    title: "Top Web Design Trends for 2025",
+    excerpt:
+      "In this rapidly changing world of design, it becomes imperative for the business and the designers to..."
+  },
+  {
+    image: "/images/home/article3.png",
+    date: " Jun 12, 2025",
+    category: "Web Design",
+    title: "The Role of Neuromarketing in Web Design",
+    excerpt:
+      "Businesses are increasingly recognizing the importance of neuromarketing in guiding web design decisionsBusinesses are increasingly recognizing the importance of neuromarketing in guiding web design decisions..."
+  }
+];
+---
+<section class="gridmainarea bg-change"  data-color="#FFFFFF">
+  <div class="container">
+      <div class="headingarea">
+          <div class="topbar">
+              <h2>Latest Articles</h2>
+          </div>
+          <Button href="/" text="more" variant="primary" extraClass="small-icon-btn" withArrow />
+      </div>
+      <div class="cardgrid cardgrid-col3">
+        {posts.map((post) => (
+          <a href="">
+          <article class="grid-item">
+            <div class="card-img zoom-img">
+              <img src={post.image} alt={post.title} loading="lazy" />
+            </div>
+
+            <div class="card-content">
+              <div class="meta">
+                <span class="date">Posted on <span class="font-semibold text-[#4E4E4E]">{post.date}</span></span>
+                <span class="divider"></span>
+                <span class="category">{post.category}</span>
+              </div>
+              <div class="text-wrap reveal">
+                <h5  class="title ">{post.title}</h5>
+                <p  class="excerpt ">{post.excerpt}</p>
+              </div>
+            </div>
+          </article>
+          </a>
+        ))}
+      </div>
+  </div>
+</section>
+<!-- <script type="module" is:inline>
+  import { initReveal} from "/src/js/contentSplit.js";
+  initReveal();
+</script> -->
+

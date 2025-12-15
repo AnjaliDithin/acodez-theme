@@ -192,7 +192,7 @@ li > ol {
 	width: 100%;
 	padding: 0 2rem;
 	margin: 0 auto;
-    max-width:134rem;
+    max-width:138rem;
 }
 .fullcontainer {
 	width: 100%;
@@ -280,5 +280,54 @@ section{
 //  height: 100svh;
   transition: background-color 0.4s ease;
 }
+/* TEXT REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  &.active {
+	opacity: 1;
+  	transform: translateY(0);
+  }
+}
+
+.interaction_trail {
+//   position: fixed;        /* 🔑 FIX */
+  position: absolute;        /* 🔑 FIX */
+  inset: 0;               /* full viewport */
+  pointer-events: none;
+  z-index: 5;
+  .interaction_list {
+	position: absolute;
+	inset: 0;               
+	pointer-events: none;
+  	.interaction_item {
+		position: absolute;
+		will-change: transform, opacity;
+	}
+	.image-trail-img {
+		display: block;
+		width: auto;
+		height: auto;
+	}
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

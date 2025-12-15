@@ -108,7 +108,7 @@ const bottomServices = services.slice(4);
                       <h6 class="title__number">({s.id})</h6>
                       <h4>{s.title}</h4>
                     </div>
-                    <div class="content-btmbox-col">
+                    <div class="content-btmbox-col reveal">
                       <div class="content-box">
                         <p>{s.description}</p>
                       </div>
@@ -126,3 +126,7 @@ const bottomServices = services.slice(4);
   </div>
 </section>
 <!-- <div class="pin-spacer-footer"></div> -->
+ <script type="module" is:inline>
+  import { initReveal} from "/src/js/contentSplit.js";
+  initReveal();
+</script>
