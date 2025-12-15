@@ -1,4 +1,3 @@
-console.log("✅ main.js bundled and executed");
 
 import { initMouseFollower } from "./mouse_follower.js";
 import { initInteractiveGlobe } from "./interactiveGlobe.js";
