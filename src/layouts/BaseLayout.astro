@@ -1,9 +1,11 @@
 ---
-import "../styles/global.css";   
-import "../styles/main.scss";    
+import "../styles/global.css";
+import "../styles/main.scss";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import GsapBgChange from "../components/GsapBgChange";
 ---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,12 +18,19 @@ import Footer from "../components/Footer.astro";
   </head>
 
   <body>
+    <GsapBgChange client:load/>
     <Header />
 
     <main>
       <slot />
     </main>
+
     <Footer />
+    <!-- <script >
+      import "../scripts/main.js";
+    </script> -->
+    <script type="module" src="/src/scripts/main.js" client:load></script>
 
 
+  </body>
 </html>

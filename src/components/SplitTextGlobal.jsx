@@ -8,23 +8,18 @@ export default function SplitTextGlobal() {
   const containerRef = useRef(null);
   const textRef = useRef(null);
 
-  // ✅ MAIN TEXT
   const text = useMemo(() => (
     "Acodez is rated as one of the top web agencies in India by various industry magazines and review sites. We have a right blend of award-winning designers, expert web developers and Google certified digital marketers which make us a unique one-stop solution for hundreds of our clients, spread across 80+ countries."
   ), []);
 
   const words = useMemo(() => text.split(" "), [text]);
 
-  // ✅ ✅ EDIT ONLY THIS DATA
-
-  // ✅ PHRASES TO HIGHLIGHT (MULTI-WORD SUPPORTED)
   const highlightPhrases = [
     "acodez",
     "top web agencies",
     "google certified"
   ];
 
-  // ✅ IMAGES AFTER SPECIFIC WORDS (DIFFERENT IMAGES)
   const imageAfterRules = [
     {
       phrase: "india",
@@ -36,7 +31,6 @@ export default function SplitTextGlobal() {
     }
   ];
 
-  // ✅ ✅ HIGHLIGHT MAP → MARKS *ALL WORDS* IN A PHRASE
   const highlightMap = useMemo(() => {
     const map = new Array(words.length).fill(false);
 
@@ -61,13 +55,11 @@ export default function SplitTextGlobal() {
     return map;
   }, [words]);
 
-  // ✅ ✅ IMAGE MATCH (NO DUPLICATION)
   const getImageAfter = (cleanWord) => {
     const rule = imageAfterRules.find(r => r.phrase === cleanWord);
     return rule ? rule.src : null;
   };
 
-  // ✅ ✅ GSAP SCROLL OPACITY ANIMATION
   useEffect(() => {
     if (!textRef.current) return;
 
@@ -101,7 +93,6 @@ export default function SplitTextGlobal() {
     };
   }, [words]);
 
-  // ✅ ✅ JSX OUTPUT
   return (
     <div className="smooth-wrapper">
       <div ref={containerRef} className="smooth-content">
@@ -110,10 +101,8 @@ export default function SplitTextGlobal() {
           {words.map((word, index) => {
             const cleanWord = word.replace(/[.,]/g, "").toLowerCase();
 
-            // ✅ FULL PHRASE HIGHLIGHT
             const shouldHighlight = highlightMap[index];
 
-            // ✅ DIFFERENT IMAGE AFTER WORD
             const imageSrc = getImageAfter(cleanWord);
 
             return (
@@ -127,7 +116,6 @@ export default function SplitTextGlobal() {
                   {word}
                 </span>
 
-                {/* ✅ IMAGE AFTER WORD */}
                 {imageSrc && (
                   <span className="word inline-block align-middle" style={{ opacity: 0.2 }}>
                     <span className="inline-flex items-center justify-center highlight-img">

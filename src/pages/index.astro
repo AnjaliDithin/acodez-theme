@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BannerSection from "../components/HeroBanner.astro";
-import GsapBgChange from "../components/GsapBgChange.jsx";
 import ImageHoverSection from "../components/ImageHoverSection.astro";
 import ServicesScrolleffect from "../components/ServicesScrolleffect.astro";
 import Col3CardGrid from "../components/Col3CardGrid.astro";
@@ -65,16 +64,11 @@ const faqServices= [
   <ImageHoverSection />
   
   <ServicesScrolleffect />
-  <GsapBgChange />
   <Col3CardGrid />
   <CtaSection />
+  
   <Faq heading="Got Questions?" services={faqServices} bgColor="#F6F8FA" />
-
-
-
-  <script type="module">
-  import "../js/main.js";
-</script>
+    
 
  
 </BaseLayout>

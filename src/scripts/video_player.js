@@ -98,11 +98,104 @@
 // }
 
 // src/js/videoPlayer.js
+// export function initVideoControls() {
+//   // SSR guard
+//   if (typeof window === "undefined") return;
+
+//   // Quick touch check (skip custom click UX on touch)
+//   const isTouch =
+//     "ontouchstart" in window || navigator.maxTouchPoints > 0;
+//   if (isTouch) return;
+
+//   const wrapper = document.querySelector(".video-below-banner .video-wrapper");
+//   if (!wrapper) return;
+
+//   const video = wrapper.querySelector("video");
+//   const closeBtn = wrapper.querySelector(".video-close-btn");
+//   if (!video || !closeBtn) {
+//     console.warn("videoPlayer: missing video or close button");
+//     return;
+//   }
+
+//   // ensure inline autoplay (muted) — allowed by browsers
+//   video.muted = true;
+//   video.playsInline = true;
+//   video.loop = true;
+//   video.play().catch(() => { /* ignore autoplay rejection */ });
+
+//   let expanded = false;
+
+//   // Expand the video to fixed full viewport
+//   function expand() {
+//     if (expanded) return;
+//     wrapper.classList.add("is-expanded");
+//     // ensure the close button is visible
+//     closeBtn.hidden = false;
+//     // unmute when expanding (optional)
+//     video.muted = false;
+//     // make sure it plays
+//     video.play().catch((err) => console.warn("play failed:", err));
+//     expanded = true;
+//     // hide native cursor if you want Cuberto-only: handled by CSS .is-expanded { cursor: none; }
+//   }
+
+//   // Collapse back to inline
+//   function collapse() {
+//     if (!expanded) return;
+//     wrapper.classList.remove("is-expanded");
+//     closeBtn.hidden = true;
+//     video.muted = true; // keep inline playback muted (optional)
+//     expanded = false;
+//   }
+
+//   // Click the wrapper: expand if not expanded, collapse if expanded
+//   wrapper.addEventListener("click", (ev) => {
+//     // If a custom cursor or other overlay stops propagation, ensure it doesn't
+//     // reach here during expand; but this logic is safe either way.
+//     if (!expanded) {
+//       ev.preventDefault();
+//       ev.stopPropagation();
+//       expand();
+//       return;
+//     }
+//     // when expanded, clicking wrapper acts as collapse
+//     collapse();
+//   });
+
+//   // Close button
+//   closeBtn.addEventListener("click", (ev) => {
+//     ev.preventDefault();
+//     ev.stopPropagation();
+//     collapse();
+//   });
+
+//   // ESC to close
+//   document.addEventListener("keydown", (e) => {
+//     if ((e.key === "Escape" || e.key === "Esc") && expanded) collapse();
+//   });
+
+//   // Optional: pause/resume handling when tab visibility changes (nice-to-have)
+//   document.addEventListener("visibilitychange", () => {
+//     if (document.hidden && expanded) {
+//       // keep playing or pause if desired:
+//       // video.pause();
+//     }
+//   });
+
+//   // return cleanup if you ever need to unmount
+//   return () => {
+//     wrapper.removeEventListener("click", expand);
+//     closeBtn.removeEventListener("click", collapse);
+//     document.removeEventListener("keydown", collapse);
+//   };
+// }
+
+// export default initVideoControls;
+
+
 export function initVideoControls() {
-  // SSR guard
   if (typeof window === "undefined") return;
 
-  // Quick touch check (skip custom click UX on touch)
   const isTouch =
     "ontouchstart" in window || navigator.maxTouchPoints > 0;
   if (isTouch) return;
@@ -112,83 +205,49 @@ export function initVideoControls() {
 
   const video = wrapper.querySelector("video");
   const closeBtn = wrapper.querySelector(".video-close-btn");
-  if (!video || !closeBtn) {
-    console.warn("videoPlayer: missing video or close button");
-    return;
-  }
+  if (!video || !closeBtn) return;
 
-  // ensure inline autoplay (muted) — allowed by browsers
   video.muted = true;
   video.playsInline = true;
   video.loop = true;
-  video.play().catch(() => { /* ignore autoplay rejection */ });
+  video.play().catch(() => {});
 
   let expanded = false;
 
-  // Expand the video to fixed full viewport
   function expand() {
     if (expanded) return;
     wrapper.classList.add("is-expanded");
-    // ensure the close button is visible
     closeBtn.hidden = false;
-    // unmute when expanding (optional)
     video.muted = false;
-    // make sure it plays
-    video.play().catch((err) => console.warn("play failed:", err));
+    video.play().catch(() => {});
     expanded = true;
-    // hide native cursor if you want Cuberto-only: handled by CSS .is-expanded { cursor: none; }
   }
 
-  // Collapse back to inline
   function collapse() {
     if (!expanded) return;
     wrapper.classList.remove("is-expanded");
     closeBtn.hidden = true;
-    video.muted = true; // keep inline playback muted (optional)
+    video.muted = true;
     expanded = false;
   }
 
-  // Click the wrapper: expand if not expanded, collapse if expanded
-  wrapper.addEventListener("click", (ev) => {
-    // If a custom cursor or other overlay stops propagation, ensure it doesn't
-    // reach here during expand; but this logic is safe either way.
-    if (!expanded) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      expand();
-      return;
-    }
-    // when expanded, clicking wrapper acts as collapse
+  wrapper.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    expanded ? collapse() : expand();
+  });
+
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     collapse();
   });
 
-  // Close button
-  closeBtn.addEventListener("click", (ev) => {
-    ev.preventDefault();
-    ev.stopPropagation();
-    collapse();
-  });
-
-  // ESC to close
   document.addEventListener("keydown", (e) => {
-    if ((e.key === "Escape" || e.key === "Esc") && expanded) collapse();
+    if (e.key === "Escape" && expanded) collapse();
   });
-
-  // Optional: pause/resume handling when tab visibility changes (nice-to-have)
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden && expanded) {
-      // keep playing or pause if desired:
-      // video.pause();
-    }
-  });
-
-  // return cleanup if you ever need to unmount
-  return () => {
-    wrapper.removeEventListener("click", expand);
-    closeBtn.removeEventListener("click", collapse);
-    document.removeEventListener("keydown", collapse);
-  };
 }
 
-export default initVideoControls;
+
+
 
