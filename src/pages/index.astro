@@ -72,11 +72,9 @@ const faqServices= [
 
 
 
-  <script type="module" client:visible>
-    import('/src/js/main.js').catch(err => {
-      console.error('Failed to import /src/js/main.js:', err);
-    });
-  </script>
+  <script type="module">
+  import "../js/main.js";
+</script>
 
  
 </BaseLayout>
