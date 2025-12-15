@@ -314,3 +314,33 @@ export function initScrollAccordion({ debug = false } = {}) {
 
 
 
+// export function initScrollAccordion() {
+//   const cards = gsap.utils.toArray(".scroll-block");
+//   if (!cards.length) return;
+
+//   // Kill old triggers (important if re-init / Astro)
+//   ScrollTrigger.getAll().forEach(t => t.kill());
+
+//   // Stack order: later cards above earlier
+//   cards.forEach((card, i) => {
+//     gsap.set(card, {
+//       position: "relative",
+//       zIndex: i + 1
+//     });
+//   });
+
+//   cards.forEach((card, i) => {
+//     ScrollTrigger.create({
+//       trigger: card,
+//       start: "top top",
+//       endTrigger: cards[i + 1] || card,
+//       end: cards[i + 1] ? "top top" : "+=300",
+//       pin: true,
+//       pinSpacing: false,
+//       anticipatePin: 1
+//     });
+//   });
+// }
+
+
+

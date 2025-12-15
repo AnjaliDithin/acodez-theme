@@ -1,5 +1,5 @@
 import { initMouseFollower } from "./mouseFollower.js";
-import heroCrossfade from "./heroCrossfade.js";
+import {initHeroCrossfade }from "./heroCrossfade.js";
 import { initVideoControls } from "./videoPlayer.js";
 import { initHoverParallax } from "./hoverParallax.js";
 import { initSplittext } from "./splittext.js";
@@ -9,7 +9,7 @@ import { initScrollAccordion } from "./scrolltrigger-accordion.js";
 
 function initAll() {
   initMouseFollower();
-  heroCrossfade();
+  initHeroCrossfade();
   initVideoControls();
   initHoverParallax();
   initSplittext();

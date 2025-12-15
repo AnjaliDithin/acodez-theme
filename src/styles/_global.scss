@@ -33,7 +33,7 @@ body {
  	font-family: var(--font-primary);
 	color:$primary-color;
 	overflow-x: hidden;
-	background: $theme-white;
+	// background: $theme-white;
 	// &.header-scrolled{
 	// 	overflow-x: visible;
 	// }
@@ -85,6 +85,7 @@ hr {
 	border: 0;
 	margin: 1em 0;
 	padding: 0;
+	border-top: 0.1rem solid $theme-deep-grey;
 }
 nav{
 	ul,ol{
@@ -272,46 +273,10 @@ p,li{
 		font-size: 1.7rem;
 	}
 }
-.bg-change {
-//   padding: 150px 0; 
-  min-height: auto;
-}
-section{
-//  height: 100svh;
-  transition: background-color 0.4s ease;
-}
-/* TEXT REVEAL */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: transform 0.8s ease, opacity 0.8s ease;
-  &.active {
-	opacity: 1;
-  	transform: translateY(0);
-  }
-}
 
-.interaction_trail {
-//   position: fixed;        /* 🔑 FIX */
-  position: absolute;        /* 🔑 FIX */
-  inset: 0;               /* full viewport */
-  pointer-events: none;
-  z-index: 5;
-  .interaction_list {
-	position: absolute;
-	inset: 0;               
-	pointer-events: none;
-  	.interaction_item {
-		position: absolute;
-		will-change: transform, opacity;
-	}
-	.image-trail-img {
-		display: block;
-		width: auto;
-		height: auto;
-	}
-}
-}
+
+
+
 
 
 

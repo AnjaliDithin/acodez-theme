@@ -1,12 +1,44 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BannerSection from "../components/HeroBanner.astro";
-import TestimonialSection from "../components/TestimonialSection.astro";
 import GsapBgChange from "../components/GsapBgChange.jsx";
 import ImageHoverSection from "../components/ImageHoverSection.astro";
 import ServicesScrolleffect from "../components/ServicesScrolleffect.astro";
 import Col3CardGrid from "../components/Col3CardGrid.astro";
 import CtaSection from "../components/CtaSection.astro";
+import Faq from "../components/Faq.astro";
+const faqServices= [
+  {
+    id: "01",
+    title: "Why should I do my web design and development from Acodez?",
+    description:
+      "Acodez is a leading web design company in India with 10+ years of experience and 16 international awards to its credit. We also have experience working for many leading MNCs for their web design and development projects. Acodez operates from its 6 offices across India and has worked on more than 1000+ web design projects for our clients across the globe, from more than 80 countries.",
+  },
+  {
+    id: "02",
+    title: "Why is India an ideal choice for web development outsourcing?",
+    description:
+      "We build responsive, fast, and scalable web applications using modern technologies and best practices.",
+  },
+  {
+    id: "03",
+    title: "How to find the best web design company in India?",
+    description:
+      "Custom software solutions tailored to your business needs with cutting-edge technology stack.",
+  },
+  {
+    id: "04",
+    title: "How much does it cost to hire a web developer in India?",
+    description:
+      "Comprehensive digital marketing strategies to grow your online presence and reach your target audience.",
+  },
+  {
+    id: "05",
+    title: "Do you do custom website design or use pre-built templates?",
+    description:
+      "Our highly creative team of designers always excels in creating unique brand identity and out-of-the-box designs that speaks on its own!",
+  },
+];
 ---
 
 <BaseLayout>
@@ -36,6 +68,8 @@ import CtaSection from "../components/CtaSection.astro";
   <GsapBgChange client:load />
   <Col3CardGrid />
   <CtaSection />
+  <Faq heading="Got Questions?" services={faqServices} bgColor="#F6F8FA" />
+
 
 
   <script type="module" client:visible>

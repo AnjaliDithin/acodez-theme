@@ -1,0 +1,50 @@
+---
+import ContentSubHead from "./ContentSubHead.astro";
+
+const {
+  heading = "Got Questions?",
+  services = [],
+  bgColor = "#FFFFFF",
+} = Astro.props;
+---
+
+<section class="serviceScrollsection bg-change" data-color={bgColor}>
+  <div class="container">
+    <div class="service-area">
+
+      <ContentSubHead
+        heading={heading}
+        align="center"
+        color="#9C9C9C"
+      />
+
+      <div class="service-accordion-area" id="service-scroll-wrapper">
+        <div id="grid_container">
+
+          {services.map((service) => (
+            <div class="scroll-accordion scroll-block">
+
+              <div class="title-row">
+                <div class="heading-row">
+                  <h6 class="title__number">({service.id})</h6>
+                  <h5>{service.title}</h5>
+                </div>
+              </div>
+
+              <div class="text__wrapper">
+                <div class="content-box-col">
+                  <div class="content-box">
+                    <p>{service.description}</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -67,7 +67,7 @@ const bottomServices = services.slice(4);
 
           { /* TOP: only first 4 services in scroll-accordion */ }
           {topServices.map((service) => (
-            <div class="scroll-accordion" key={service.id}>
+            <div class="scroll-accordion scroll-block" key={service.id}>
                 <div class="title-row">
                   <div class="heading-row">
                     <h6 class="title__number">({service.id})</h6>
@@ -100,7 +100,7 @@ const bottomServices = services.slice(4);
 
           { /* BOTTOM: render remaining services after the first 4 */ }
           {bottomServices.length > 0 && (
-            <div class="scroll-bttom-row" id="scroll-bttom-row">
+            <div class="scroll-bttom-row scroll-block" id="scroll-bttom-row">
               {bottomServices.map((s) => (
                 <div class="btm-col" key={s.id}>
                   <div class="title-btm-row">
@@ -126,7 +126,7 @@ const bottomServices = services.slice(4);
   </div>
 </section>
 <!-- <div class="pin-spacer-footer"></div> -->
- <script type="module" is:inline>
+<script type="module" is:inline>
   import { initReveal} from "/src/js/contentSplit.js";
   initReveal();
 </script>

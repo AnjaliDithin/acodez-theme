@@ -1,0 +1,116 @@
+@use "variables" as *;
+
+.footer-ctbar {
+  position: relative;
+  padding: 11.5rem 0 11.5rem;
+  .footer-ctbar__row{
+    display: flex;
+    align-items: flex-start;
+    gap: 4rem;
+    justify-content: flex-start;
+    padding-bottom: 4rem;
+    &.footer-ctbar__ctlinks{
+      justify-content: space-between;
+    }
+  }
+  .footer-ctbar__contact{
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+  }
+  .footer-ctbar__links{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 2.5rem;
+    li{
+      line-height: 1;
+      a{
+        text-decoration: none;
+        color: #212427;
+        display: flex;
+        gap:1rem;
+        align-items: center;
+        font-size: clamp(1.8rem, 1vw + 1.2rem, 2rem);
+        @media screen and (min-width: 1300px) {
+          font-size: 2rem;
+        }
+       
+      }
+    }
+  }
+  
+  .footer-ctbar__form {
+    .field-wrap{
+      display: flex;
+      align-items: center;
+      gap:6.1rem;
+    }
+    input[type="email"] {
+       flex: 1;                
+      min-width: 0; 
+      border: none;
+      background: transparent;
+      padding: 0 0.5rem;
+      outline: none;
+      font-size: clamp(1.8rem, 1vw + 1.2rem, 2.2rem);
+      line-height: 1.2;
+      @media screen and (min-width: 1300px) {
+        font-size: 2.2rem;
+      }
+    }
+    button[type="submit"] {
+       flex-shrink: 0; 
+      border: none;
+      background: $theme-lightblue;
+      color: #fff;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+      &::before{
+        content: "";
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2.3rem;
+        width: 2.3rem;
+        right: 1.1rem;
+        transition: all 0.3s;
+        background: url(/images/arrow-right2.svg) center no-repeat;
+        background-size: contain;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+  .subscribe-box{
+    display: flex;
+    gap: 1.6rem;
+    align-items: center;
+    .subscribe-label{
+      position: relative;
+      padding-right: 2rem;
+      margin-right: 3.6rem;
+      &::after{
+        content: "";
+        display: block;
+        height: 5rem;
+        background: #D9D9D9;
+        width: 0.1rem;
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        right: -2rem;
+      }
+      p{
+        line-height: 1.6;
+      }
+    }
+  }
+
+}

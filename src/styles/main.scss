@@ -4,10 +4,12 @@
 
 /* Base styles */
 @use "global";
+@use "custom";
+
 
 /* Components */
 @use "header";
-@use "footer";
+@use "footer-ctbar";
 @use "contentSubhead";
 @use "homebanner";
 @use "video-banner";

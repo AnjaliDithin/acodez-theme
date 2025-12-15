@@ -1,0 +1,98 @@
+---
+const phone = "+91 95446 68844";
+const email = "info@acodez.in";
+const locations =[
+   "UL CyberPark (SEZ), Nellikode (PO), Kerala, India -673 016",
+  "Westhill, Kozhikode ,Kerala - 673005, India",
+  "40/383, 5th Floor,Jos Annex, Jose Junction,M.G.Road, Kochi-682016, Kerala, India"
+];
+const location_heads = [
+    "Calicut (SEZ Unit)",
+    "Calicut",
+    "Kochi"
+];
+
+  const fallbackLocation = locations[0];
+---
+<section class="footer-ctbar  bg-change" data-color="#F6F8FA">
+    <div class="container">
+        <div class="footer-ctbar__inner">
+            <div class="footer-ctbar__row footer-ctbar__ctlinks">
+                <div class="footer-ctbar__contact">
+                    <h3>Contact Us.</h3>
+
+                    <ul class="footer-ctbar__links">
+                        <li>
+                        <a href={`mailto:${email}`}>
+                            <span class="icon">
+                                <img src="/images/mail.svg" alt="Email Icon" />
+                            </span>
+                            {email}
+                        </a>
+                        </li>
+                        <li>
+                        <a href={`tel:${phone.replace(/\s+/g, "")}`}>
+                            <span class="icon">
+                                <img src="/images/call.svg" alt="Email Icon" />
+                            </span>
+                            {phone}
+                        </a>
+                        </li>
+                        <li>
+                        <a href={`https://wa.me/${phone.replace(/\D/g, "")}`} target="_blank">
+                            <span class="icon">
+                                <img src="/images/whatsapp.svg" alt="WhatsApp Icon" />
+                            </span>
+                            {phone}
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+                 <div class="footer-ctbar__partner">
+                    <img src="/images/google-partner.svg" alt="Google Partner" />
+                </div>
+            </div>
+            <hr />
+            <div class="footer-ctbar__row footer-ctbar__newsletter">
+                <h3>Subscribe Newsletter.</h3>
+
+                <div class="subscribe-box">
+                    <div class="subscribe-label">
+                        <p>Enter your email ID to <br>subscribe to our newsletter.</p>
+                    </div>
+                    <form class="footer-ctbar__form">
+                        <div class="field-wrap">
+                        <input type="email" placeholder="Enter your@email.com" required />
+                        <button type="submit" aria-label="Subscribe"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <hr />
+            <div class="footer-ctbar__row footer-ctbar__location">
+            <h3>Locations.</h3>
+                <div class="cross-textfade-wrap">
+                      <div class="text-wrap crossfade-layer crossfade-layer--fallback">
+                            <p class="footer-ctbar__location">
+                            <span class="lctn-head">{location_heads[0]} - </span>
+                            {locations[0]}
+                            </p>
+                        </div>
+
+                    <div class="text-wrap crossfade-layer crossfade-layer--animated">
+                    {locations.map((loc, i) => (
+                        <p class="footer-ctbar__location js-crossfade">
+                        <span class="lctn-head">{location_heads[i]} - </span>
+                        {loc}
+                        </p>
+                    ))}
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
