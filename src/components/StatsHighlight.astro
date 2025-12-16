@@ -1,0 +1,59 @@
+---
+const stats = [
+  {
+    value: "80+",
+    label: "Countries Served",
+    image: "/images/home/counter1.svg",
+  },
+  {
+    value: "1000+",
+    label: "Projects Completed",
+    image: "/images/home/counter2.svg",
+  },
+  {
+    value: "16",
+    label: "International Awards",
+    image: "/images/home/counter3.svg",
+  },
+  {
+    value: "06",
+    label: "Different Locations",
+    image: "/images/home/counter4.svg",
+  },
+];
+---
+
+
+<section class="stats-highlight-section bg-chnge" data-color="#0E1216">
+  <div class="container">
+
+    <div class="section-header">
+      <h2 class="section-title">Why We Standout.</h2>
+      <h4 class="section-description">
+        We have worked miracles across various sectors of
+        <span class="highlight"> web design and development </span>
+        along with
+        <span class="highlight"> digital marketing, flaunting our creativity and skills</span>,
+        which has bagged us a lot of accolades and awards.
+      </h4>
+    </div>
+
+    <div class="stats-grid">
+      {stats.map((item) => (
+        <div class="stat-card" key={item.label}>
+            <img src={item.image} alt={item.label} class="stat-icon" />
+           <h2
+            class="stat-value"
+            data-count={item.value.replace("+", "")}
+            data-suffix={item.value.includes("+") ? "+" : ""}
+            >
+            0
+            </h2>
+            <h6 class="stat-label">{item.label}</h6>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+

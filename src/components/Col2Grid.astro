@@ -1,0 +1,27 @@
+---
+const {
+  title = "Acodie",
+  subtitle = "OUR MASCOT",
+  description = "We love illustrations and Acodie, our mascot, is a cool showcase of our creativity. You could find Acodie in every page of this site in various styles and emotions.",
+  image = "/images/home/acodie.png",
+  reverse = false, // set true to swap columns
+} = Astro.props;
+---
+
+<section class={`Col2grid-section bg-change ${reverse ? "is-reverse" : ""}`} data-color="#FFFFFF">
+  <div class="container">
+    <div class="Col2-gridarea">
+      
+      <div class="left-content">
+        <h2 class="mascot-title">{title}</h2>
+        <h5 class="mascot-subtitle">{subtitle}</h5>
+        <p class="mascot-desc">{description}</p>
+      </div>
+
+      <div class="right-image">
+        <img src={image} alt={title} loading="lazy" />
+      </div>
+
+    </div>
+  </div>
+</section>

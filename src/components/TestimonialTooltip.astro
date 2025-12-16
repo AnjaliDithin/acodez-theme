@@ -1,0 +1,135 @@
+---
+import ContentSubHead from "./ContentSubHead.astro";
+
+const testimonials = [
+  {
+    brand: "Anchor",
+    logo: "/images/home/brand-logo1.png",
+    text: "“I will definitely recommend Acodez to such clients who're looking for quality.”",
+    customer: "MPM Munawar",
+    designation: "Chairman & MD, Exotel Holidays P Ltd, India",
+    customerImg: "/images/home/brand-user2.png",
+  },
+  {
+    brand: "HDFC",
+    logo: "/images/home/brand-logo2.png",
+    text: "“I was really convinced with the previous works they've done and hence I contacted them, even though I'm from Paris and they're in India...and I really liked the design they've done for me too... I strongly recommend Acodez to anyone who's looking for quality stuffs.”",
+    customer: "Simo Bennis",
+    designation: "Seduction Naturelle PNL, France",
+    customerImg: "/images/home/brand-user2.png",
+  },
+  {
+    brand: "Anchor",
+    logo: "/images/home/brand-logo3.png",
+    text: "“Thank you very much for creating a fantastic corporate website for us. I deeply appreciate your efforts and guidance, without which, this wouldn't have been possible.”",
+    customer: "Hiroyasu Tsuchiya",
+    designation: "Corporate Branding Division, Anchor by Panasonic",
+    customerImg: "/images/home/brand-user3.png",
+  },
+];
+
+---
+
+<section class="testimonial-section bg-change"   data-color="linear-gradient(180deg, rgba(246, 248, 250, 0) 35%, #EBF1F3 100%)">
+  <div class="container">
+    <div class="testimonial-area">
+      <ContentSubHead
+        heading="Testimonials"
+        align="center-align"
+        color="#9C9C9C"
+      />
+
+      <div class="center-content-area">
+        <h2 class="testimonial-heading">
+
+          Strategy to
+
+          <span class="logo-tooltip-wrap">
+            <div class="img-wrap">
+              <img
+                src={testimonials[0].logo}
+                alt={testimonials[0].brand}
+                class="brand-logo"
+              />
+            </div>
+
+            <span class="tooltip-card">
+              <p class="tooltip-text">{testimonials[0].text}</p>
+                <div class="tooltip-user">
+                  <div class="user-img">
+                  <img
+                    src={testimonials[0].customerImg}
+                    alt={testimonials[0].customer}
+                  />
+                  </div>
+                  <div class="user-info">
+                  <span class="customer">{testimonials[0].customer}</span>
+                  <span class="desig">{testimonials[0].designation}</span>
+                  </div>
+                </div>
+            </span>
+          </span>
+
+          <span class="highlight">execution</span>,  
+          <strong>Acodez</strong> handled
+
+          <span class="logo-tooltip-wrap">
+            <div class="img-wrap">
+              <img
+                  src={testimonials[2].logo}
+                  alt={testimonials[2].brand}
+                  class="brand-logo"
+                />
+            </div>
+
+            <span class="tooltip-card">
+                <p class="tooltip-text">{testimonials[1].text}</p>
+                <div class="tooltip-user">
+                  <div class="user-img">
+                  <img
+                    src={testimonials[2].customerImg}
+                    alt={testimonials[2].customer}
+                  />
+                  </div>
+                  <div class="user-info">
+                  <span class="customer">{testimonials[2].customer}</span>
+                  <span class="desig">{testimonials[2].designation}</span>
+                </div>
+                </div>
+            </span>
+          </span>
+
+          everything with clarity and commitment.
+          <span class="logo-tooltip-wrap">
+            <div class="img-wrap">
+              <img
+                  src={testimonials[1].logo}
+                  alt={testimonials[1].brand}
+                  class="brand-logo"
+                />
+            </div>
+
+            <span class="tooltip-card">
+                <p class="tooltip-text">{testimonials[1].text}</p>
+                <div class="tooltip-user">
+                  <div class="user-img">
+                  <img
+                    src={testimonials[1].customerImg}
+                    alt={testimonials[1].customer}
+                  />
+                  </div>
+                  <div class="user-info">
+                  <span class="customer">{testimonials[1].customer}</span>
+                  <span class="desig">{testimonials[1].designation}</span>
+                </div>
+                </div>
+            </span>
+          </span>
+          
+
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+

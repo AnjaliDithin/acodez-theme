@@ -2,6 +2,8 @@
 @use "variables" as *;
 @use "mixins" as *;
 
+
+
 /* Base styles */
 @use "global";
 @use "custom";
@@ -19,3 +21,11 @@
 @use "serviceScrollsection";
 @use "col3-cardgrid";
 @use "cta-section";
+@use "faq_block";
+@use "col2grid";
+@use "testimonialblock";
+@use "stats-highlight";
+
+// @import "swiper/css";
+// @import "swiper/css/navigation";
+// @import "swiper/css/pagination";

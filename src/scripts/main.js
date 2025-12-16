@@ -8,6 +8,8 @@ import { initSplittext } from "./splittext.js";
 import { initTextAnimation } from "./textanimation.js";
 import { initScrollAccordion } from "./scrolltrigger_accordion.js";
 import { initImageTrail } from "./image_trail.js";
+import { initStatCounter } from "./statCounter.js";
+import { initGsapSlider } from "./gsapSlider.js";
 
 
 
@@ -21,6 +23,8 @@ function initAll() {
   initTextAnimation();
   initScrollAccordion();
   initImageTrail();
+  initStatCounter();
+  initGsapSlider();
 }
 
 // First load

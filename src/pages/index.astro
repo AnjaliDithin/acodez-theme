@@ -6,6 +6,10 @@ import ServicesScrolleffect from "../components/ServicesScrolleffect.astro";
 import Col3CardGrid from "../components/Col3CardGrid.astro";
 import CtaSection from "../components/CtaSection.astro";
 import Faq from "../components/Faq.astro";
+import Col2Grid from "../components/col2grid.astro";
+import TestimonialTooltip from "../components/TestimonialTooltip.astro";
+import StatsHighlight from "../components/StatsHighlight.astro";
+import Col3ProjectSlider from "../components/Col3ProjectSlider.astro";
 const faqServices= [
   {
     id: "01",
@@ -64,11 +68,18 @@ const faqServices= [
   <ImageHoverSection />
   
   <ServicesScrolleffect />
+  <Col3ProjectSlider />
+
+  <StatsHighlight />
+  <Col2Grid 
+    title="Acodie"
+    subtitle="OUR MASCOT"
+    description="We love illustrations and Acodie, our mascot, is a cool showcase of our creativity. You could find Acodie in every page of this site in various styles and emotions."
+    image="/images/home/acodie.png"
+    reverse={false} />
+  <TestimonialTooltip />
+  <Faq heading="Got Questions?" services={faqServices} bgColor="#F6F8FA" />
   <Col3CardGrid />
   <CtaSection />
-  
-  <Faq heading="Got Questions?" services={faqServices} bgColor="#F6F8FA" />
-    
-
  
 </BaseLayout>

@@ -1,0 +1,58 @@
+---
+const projects = [
+  { title: "Freemans", image: "/images/home/project1.png" ,desc:"Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus viverra nulla ut metus varius..."},
+  { title: "Globallogic", image: "/images/home/project2.png" ,desc:"Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus viverra nulla ut metus varius..."},
+  { title: "Soumya Construction", image: "/images/home/project3.png" ,desc:"Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus viverra nulla ut metus varius..."},
+  { title: "Freemans", image: "/images/home/project1.png" ,desc:"Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus viverra nulla ut metus varius..."},
+  { title: "Globallogic", image: "/images/home/project2.png" ,desc:"Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus viverra nulla ut metus varius..."},
+  { title: "Soumya Construction", image: "/images/home/project3.png" ,desc:"Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus viverra nulla ut metus varius..."},
+];
+---
+
+<section class="content-slider-section">
+  <div class="container">
+
+    <div class="section-header">
+      <h2>Web Development.</h2>
+      <p>Human-centred design meets cutting-edge technology.</p>
+    </div>
+
+    <div class="swiper project-swiper">
+      <div class="swiper-wrapper">
+        {projects.map((item) => (
+          <div class="swiper-slide" key={item.title}>
+            <article class="slider-card">
+              <img src={item.image} alt={item.title} />
+              <h5>{item.title}</h5>
+              <p>{item.desc}</p>
+            </article>
+          </div>
+        ))}
+      </div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
+  </div>
+</section>
+
+<script >
+  import Swiper from "swiper";
+  import { Navigation } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
+
+  new Swiper(".project-swiper", {
+    modules: [Navigation],
+    // slidesPerView: 3,
+    slidesPerView: "auto",
+    spaceBetween: 32,
+    speed: 700,
+    loop: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>

@@ -1,0 +1,56 @@
+.Col2grid-section{
+    .Col2-gridarea{
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 1.5rem;
+         @media screen and (min-width: 768px) {
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+        }
+
+        .left-content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 36.5rem;
+            justify-content: center;
+            margin: 0 auto;
+            .mascot-subtitle{
+                font-size: var(--font-size-sm);
+                color: var(--color-primary);
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                letter-spacing: 1rem;
+            }
+            .mascot-title{
+                font-size: clamp(3.5rem, 8vw, 8rem);
+                line-height: 1.15;
+                margin-bottom: 1rem;
+                @media screen and (min-width: 768px) {
+                    font-size: 8rem;
+                    
+                }
+            }
+            .mascot-desc{
+                font-size: var(--font-size-md);
+                color: var(--color-text-secondary);
+                line-height: 1.6;
+            }
+        }
+
+        .right-image{
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        &.is-reverse{
+            .Col2-gridarea{
+               
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-<!-- ---
+---
 import ContentSubHead from "./ContentSubHead.astro";
 
 const {
@@ -8,17 +8,18 @@ const {
 } = Astro.props;
 ---
 
-<section class="serviceScrollsection bg-change" data-color={bgColor}>
+<section class="FaqScrollsection bg-change" data-color={bgColor}>
   <div class="container">
-    <div class="service-area">
+    <div class="Faq-area">
 
       <ContentSubHead
         heading={heading}
-        align="center"
+        align="center-align"
         color="#9C9C9C"
       />
+      <h2 class="heading_text">We've Got Answers!</h2>
 
-      <div class="service-accordion-area" id="service-scroll-wrapper">
+      <div class="Faq-accordion-area" id="Faq-scroll-wrapper">
         <div id="grid_container">
 
           {services.map((service) => (
@@ -26,8 +27,12 @@ const {
 
               <div class="title-row">
                 <div class="heading-row">
-                  <h6 class="title__number">({service.id})</h6>
+                  <h6 class="title__number">{service.id}</h6>
                   <h5>{service.title}</h5>
+                </div>
+                <div class="icon-wrapper">
+                  <span class="open-icon" aria-hidden="true">Open</span>
+                  <span class="close-icon" aria-hidden="true">Close</span>
                 </div>
               </div>
 
@@ -47,4 +52,4 @@ const {
 
     </div>
   </div>
-</section> -->
+</section>

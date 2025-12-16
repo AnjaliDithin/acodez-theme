@@ -6,9 +6,14 @@
   .footer-ctbar__row{
     display: flex;
     align-items: flex-start;
-    gap: 4rem;
+    gap: 2rem;
     justify-content: flex-start;
     padding-bottom: 4rem;
+    flex-wrap: wrap;
+    @media screen and (min-width: 991px) {
+        flex-wrap: nowrap;
+        gap: 4rem;
+    }
     &.footer-ctbar__ctlinks{
       justify-content: space-between;
     }
@@ -23,7 +28,13 @@
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 2.5rem;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+     @media screen and (min-width: 991px) {
+        flex-wrap: nowrap;
+        gap: 2.5rem;
+    }
     li{
       line-height: 1;
       a{
@@ -31,8 +42,13 @@
         color: #212427;
         display: flex;
         gap:1rem;
-        align-items: center;
-        font-size: clamp(1.8rem, 1vw + 1.2rem, 2rem);
+        align-items: flex-start;
+        font-size: clamp(1.6rem, 1vw + 1rem, 2rem);
+        flex-wrap: wrap;
+        @media screen and (min-width: 580px) {
+          flex-wrap: nowrap;
+           align-items: center;
+        } 
         @media screen and (min-width: 1300px) {
           font-size: 2rem;
         }
@@ -42,10 +58,18 @@
   }
   
   .footer-ctbar__form {
+    width: 100%;
+    @media screen and (min-width: 580px) {
+        width: auto;
+    }
     .field-wrap{
       display: flex;
       align-items: center;
       gap:6.1rem;
+      flex-wrap: wrap;
+       @media screen and (min-width: 580px) {
+        flex-wrap: nowrap;
+    }
     }
     input[type="email"] {
        flex: 1;                
@@ -92,6 +116,10 @@
     display: flex;
     gap: 1.6rem;
     align-items: center;
+     flex-wrap: wrap;
+    @media screen and (min-width: 580px) {
+        flex-wrap: nowrap;
+    }
     .subscribe-label{
       position: relative;
       padding-right: 2rem;

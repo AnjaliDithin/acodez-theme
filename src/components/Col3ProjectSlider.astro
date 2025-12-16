@@ -1,0 +1,56 @@
+---
+const projects = [
+  {
+    title: "Freemans",
+    image: "/images/home/project1.png",
+    desc:
+      "Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius...",
+  },
+  {
+    title: "Globallogic",
+    image: "/images/home/project2.png",
+    desc:
+      "Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius...",
+  },
+  {
+    title: "Soumya Construction",
+    image: "/images/home/project3.png",
+    desc:
+      "Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius...",
+  },
+  {
+    title: "Freemans",
+    image: "/images/home/project1.png",
+    desc:
+      "Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius...",
+  },
+];
+---
+
+<section class="slider-section">
+  <div class="slider-container slider-container--left">
+
+    <div class="section-header">
+      <h2 class="section-title">Web Development.</h2>
+      <p class="section-description">
+        Human-centred design meets cutting-edge technology.
+      </p>
+    </div>
+
+    <!-- GSAP SLIDER -->
+    <div class="slider">
+      <div class="slider-track">
+        {projects.map((item) => (
+          <article class="slider-item" key={item.title}>
+            <img src={item.image} alt={item.title} />
+            <h5>{item.title}</h5>
+            <p>{item.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+

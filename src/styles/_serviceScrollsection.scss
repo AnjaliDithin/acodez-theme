@@ -107,10 +107,7 @@
     .scroll-accordion {
       display: block;
       position: relative !important;
-      // border-bottom: 1px solid rgba(0, 0, 0, 0.06);
       background-clip: padding-box;
-
-      // background-color: #F6F8FA;
       will-change: transform;
       overflow: hidden;
       padding: 3.7rem 0;
