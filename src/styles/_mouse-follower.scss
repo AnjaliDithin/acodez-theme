@@ -41,7 +41,8 @@
   &.-text {
     background: $theme-lightblue;
     color: $theme-white;
-    border-color: $theme-lightblue;
+    // border-color: $theme-lightblue;
+    border-color: transparent;
     width: 80px;
     height: 80px;
     @media (min-width: 768px) {

@@ -5,52 +5,62 @@ const projects = [
     image: "/images/home/project1.png",
     desc:
       "Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius...",
+    color: "#d82929" 
   },
   {
     title: "Globallogic",
     image: "/images/home/project2.png",
     desc:
       "Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius...",
+    color: "#FF5F2DF2"
   },
   {
     title: "Soumya Construction",
     image: "/images/home/project3.png",
     desc:
       "Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius...",
+    color: "#AC3B61"
   },
   {
     title: "Freemans",
     image: "/images/home/project1.png",
     desc:
       "Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius...",
+    color: "#d82929"
   },
 ];
 ---
 
-<section class="slider-section">
-  <div class="slider-container slider-container--left">
+<section class="col3Projectslider" id="horizontal-Projectscroll" >
+  <div class="col3Projects_container slider-container--left">
+    <div class="container">
 
-    <div class="section-header">
-      <h2 class="section-title">Web Development.</h2>
-      <p class="section-description">
-        Human-centred design meets cutting-edge technology.
+    <div class="heading-block">
+      <h2 class="title_blk">Web Development.</h2>
+      <p class="description_blk">
+       We ensure that all our web development and mobile application development projects are not only engineered using the most cutting edge technologies, but also they're created through a human-centred design process.
       </p>
     </div>
 
-    <!-- GSAP SLIDER -->
-    <div class="slider">
-      <div class="slider-track">
+    <div class="Projects-slider" data-cursor-text="view more">
+      <div class="Projects-slidertrack">
         {projects.map((item) => (
-          <article class="slider-item" key={item.title}>
+          <article class="slider-item" key={item.title} data-color={item.color}>
+            <div class="img_blk">
             <img src={item.image} alt={item.title} />
+            </div>
+            <div class="content_blk">
             <h5>{item.title}</h5>
             <p>{item.desc}</p>
+            </div>
           </article>
         ))}
       </div>
     </div>
 
   </div>
+  </div>
 </section>
+
 
 

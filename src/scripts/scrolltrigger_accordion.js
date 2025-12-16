@@ -99,7 +99,7 @@ export function initScrollAccordion({ debug = false } = {}) {
     if (debug) console.info("[accordion] opening index", activeIndex);
 
     // briefly disable pointer events to reduce interactive reflows
-    togglePointerEvents(false);
+    // togglePointerEvents(false);
 
     contents.forEach((c, i) => {
       if (!c) return;
@@ -123,7 +123,7 @@ export function initScrollAccordion({ debug = false } = {}) {
             // switch to auto to allow responsiveness
             c.style.height = "auto";
             // slight delay so sibling closes finish
-            setTimeout(() => togglePointerEvents(true), 60);
+            // setTimeout(() => togglePointerEvents(true), 60);
             // refresh ScrollTrigger measurements after final layout
             ScrollTrigger.refresh();
           }
@@ -167,7 +167,7 @@ export function initScrollAccordion({ debug = false } = {}) {
   items.forEach((item, index) => {
     ScrollTrigger.create({
       trigger: item,
-      start: "top bottom",
+      start: "center center",
       toggleActions: "restart none none reverse",
       onEnter: () => openAccordion(index),
       onEnterBack: () => openAccordion(index)
@@ -200,45 +200,7 @@ export function initScrollAccordion({ debug = false } = {}) {
     });
   }
 
-  // NEAREST-TO-CENTER scanner (debounced + rAF)
-  let scanTimer = null;
-  function scanNearestDebounced() {
-    if (scanTimer) clearTimeout(scanTimer);
-    scanTimer = setTimeout(() => {
-      requestAnimationFrame(() => {
-        const viewportCenter = window.innerHeight / 2;
-        let closestIdx = -1;
-        let closestDist = Infinity;
 
-        items.forEach((it, idx) => {
-          const rect = it.getBoundingClientRect();
-          const elCenter = rect.top + rect.height / 2;
-          const dist = Math.abs(elCenter - viewportCenter);
-          if (dist < closestDist) {
-            closestDist = dist;
-            closestIdx = idx;
-          }
-        });
-
-        // threshold for sensitivity (tune if needed)
-        const threshold = 220;
-        if (closestIdx >= 0) {
-          if (closestIdx === lastIndex || closestDist < threshold) {
-            openAccordion(closestIdx);
-          }
-        }
-      });
-    }, 120); // debounce window (ms)
-  }
-
-  if (wrapper) {
-    // initial scan so direct navigation opens proper panel
-    scanNearestDebounced();
-    window.addEventListener("scroll", scanNearestDebounced, { passive: true });
-    window.addEventListener("resize", scanNearestDebounced);
-  }
-
-  // Refresh ScrollTrigger when images load and on window load
   function refreshAfterImagesAndLoad() {
     const imgs = wrapper ? wrapper.querySelectorAll("img") : document.querySelectorAll(".scroll-accordion img");
     let pending = 0;
@@ -314,33 +276,6 @@ export function initScrollAccordion({ debug = false } = {}) {
 
 
 
-// export function initScrollAccordion() {
-//   const cards = gsap.utils.toArray(".scroll-block");
-//   if (!cards.length) return;
-
-//   // Kill old triggers (important if re-init / Astro)
-//   ScrollTrigger.getAll().forEach(t => t.kill());
-
-//   // Stack order: later cards above earlier
-//   cards.forEach((card, i) => {
-//     gsap.set(card, {
-//       position: "relative",
-//       zIndex: i + 1
-//     });
-//   });
-
-//   cards.forEach((card, i) => {
-//     ScrollTrigger.create({
-//       trigger: card,
-//       start: "top top",
-//       endTrigger: cards[i + 1] || card,
-//       end: cards[i + 1] ? "top top" : "+=300",
-//       pin: true,
-//       pinSpacing: false,
-//       anticipatePin: 1
-//     });
-//   });
-// }
 
 
 

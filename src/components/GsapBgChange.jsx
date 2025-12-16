@@ -18,28 +18,26 @@ export default function GsapBgChange() {
 
       let currentBg = "#ffffff";
 
-      gsap.set(main, { backgroundColor: currentBg });
+      gsap.set(main, { background: currentBg });
 
      function applyColor(nextColor) {
         if (currentBg === nextColor) return;
 
         gsap.killTweensOf(main);
-        gsap.set(main, { backgroundColor: currentBg });
+        gsap.set(main, { background: currentBg });
 
-        gsap.to(main, {
-          backgroundColor: nextColor,
-          duration: 1.4,
-          ease: "power3.out",
-          overwrite: true,
-          onComplete: () => {
-            // console.log(
-            //   "BG FINAL:",
-            //   nextColor,
-            //   "→",
-            //   getComputedStyle(main).backgroundColor
-            // );
-          }
-        });
+        if (nextColor.includes('linear-gradient') || nextColor.includes('radial-gradient')) {
+          // Instant change for gradients
+          gsap.set(main, { background: nextColor });
+        } else {
+          // Smooth animation for solid colors
+          gsap.to(main, {
+            background: nextColor,
+            duration: 0.8,
+            ease: "power3.out",
+            overwrite: true,
+          });
+        }
 
         currentBg = nextColor;
       }

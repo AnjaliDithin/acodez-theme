@@ -2,11 +2,11 @@
 import gsap from "gsap";
 
 export function initImageTrail() {
-  const trail = document.querySelector(".interaction_trail");
+  const trail = document.querySelector(".cta-section  .interaction_trail");
   if (!trail) return;
 
-  const list = trail.querySelector(".interaction_list");
-  const sources = [...trail.querySelectorAll(".interaction_item img")];
+  const list = trail.querySelector(".cta-section  .interaction_list");
+  const sources = [...trail.querySelectorAll(".cta-section .interaction_item img")];
 
   if (!sources.length) return;
 

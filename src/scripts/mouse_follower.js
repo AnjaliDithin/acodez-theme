@@ -27,6 +27,11 @@ export function initMouseFollower() {
     textFontWeight: 600,
   });
 
+  // Hide default cursor
+  document.body.style.cursor = 'none';
+
   return mfInstance;
 }
+
+export { mfInstance };
 

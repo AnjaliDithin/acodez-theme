@@ -9,12 +9,13 @@ import { initTextAnimation } from "./textanimation.js";
 import { initScrollAccordion } from "./scrolltrigger_accordion.js";
 import { initImageTrail } from "./image_trail.js";
 import { initStatCounter } from "./statCounter.js";
-import { initGsapSlider } from "./gsapSlider.js";
+import { initGsapCardSlider } from "./gsap_cardSlider.js";
+import { initArcPathSlider } from "./gsap_arcSlider.js";
 
 
 
 function initAll() {
-  initMouseFollower();
+  const mf = initMouseFollower();
   initInteractiveGlobe();
   initHeroCrossfade();
   initVideoControls();
@@ -24,7 +25,8 @@ function initAll() {
   initScrollAccordion();
   initImageTrail();
   initStatCounter();
-  initGsapSlider();
+  initGsapCardSlider({ mfInstance: mf });
+  initArcPathSlider();
 }
 
 // First load
