@@ -11,6 +11,9 @@ import { initImageTrail } from "./image_trail.js";
 import { initStatCounter } from "./statCounter.js";
 import { initGsapCardSlider } from "./gsap_cardSlider.js";
 import { initArcPathSlider } from "./gsap_arcSlider.js";
+import { initFeaturedWorks } from "./featured_work.js";
+import { initFeaturedCardsScroll } from "./featuredCardsScroll.js";
+
 
 
 
@@ -27,6 +30,8 @@ function initAll() {
   initStatCounter();
   initGsapCardSlider({ mfInstance: mf });
   initArcPathSlider();
+   initFeaturedWorks();
+   initFeaturedCardsScroll();
 }
 
 // First load

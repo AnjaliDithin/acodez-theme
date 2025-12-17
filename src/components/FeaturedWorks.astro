@@ -1,0 +1,81 @@
+---
+const projects = [
+  {
+    title: "Obsessed with Quality!",
+    image: "/images/home/feature1.png",
+    description:
+      "At Acodez, we obsess over quality. We deliver world-class digital products with pixel-perfect execution.",
+    link: "#",
+    size: "large",
+  },
+  {
+    title: "GlobalLogic",
+    image: "/images/home/feature2.png",
+    description:
+      "GlobalLogic: Engineering impact through intelligent products, platforms, and services.",
+    tags: ["Branding", "UX Design", "Development"],
+    link: "#",
+    size: "medium",
+  },
+//   {
+//     title: "Engineering Impact",
+//     image: "/images/home/feature1.png",
+//     description:
+//       "High-performance platforms designed for scale and speed.",
+//     link: "#",
+//     size: "small",
+//   },
+];
+---
+
+<section class="featured-work-sec ">
+  
+    <div class="featured-area">
+        <div class="heading-layer">
+                <div class="heading-block">
+                    <h2 class="heading-text rolling-text">Featured works</h2>
+                </div>
+            </div>
+        </div>
+        <div class="cards-grid-area">
+            <div class="container">
+                <div class="cards-grid">
+                    {projects.map((item) => (
+                        <article class={`card-block ${item.size}`}>
+                            <div class="card-wrap">
+                                <div class="image-wrap">
+                                    <img src={item.image} alt={item.title} loading="lazy" />
+                                </div>
+
+                                <div class="content-wrap">
+                                    <h3>{item.title}</h3>
+                                    <p>{item.description}</p>
+
+                                    {item.tags && (
+                                    <div class="tags">
+                                        {item.tags.map((tag) => (
+                                        <span>{tag}</span>
+                                        ))}
+                                    </div>
+                                    )}
+
+                                    <a href={item.link} class="cta">
+                                    View Case
+                                    <span>↗</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="explore">
+            <a href="#" class="explore-btn">
+                Explore All <span>→</span>
+            </a>
+        </div>
+    </div>
+</section>

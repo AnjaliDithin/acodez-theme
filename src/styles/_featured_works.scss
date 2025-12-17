@@ -1,0 +1,109 @@
+@use "variables" as *;
+
+.featured-work-sec{
+    position: relative;
+    background: #0E1216;
+    .heading-text {
+        color:$theme-white;
+        font-size: 30rem;
+        font-weight: 300;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        white-space: nowrap;
+        z-index: 2;
+         white-space: nowrap;
+        will-change: transform;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: geometricPrecision;
+          transform: translateY(-0.04em);
+        
+    }
+    .heading-layer {
+        position: relative;
+        // min-height: 100vh;
+        overflow: hidden;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+    }
+    .heading-block {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 13rem;
+        will-change: transform;
+    }
+
+    .heading-text,
+    .spacing-layer2 {
+        will-change: transform, opacity;
+    }
+    .spacing-layer1{
+        align-items: center;
+        background: #0E1216;
+        position: absolute;
+        inset: 0;   
+        height: 100%;
+        width: 110%;
+    }
+    .spacing-layer2{
+        background: #0E1216;
+        pointer-events: none;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        height: 100%;
+        width: 100%;
+        -webkit-transition: 0.3s opacity;
+        transition: 0.3s opacity;
+        opacity: 0;
+    }
+     .cards-grid-area {
+        position: absolute;
+        top: -25%;
+        // top:-50%;
+        // transform: translateY(-50%);
+        z-index: 4;
+        padding: 8rem 0 0;
+  }
+    
+    .cards-grid{
+        display: flex;
+        flex-direction: column;
+        gap: 8rem;
+        .card-wrap{
+            display: flex;
+            justify-content: center;
+        }
+        .card-block{
+         will-change: transform;
+        transform: translateY(100vh);
+            &:nth-child(even){
+                .image-wrap{
+                    order: 2;
+                }
+                .content-wrap{
+                    padding-left: 0;
+                    padding-right: 3rem;
+                }
+            }
+        }
+        .image-wrap{
+            width: 48%;
+            img{
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+        }
+        .content-wrap{
+            width: 48%;
+            padding-left: 3rem;
+        }
+    }
+    
+}
