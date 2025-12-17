@@ -16,40 +16,41 @@ section{
 //   	transform: translateY(0);
 //   }
 // }
-.cross-fade-wrap{
-    position: relative;
-    width: clamp(20rem, 22vw, 25rem);
-    height: clamp(8rem, 8vw, 10rem);
-    overflow: hidden;
-    border-radius: 12rem;
-    .images-wrap {
-      // position: relative;
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 12rem;
-      img{
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          // opacity: 0;
-          border-radius: 12rem;
-      }
-    }
-    .crossfade-layer--fallback {
-      z-index: 1;
-    }
 
-    .crossfade-layer--animated {
-      z-index: 2;
-        img{
-            opacity: 0;
-        }
-    }
-}
+// .cross-fade-wrap{
+//     position: relative;
+//     width: clamp(20rem, 22vw, 25rem);
+//     height: clamp(8rem, 8vw, 10rem);
+//     overflow: hidden;
+//     border-radius: 12rem;
+//     .images-wrap {
+//       // position: relative;
+//       position: absolute;
+//       inset: 0;
+//       width: 100%;
+//       height: 100%;
+//       border-radius: 12rem;
+//       img{
+//           position: absolute;
+//           inset: 0;
+//           width: 100%;
+//           height: 100%;
+//           object-fit: cover;
+//           // opacity: 0;
+//           border-radius: 12rem;
+//       }
+//     }
+//     .crossfade-layer--fallback {
+//       z-index: 1;
+//     }
+
+//     .crossfade-layer--animated {
+//       z-index: 2;
+//         img{
+//             opacity: 0;
+//         }
+//     }
+// }
 .cross-textfade-wrap{
     position: relative;
     overflow: hidden;
@@ -140,4 +141,102 @@ section{
 		height: auto;
 	}
 }
+}
+
+// .cross-fade-wrap{
+//     position: relative;
+//     overflow: hidden;
+//     .images-wrap {
+//       // position: relative;
+//       position: absolute;
+//       inset: 0;
+//       img{
+//         position: absolute;
+//         inset: 0;
+//       }
+//     }
+//     .crossfade-layer--fallback {
+//         z-index: 1;
+//     }
+
+//     .crossfade-layer--animated {
+//       z-index: 2;
+//         img{
+//             opacity: 0;
+//         }
+//     }
+// }
+.cross-fade-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+.crossfade-layer--animated .fade-img {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  object-fit: contain;
+  animation: crossfade 9s infinite;
+}
+
+/* Individual delays */
+.crossfade-layer--animated .fade-img:nth-child(1) {
+  animation-delay: 0s;
+}
+.crossfade-layer--animated .fade-img:nth-child(2) {
+  animation-delay: 3s;
+}
+.crossfade-layer--animated .fade-img:nth-child(3) {
+  animation-delay: 6s;
+}
+.crossfade-layer--animated .fade-img:nth-child(4) {
+  animation-delay: 9s;
+}
+.crossfade-layer--animated .fade-img:nth-child(5) {
+  animation-delay: 6s;
+}
+}
+// .cross-textfade-wrap{
+//   position: relative;
+//   width: 100%;
+//    height: 2.5rem;
+//    overflow: hidden;
+//     .crossfade-layer--animated .js-crossfade {
+//     position: absolute;
+//     inset: 0;
+//     display: flex;
+//     align-items: center;
+//     opacity: 0;
+
+//     animation: textCrossfade 9s infinite;
+//     }
+//     .crossfade-layer--animated .js-crossfade:nth-child(1) {
+//     animation-delay: 0s;
+//     }
+
+//     .crossfade-layer--animated .js-crossfade:nth-child(2) {
+//     animation-delay: 3s;
+//     }
+
+//     .crossfade-layer--animated .js-crossfade:nth-child(3) {
+//     animation-delay: 6s;
+//     }
+// }
+
+/* Keyframes */
+@keyframes crossfade {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }

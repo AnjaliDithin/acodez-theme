@@ -57,6 +57,25 @@
       overflow: hidden;
       max-width: 80%;
     }
+    .tag-list{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap:1rem;
+      align-items: center;
+      margin-top: 1.5rem;
+      li{
+        border: 1px solid #EAEAEA;
+        font-size: 1.2rem;
+        color: #818385;
+        font-weight: 500;
+        padding: 0.7rem 1.1rem;
+        white-space: nowrap;
+        border-radius: 2rem;
+        min-height: 3rem;
+      }
+    }
   }
   
 }

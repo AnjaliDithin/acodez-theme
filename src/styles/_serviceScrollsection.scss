@@ -9,7 +9,12 @@
     }
     .scroll-opacity-text{
         font-weight: 200;
-        line-height: 1.4;
+        line-height: 1.28;
+        max-width: 122.7rem;
+        span{
+          margin: 0 0.8rem;
+          line-height: 1;
+        }
     }
   
    .highlight-img{

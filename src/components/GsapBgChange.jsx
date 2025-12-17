@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -7,66 +6,95 @@ export default function GsapBgChange() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const timer = setTimeout(() => {
-      const sections = document.querySelectorAll(".bg-change, .bg-chnge");
-      const main =
-        document.querySelector("main") ||
-        document.querySelector("#app") ||
-        document.body;
+    const main =
+      document.querySelector("main") ||
+      document.querySelector("#app") ||
+      document.body;
 
-      if (!sections.length || !main) return;
+    const sections = gsap.utils.toArray(".bg-change, .bg-chnge");
 
-      let currentBg = "#ffffff";
+    if (!sections.length || !main) return;
 
-      gsap.set(main, { background: currentBg });
+    const DEFAULT_BG = "#ffffff";
+    let currentBg = DEFAULT_BG;
 
-     function applyColor(nextColor) {
-        if (currentBg === nextColor) return;
+    // Initial background
+    gsap.set(main, {
+      backgroundColor: DEFAULT_BG,
+      backgroundImage: "none",
+    });
 
+    function applyBackground(nextBg) {
+      if (!nextBg || nextBg === currentBg) return;
+
+      currentBg = nextBg;
+
+      // ✅ If gradient → apply instantly
+      if (nextBg.includes("gradient")) {
         gsap.killTweensOf(main);
-        gsap.set(main, { background: currentBg });
 
-        if (nextColor.includes('linear-gradient') || nextColor.includes('radial-gradient')) {
-          // Instant change for gradients
-          gsap.set(main, { background: nextColor });
-        } else {
-          // Smooth animation for solid colors
-          gsap.to(main, {
-            background: nextColor,
-            duration: 0.8,
-            ease: "power3.out",
-            overwrite: true,
-          });
-        }
-
-        currentBg = nextColor;
+        gsap.set(main, {
+          backgroundImage: nextBg,
+          backgroundColor: "transparent",
+        });
+        return;
       }
 
-      sections.forEach((section, index) => {
-        const color = section.getAttribute("data-color");
-        if (!color) return;
+      // ✅ Solid color → animate smoothly
+      gsap.set(main, { backgroundImage: "none" });
 
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top 55%",
-          end: "bottom 55%",
-
-          onEnter: () => applyColor(color),
-          onEnterBack: () => applyColor(color),
-          onLeaveBack: () => applyColor("#ffffff"),
-        });
+      gsap.to(main, {
+        backgroundColor: nextBg,
+        duration: 0.6,
+        ease: "power2.out",
+        overwrite: "auto",
       });
+    }
 
+    function updateBg() {
+      const centerY = window.innerHeight / 2;
+      let activeSection = null;
+
+      // Pick FIRST section that contains center
+      for (let i = 0; i < sections.length; i++) {
+        const rect = sections[i].getBoundingClientRect();
+
+        if (rect.top <= centerY && rect.bottom >= centerY) {
+          activeSection = sections[i];
+          break;
+        }
+      }
+
+      const nextBg =
+        activeSection?.getAttribute("data-color") || DEFAULT_BG;
+
+      applyBackground(nextBg);
+    }
+
+    // One global trigger
+    ScrollTrigger.create({
+      start: 0,
+      end: "max",
+      onUpdate: updateBg,
+    });
+
+    // Ensure correct background on load & refresh
+    ScrollTrigger.addEventListener("refresh", updateBg);
+
+    window.addEventListener("load", () => {
       ScrollTrigger.refresh();
-    }, 300);
+      updateBg();
+    });
+
+    // Initial run (SPA safety)
+    updateBg();
 
     return () => {
-      clearTimeout(timer);
+      ScrollTrigger.removeEventListener("refresh", updateBg);
       ScrollTrigger.getAll().forEach((st) => st.kill());
-      gsap.killTweensOf("*");
+      gsap.killTweensOf(main);
     };
   }, []);
 
   return null;
 }
-

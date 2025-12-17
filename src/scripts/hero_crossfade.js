@@ -4,7 +4,7 @@ import gsap from "gsap";
 let isInit = false;
 
 export function initHeroCrossfade({
-  selector = ".crossfade-layer--animated .js-crossfade",
+  selector = ".cross-textfade-wrap .crossfade-layer--animated .js-crossfade",
   duration = 0.5,
   delay = 1.8
 } = {}) {
@@ -26,6 +26,9 @@ export function initHeroCrossfade({
       .to(next, { autoAlpha: 1, duration });
   });
 }
+
+
+
 
 
 
