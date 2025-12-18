@@ -1,62 +1,69 @@
 ---
 const projects = [
-
   {
-    title: "GlobalLogic",
-    image: "/images/home/feature1.png",
-    description:
-      "GlobalLogic: Engineering impact through intelligent products, platforms, and services.",
+    image: "/images/home/feature1.jpg",
+    description: [
+      "GlobalLogic: Engineering impact through intelligent products, platforms, and services.",
+      "Our mission is to build digital products, platforms, and services designed for desirability, curated for intelligence, and engineered for excellence."
+    ],
     tags: ["Branding", "UX Design", "Development"],
-    link: "#",
-    size: "medium",
-  },
-    {
-    title: "Obsessed with Quality!",
-    image: "/images/home/feature2.png",
-    description:
-      "At Acodez, we obsess over quality. We deliver world-class digital products with pixel-perfect execution.",
+    logoimage: "/images/home/feature-logo1.svg",
     link: "#",
     size: "large",
+  },
+  {
+    title: "Obsessed with Quality!",
+    image: "/images/home/feature2.jpg",
+    description: [
+      "Yes, at Acodez, we're obsessed with quality. We rely on our portfolio to do business and always ensure that each of our web or mobile deliverable is unique and world class."],
+    link: "#",
+    size: "medium",
   }
-//   {
-//     title: "Engineering Impact",
-//     image: "/images/home/feature1.png",
-//     description:
-//       "High-performance platforms designed for scale and speed.",
-//     link: "#",
-//     size: "small",
-//   },
 ];
+
 ---
 
-<section class="featured-work-sec ">
+<section class="featured-work-sec bg-chnge" data-color="#0E1216">
   
     <div class="featured-area">
-        <div class="heading-layer">
+        <!-- <div class="heading-layer"> -->
             <div class="heading-block">
                 <h2 class="heading-text rolling-text">Featured works</h2>
             </div>
-        </div>
+        <!-- </div> -->
         <div class="cards-grid-area">
-            <div class="container">
+            
                 <div class="cards-grid" id="card-grid">
                     {projects.map((item) => (
                         <article class={`card-block ${item.size}`}>
+                            <div class="container">
                             <div class="card-wrap">
-                                <div class="image-wrap">
+                                
+                                <div class="image-wrap" >
                                     <img src={item.image} alt={item.title} loading="lazy" />
                                 </div>
 
                                 <div class="content-wrap">
-                                    <h3>{item.title}</h3>
-                                    <p>{item.description}</p>
-
-                                    {item.tags && (
-                                    <div class="tags">
-                                        {item.tags.map((tag) => (
-                                        <span>{tag}</span>
+                                     {item.logoimage && (
+                                    <div class="image-blk">
+                                        <img src={item.logoimage} alt={item.title} loading="lazy" />
+                                    </div>
+                                    )}
+                                    <div class="text-blk">
+                                         {item.title && (
+                                        <h4>{item.title}</h4>
+                                        )}
+                                         {item.description.map((text) => (
+                                        <p>{text}</p>
                                         ))}
                                     </div>
+
+                                  {item.tags && (
+                                    <ul class="tags-blk">
+                                        {item.tags.map((tag) => (
+                                        <li>{tag}</li>
+                                        ))}
+                                    </ul>
                                     )}
 
                                     <a href={item.link} class="cta">
@@ -65,9 +72,9 @@ const projects = [
                                     </a>
                                 </div>
                             </div>
+                            </div>
                         </article>
                     ))}
-                </div>
             </div>
         </div>
 
