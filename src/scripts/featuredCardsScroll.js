@@ -4,27 +4,42 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export function initFeaturedCardsScroll() {
-  const cards = document.querySelectorAll(".card-block");
+  const cards = gsap.utils.toArray(".card-block");
+  if (!cards.length) return;
 
-  if (!cards.length) {
-    console.warn("No cards found");
-    return;
-  }
+  const vh = window.innerHeight;
+  const TOP_GAP = 475;     // where the FIRST card stops
+  const EXTRA_GAP = 0;    // optional small spacing between cards
 
-  const cardsTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".cards-grid-area",
-      start: "top 80%",
-      toggleActions: "play none none none",
-    },
-  });
+  // Measure card height once (assumes equal heights)
+  const cardHeight = cards[0].offsetHeight;
 
-  cards.forEach((card) => {
-    cardsTl.from(card, {
+  cards.forEach((card, i) => {
+    // Start below viewport
+    gsap.set(card, {
+      y: vh * 0.6,
       opacity: 0,
-      y: -80,
-      duration: 0.8,
-      ease: "power3.out",
+      force3D: true,
+      willChange: "transform, opacity",
+    });
+
+    // 🔥 TRUE STACKING: each card fully above the previous
+    const finalY =
+      -vh * 0.6 +
+      (TOP_GAP - i * (cardHeight + EXTRA_GAP));
+
+    gsap.to(card, {
+      y: finalY,
+      opacity: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: card,
+        start: "top bottom",
+        end: "top+=200 top",
+        scrub: 1.5,
+        invalidateOnRefresh: true,
+        fastScrollEnd: false,
+      },
     });
   });
 }

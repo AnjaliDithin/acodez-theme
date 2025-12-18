@@ -30,8 +30,8 @@ function initAll() {
   initStatCounter();
   initGsapCardSlider({ mfInstance: mf });
   initArcPathSlider();
-   initFeaturedWorks();
-   initFeaturedCardsScroll();
+  initFeaturedWorks();
+  initFeaturedCardsScroll();
 }
 
 // First load

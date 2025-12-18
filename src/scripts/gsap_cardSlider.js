@@ -23,7 +23,7 @@ export function initGsapCardSlider({
     trigger: section,
     start: "top top",
     end: () => `+=${getScrollAmount()}`,
-    pin: true,
+    // pin: true,
     onUpdate: (self) => {
       gsap.set(track, { x: -getScrollAmount() * self.progress });
     },

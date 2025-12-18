@@ -4,49 +4,32 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export function initFeaturedWorks() {
-  const section = document.querySelector(".featured-work-sec .featured-area");
+  const section = document.querySelector(".featured-work-sec");
   const title = section?.querySelector(".heading-text");
-  const cards = gsap.utils.toArray(".card-block");
 
   if (!section || !title) return;
 
-  const startX = window.innerWidth;
-  const endX = -title.offsetWidth * 0.8;
+  // Measure AFTER fonts/layout are ready
+  const getTextWidth = () => title.offsetWidth;
 
-  // Initial text position
   gsap.set(title, {
-    x: startX,
+    x: () => window.innerWidth / 2 + getTextWidth() / 2,
     force3D: true,
     willChange: "transform",
   });
 
-  gsap.timeline({
+  gsap.to(title, {
+    x: () => -getTextWidth() / 2,
+    ease: "none",
     scrollTrigger: {
       trigger: section,
       start: "top top",
-      end: "+=1500",        // controls how long section stays fixed
+      end: "+=1200",          // give more scroll room
+      scrub: 1.8,             // smooth scrub
       pin: true,
-      pinType: "fixed",            // ✅ section becomes fixed
-      scrub: 1.5,
-      anticipatePin: 1,
-      fastScrollEnd: true,
+      anticipatePin: 1,       // 🔥 reduces pin flicker
+      invalidateOnRefresh: true,
+      fastScrollEnd: false,
     },
-  })
-  .to(title, {
-    x: endX,
-    ease: "none",
-    duration: 1,
-  });
-   cards.forEach((card, i) => {
-    gsap.to(card, {
-      y: 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: `top+=${textScroll + i * cardScroll} top`,
-        end: `top+=${textScroll + (i + 1) * cardScroll} top`,
-        scrub: true,
-      },
-    });
   });
 }
