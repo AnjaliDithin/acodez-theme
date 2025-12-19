@@ -1,0 +1,64 @@
+---
+const items = [
+  "Awwwards – Arcturus Winner",
+  "Shopify Partner",
+  "WordPress Approved",
+  "AVA Digital Awards",
+  "The Communicator Award",
+  "Dotcomm Awards",
+  "Hermes Creative Awards",
+  "Google Partner",
+  "Horizon Interactive Awards",
+  "Interactive Media Awards"
+];
+---
+<section class="awards-ticker">
+    <div class="awards-ticker-block">
+        <div class="fade fade-left"></div>
+        <div class="fade fade-right"></div>
+
+        <div class="ticker">
+            <div class="ticker-track">
+            {items.map(item => (
+                <span class="ticker-item">
+                {item}
+                <span class="star">✱</span>
+                </span>
+            ))}
+
+            {/* duplicate for seamless loop */}
+            {items.map(item => (
+                <span class="ticker-item">
+                {item}
+                <span class="star">✱</span>
+                </span>
+            ))}
+            </div>
+        </div>
+        <div class="bottom-line"></div>
+  </div>
+  <div class="awards-ticker-block">
+        <div class="fade fade-left"></div>
+        <div class="fade fade-right"></div>
+
+        <div class="ticker">
+            <div class="ticker-track">
+            {items.map(item => (
+                <span class="ticker-item">
+                {item}
+                <span class="star">✱</span>
+                </span>
+            ))}
+
+            {/* duplicate for seamless loop */}
+            {items.map(item => (
+                <span class="ticker-item">
+                {item}
+                <span class="star">✱</span>
+                </span>
+            ))}
+            </div>
+        </div>
+        <div class="bottom-line"></div>
+  </div>
+</section>

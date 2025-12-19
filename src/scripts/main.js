@@ -12,6 +12,7 @@ import { initStatCounter } from "./statCounter.js";
 import { initGsapCardSlider } from "./gsap_cardSlider.js";
 import { initArcPathSlider } from "./gsap_arcSlider.js";
 import { initFeaturedWorks } from "./featured_work.js";
+import { initFeaturedMedia } from "./featured_media.js";
 
 
 
@@ -30,6 +31,7 @@ function initAll() {
   initGsapCardSlider({ mfInstance: mf });
   initArcPathSlider();
   initFeaturedWorks();
+  initFeaturedMedia();
 }
 
 // First load

@@ -162,5 +162,13 @@
                 }
         }
     }
+    .explore{
+        position: relative;
+        z-index: 4;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin: 9rem auto 0 ;
+    }
     
 }

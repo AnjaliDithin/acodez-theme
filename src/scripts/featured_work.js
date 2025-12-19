@@ -40,7 +40,7 @@ export function initFeaturedWorks() {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: section,
-      start: "top top",
+      start: "top 100px",
       end: () => "+=" + (window.innerHeight + cards.length * cardHeight),
       scrub: 1.6,
       pin: true,

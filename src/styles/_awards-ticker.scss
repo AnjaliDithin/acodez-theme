@@ -1,0 +1,86 @@
+@use "variables" as *;
+.awards-ticker {
+  position: relative;
+  overflow: hidden;
+  background: $theme-white;
+}
+.awards-ticker-block{
+    position: relative;
+  padding: 3rem 0;
+
+}
+
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+  animation: scroll 35s linear infinite;
+  will-change: transform;
+}
+
+.ticker-item {
+    font-size: clamp(1.8rem, 1vw + 1.2rem, 2rem);
+    font-weight: 600;
+    color: $primary-color;
+    display: inline-flex;
+    align-items: center;
+    gap: 2rem;
+    @media screen and (min-width: 1300px) {
+        font-size: 2rem;
+    }
+  
+}
+
+.star {
+  color: #4285F4;
+  font-size: 1.8rem;
+}
+
+.fade {
+  position: absolute;
+  top: 0;
+  width: 50rem;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.fade-left {
+  left: 0;
+  background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0) 100%);
+}
+
+.fade-right {
+  right: 0;
+  background: linear-gradient(to left, #fff 0%, rgba(255,255,255,0) 100%);
+}
+
+/* bottom blue line */
+.bottom-line {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 0.1rem;
+  width: 100%;
+  background: rgba($theme-black,0.1);
+}
+
+/* animation */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* pause on hover (optional) */
+.awards-ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
