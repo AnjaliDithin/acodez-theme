@@ -30,38 +30,32 @@
             }
         }
     }
-  .footer-brand {
-  .brand-text {
-    font-size: 40rem;
-    line-height: 1;
-    font-weight: 700;
-    display: inline-flex;
-  }
+    .footer-brand {
+      .brand-text {
+        font-size: 40rem;
+        line-height: 1;
+        font-weight: 700;
+        display: inline-flex;
+      }
 
-  .brand-text span {
-    color: $theme-snow-grey;
+      .brand-text span {
+        --spot: 0; 
+        color:#F6F8FA;
+        &.is-active{
+            background: radial-gradient(
+            100% 100% at var(--lx, 50%) var(--ly, 50%),
+            rgba(0, 174, 239, var(--spot)) 0%,
+            $theme-snow-grey 50%
+          );
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
 
-    /* 👇 tiny cursor-based spot */
-    background: radial-gradient(
-      10px 10px at var(--lx, 50%) var(--ly, 50%),
-      rgba(0, 174, 239, 0.9) 0%,
-      $theme-snow-grey 65%
-    );
-
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    transition: background 0.05s linear;
-  }
-}
-
-
-
-
-
-
-
-
+          transition:
+          background-position 0.08s linear,
+          --spot 0.15s ease;
+        }
+      }
+    }
 
 }

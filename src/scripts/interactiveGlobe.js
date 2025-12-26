@@ -3,7 +3,7 @@ import * as THREE from "three";
 let globeInstance = null;
 
 export function initInteractiveGlobe() {
-  const container = document.querySelector(".globe-container");
+  const container = document.querySelector(".interactive-globe-container");
   const canvas = document.getElementById("globe-canvas");
 
   if (!container || !canvas) return;

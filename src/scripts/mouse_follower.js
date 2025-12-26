@@ -188,13 +188,21 @@ export function initMouseFollower() {
     }
 
     // reset letters
-    letters.forEach((l) => l.classList.remove("is-active"));
      letters.forEach((l) => {
-    l.style.setProperty("--lx", `50%`);
-    l.style.setProperty("--ly", `50%`);
+    l.style.setProperty("--spot", "0");
+    l.style.setProperty("--lx", "50%");
+    l.style.setProperty("--ly", "50%");
   });
-  });
+});
  
+brandWrapper.addEventListener("mouseenter", () => {
+  letters.forEach((l) => {
+    l.style.setProperty("--spot", "0");
+    l.style.setProperty("--lx", "50%");
+    l.style.setProperty("--ly", "50%");
+  });
+});
+
 brandWrapper.addEventListener("mousemove", (e) => {
   letters.forEach((letter) => {
     const r = letter.getBoundingClientRect();
@@ -211,12 +219,19 @@ brandWrapper.addEventListener("mousemove", (e) => {
 
       letter.style.setProperty("--lx", `${lx}%`);
       letter.style.setProperty("--ly", `${ly}%`);
+      letter.style.setProperty("--spot", "1");
+
+      // ✅ add active class
+      letter.classList.add("is-active");
     } else {
-      letter.style.setProperty("--lx", `50%`);
-      letter.style.setProperty("--ly", `50%`);
+      letter.style.setProperty("--spot", "0");
+
+      // ✅ remove active class
+      letter.classList.remove("is-active");
     }
   });
 });
+
 
 
 

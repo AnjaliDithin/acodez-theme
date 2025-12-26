@@ -5,7 +5,7 @@ const testimonials = [
   {
     brand: "Anchor",
     logo: "/images/home/brand-logo1.png",
-    text: "“I will definitely recommend Acodez to such clients who're looking for quality.”",
+    text: "I will definitely recommend Acodez to such clients who're looking for quality.",
     customer: "MPM Munawar",
     designation: "Chairman & MD, Exotel Holidays P Ltd, India",
     customerImg: "/images/home/brand-user2.png",
@@ -13,24 +13,28 @@ const testimonials = [
   {
     brand: "HDFC",
     logo: "/images/home/brand-logo2.png",
-    text: "“I was really convinced with the previous works they've done and hence I contacted them, even though I'm from Paris and they're in India...and I really liked the design they've done for me too... I strongly recommend Acodez to anyone who's looking for quality stuffs.”",
+    text:
+      "I was really convinced with the previous works they've done and hence I contacted them, even though I'm from Paris and they're in India.",
     customer: "Simo Bennis",
     designation: "Seduction Naturelle PNL, France",
     customerImg: "/images/home/brand-user2.png",
   },
   {
-    brand: "Anchor",
+    brand: "Anchor by Panasonic",
     logo: "/images/home/brand-logo3.png",
-    text: "“Thank you very much for creating a fantastic corporate website for us. I deeply appreciate your efforts and guidance, without which, this wouldn't have been possible.”",
+    text:
+      "Thank you very much for creating a fantastic corporate website for us.",
     customer: "Hiroyasu Tsuchiya",
     designation: "Corporate Branding Division, Anchor by Panasonic",
     customerImg: "/images/home/brand-user3.png",
   },
 ];
-
 ---
 
-<section class="testimonial-section bg-change"   data-color="linear-gradient(180deg, rgba(246, 248, 250, 0) 35%, #EBF1F3 100%)">
+<section
+  class="testimonial-section bg-change"
+  data-color="linear-gradient(180deg, rgba(246, 248, 250, 0) 35%, #EBF1F3 100%)"
+>
   <div class="container">
     <div class="testimonial-area">
       <ContentSubHead
@@ -41,95 +45,159 @@ const testimonials = [
 
       <div class="center-content-area">
         <h2 class="testimonial-heading">
-
           Strategy to
 
+          <!-- LOGO GROUP 1 -->
           <span class="logo-tooltip-wrap">
             <div class="img-wrap">
-              <img
-                src={testimonials[0].logo}
-                alt={testimonials[0].brand}
-                class="brand-logo"
-              />
+              <div class="cross-fade-wrap">
+                <div class="images-wrap crossfade-layer--animated">
+                  {testimonials.map((item, i) => (
+                    <img
+                      class="fade-img js-crossfade brand-logo"
+                      src={item.logo}
+                      alt={item.brand}
+                      data-index={i}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
 
             <span class="tooltip-card">
-              <p class="tooltip-text">{testimonials[0].text}</p>
-                <div class="tooltip-user">
-                  <div class="user-img">
-                  <img
-                    src={testimonials[0].customerImg}
-                    alt={testimonials[0].customer}
-                  />
-                  </div>
-                  <div class="user-info">
-                  <span class="customer">{testimonials[0].customer}</span>
-                  <span class="desig">{testimonials[0].designation}</span>
-                  </div>
+              <p class="tooltip-text"></p>
+              <div class="tooltip-user">
+                <div class="user-img">
+                  <img alt="" />
                 </div>
+                <div class="user-info">
+                  <span class="customer"></span>
+                  <span class="desig"></span>
+                </div>
+              </div>
             </span>
           </span>
 
-          <span class="highlight">execution</span>,  
+          <span class="highlight">execution</span>,
           <strong>Acodez</strong> handled
 
+          <!-- LOGO GROUP 2 -->
           <span class="logo-tooltip-wrap">
             <div class="img-wrap">
-              <img
-                  src={testimonials[2].logo}
-                  alt={testimonials[2].brand}
-                  class="brand-logo"
-                />
+              <div class="cross-fade-wrap">
+                <div class="images-wrap crossfade-layer--animated">
+                  {[2, 0, 1].map((i) => (
+                    <img
+                      class="fade-img js-crossfade brand-logo"
+                      src={testimonials[i].logo}
+                      alt={testimonials[i].brand}
+                      data-index={i}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
 
             <span class="tooltip-card">
-                <p class="tooltip-text">{testimonials[1].text}</p>
-                <div class="tooltip-user">
-                  <div class="user-img">
-                  <img
-                    src={testimonials[2].customerImg}
-                    alt={testimonials[2].customer}
-                  />
-                  </div>
-                  <div class="user-info">
-                  <span class="customer">{testimonials[2].customer}</span>
-                  <span class="desig">{testimonials[2].designation}</span>
+              <p class="tooltip-text"></p>
+              <div class="tooltip-user">
+                <div class="user-img">
+                  <img alt="" />
                 </div>
+                <div class="user-info">
+                  <span class="customer"></span>
+                  <span class="desig"></span>
                 </div>
+              </div>
             </span>
           </span>
 
           everything with clarity and commitment.
+
+          <!-- LOGO GROUP 3 -->
           <span class="logo-tooltip-wrap">
             <div class="img-wrap">
-              <img
-                  src={testimonials[1].logo}
-                  alt={testimonials[1].brand}
-                  class="brand-logo"
-                />
+              <div class="cross-fade-wrap">
+                <div class="images-wrap crossfade-layer--animated">
+                  {[1, 0, 2].map((i) => (
+                    <img
+                      class="fade-img js-crossfade brand-logo"
+                      src={testimonials[i].logo}
+                      alt={testimonials[i].brand}
+                      data-index={i}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
 
             <span class="tooltip-card">
-                <p class="tooltip-text">{testimonials[1].text}</p>
-                <div class="tooltip-user">
-                  <div class="user-img">
-                  <img
-                    src={testimonials[1].customerImg}
-                    alt={testimonials[1].customer}
-                  />
-                  </div>
-                  <div class="user-info">
-                  <span class="customer">{testimonials[1].customer}</span>
-                  <span class="desig">{testimonials[1].designation}</span>
+              <p class="tooltip-text"></p>
+              <div class="tooltip-user">
+                <div class="user-img">
+                  <img alt="" />
                 </div>
+                <div class="user-info">
+                  <span class="customer"></span>
+                  <span class="desig"></span>
                 </div>
+              </div>
             </span>
           </span>
-          
-
         </h2>
       </div>
     </div>
   </div>
 </section>
+
+<script is:inline define:vars={{ testimonials }}>
+  window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".logo-tooltip-wrap").forEach((wrap) => {
+      const tooltip = wrap.querySelector(".tooltip-card");
+      if (!tooltip) return;
+
+      const textEl = tooltip.querySelector(".tooltip-text");
+      const imgEl = tooltip.querySelector(".user-img img");
+      const nameEl = tooltip.querySelector(".customer");
+      const desigEl = tooltip.querySelector(".desig");
+
+      const logos = wrap.querySelectorAll(".js-crossfade");
+
+      function setTooltipByIndex(index) {
+        const data = testimonials[index];
+        if (!data) return;
+
+        textEl.textContent = data.text;
+        imgEl.src = data.customerImg;
+        imgEl.alt = data.customer;
+        nameEl.textContent = data.customer;
+        desigEl.textContent = data.designation;
+      }
+
+      // ✅ Listen to animation lifecycle
+      logos.forEach((logo) => {
+        const index = Number(logo.dataset.index);
+
+        logo.addEventListener("animationstart", () => {
+          setTooltipByIndex(index);
+        });
+
+        logo.addEventListener("animationiteration", () => {
+          setTooltipByIndex(index);
+        });
+      });
+
+      wrap.addEventListener("mouseenter", () => {
+        tooltip.classList.add("is-visible");
+      });
+
+      wrap.addEventListener("mouseleave", () => {
+        tooltip.classList.remove("is-visible");
+      });
+    });
+  });
+</script>
+
+
+
 

@@ -42,10 +42,10 @@
         }
         .logo-tooltip-wrap:hover .tooltip-card,
         .logo-tooltip-wrap:focus-within .tooltip-card {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0);
-        pointer-events: auto;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
         }
         .tooltip-card {
             position: absolute;
@@ -110,6 +110,10 @@
 
                 }
             }
+        }
+        .fade-img.is-active {
+            opacity: 1;
+            pointer-events: auto; // ✅ allow hover
         }
     }
 }
