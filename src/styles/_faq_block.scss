@@ -1,57 +1,85 @@
 @use "variables" as *;
 
-.FaqScrollsection{
-    .heading_text{
+.FaqScrollsection {
+    .heading_text {
         text-align: center;
     }
-    .Faq-area{
+    .Faq-area {
         max-width: 1114px;
         margin: 0 auto;
     }
-    .scroll-accordion{
+    .scroll-block {
         position: relative;
         padding: 3rem 0;
+
         &::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;              
-            height: 1px;
-            background: rgba(0,0,0,0.06);
-            pointer-events: none;
-            z-index: 2;            
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.06);
+        pointer-events: none;
         }
-        .title-row{
-            display: flex;
-            justify-content: space-between;
-            gap:2rem;
-            align-items: center;
+
+        .title-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        align-items: center;
+        cursor: pointer;
         }
-        .title__number{
-            color: #4284F4;
-            font-weight: 300;
-            font-size: clamp(1.8rem, 1vw + 1.2rem, 2.2rem);
-            @media screen and (min-width: 1300px) {
-                font-size: 2.2rem;
-            }
+
+        .heading-row {
+        display: flex;
+        gap: 6rem;
+        align-items: center;
+
+        h5 {
+            font-size: clamp(1.6rem, 1vw + 1rem, 2.5rem);
+            margin: 0;
         }
-        .heading-row{
-            display: flex;
-            justify-content: flex-start;
-            gap:6rem;
-            align-items: center;
-            cursor: pointer;
-            h5{
-                font-size: clamp(1.6rem, 1vw + 1rem, 2.5rem);
-                margin: 0;
-                @media screen and (min-width: 1300px) {
-                    font-size: 2.5rem;
-                }
+        }
+
+        .title__number {
+        color: #4284F4;
+        font-weight: 300;
+        font-size: clamp(1.8rem, 1vw + 1.2rem, 2.2rem);
+        }
+        .icon-wrapper {
+            .close-icon {
+                display: none;
             }
         }
         .text__wrapper {
-            padding-left: 10rem;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: height 0.4s ease, opacity 0.3s ease;
+        padding-left: 9rem;
+        max-width: 90%;
+        .content-box-col {
+            padding-top: 2rem;
         }
+        }
+        
+    }
+    .scroll-block.is_open {
+        .icon-wrapper {
+            .open-icon {
+                display: none;
+            }
+            .close-icon {
+                display: inline-block;
+            }
+        }
+        .text__wrapper {
+            opacity: 1;
+            transition:
+            height 0.4s ease,
+            opacity 0.25s ease,
+            visibility 0s linear 0s;
+        } 
     }
 }

@@ -1,0 +1,67 @@
+@use "variables" as *;
+
+.footer-info-sec{
+    position: relative;
+    padding: 9.2rem 0 7.2rem;
+    .footer-top{
+        display: flex;
+        flex-direction: column;
+        gap:3.2rem;
+    }
+    .footer-socials{
+        display: flex;
+        gap:3rem;
+    }
+    .footer-links{
+        display: flex;
+        align-items: center;
+        gap:2rem;
+        .footebtmlink{
+            position: relative;
+            &::before{
+                content: "";
+                background-color: #ADADAD;
+                width: 0.15rem;
+                height: 1.4rem;
+                top:50%;
+                left: -1rem;
+                transform: translateY(-50%);
+                position: absolute;
+            }
+        }
+    }
+  .footer-brand {
+  .brand-text {
+    font-size: 40rem;
+    line-height: 1;
+    font-weight: 700;
+    display: inline-flex;
+  }
+
+  .brand-text span {
+    color: $theme-snow-grey;
+
+    /* 👇 tiny cursor-based spot */
+    background: radial-gradient(
+      10px 10px at var(--lx, 50%) var(--ly, 50%),
+      rgba(0, 174, 239, 0.9) 0%,
+      $theme-snow-grey 65%
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    transition: background 0.05s linear;
+  }
+}
+
+
+
+
+
+
+
+
+
+}

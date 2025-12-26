@@ -13,6 +13,7 @@ import { initGsapCardSlider } from "./gsap_cardSlider.js";
 import { initArcPathSlider } from "./gsap_arcSlider.js";
 import { initFeaturedWorks } from "./featured_work.js";
 import { initFeaturedMedia } from "./featured_media.js";
+import { initFaqAccordion }from  "./faq-accordion.js";
 
 
 
@@ -32,6 +33,7 @@ function initAll() {
   initArcPathSlider();
   initFeaturedWorks();
   initFeaturedMedia();
+  initFaqAccordion();
 }
 
 // First load

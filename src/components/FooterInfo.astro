@@ -1,0 +1,61 @@
+---
+const socials = [
+  {
+    name: "Facebook",
+    url: "https://www.facebook.com/acodez",
+    icon: "/images/fb.svg",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/company/acodez",
+    icon: "/images/linkedin.svg",
+  },
+   {
+    name: "Dribble",
+    url: "https://www.linkedin.com/company/acodez",
+    icon: "/images/dribble.svg",
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/acodez",
+    icon: "/images/instagram.svg",
+  },
+  {
+    name: "Behance",
+    url: "https://www.behance.net/acodez",
+    icon: "/images/behance.svg",
+  },
+  {
+    name: "X",
+    url: "https://twitter.com/acodez",
+    icon: "/images/twitter.svg",
+  },
+];
+const year = new Date().getFullYear();
+---
+
+<section class="footer-info-sec bg-change" data-color="#FFFFFF">
+    <div class="container">
+        <div class="footer-area">
+            <div class="footer-top">
+                <div class="footer-socials">
+                  {socials.map((item) => (
+                      <a href={item.url} target="_blank" aria-label={item.name}>
+                      <img src={item.icon} alt={item.name} />
+                      </a>
+                  ))}
+                </div>
+                <div class="footer-links">
+                  <p>© {year} All rights reserved to Acodez</p>
+                  <a class="footebtmlink" href="/terms">Terms & Conditions</a>
+                  <a class="footebtmlink" href="/privacy">Privacy Policy</a>
+                </div>
+            </div>
+
+            <div class="footer-brand">
+                <span class="brand-text">acodez</span>
+            </div>
+           
+        </div>
+  </div>
+</section>
