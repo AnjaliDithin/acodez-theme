@@ -1,3 +1,5 @@
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initMouseFollower } from "./mouse_follower.js";
 import { initInteractiveGlobe } from "./interactiveGlobe.js";
 import { initHeroCrossfade } from "./hero_crossfade.js";
@@ -8,12 +10,14 @@ import { initTextAnimation } from "./textanimation.js";
 import { initScrollAccordion } from "./scrolltrigger_accordion.js";
 import { initImageTrail } from "./image_trail.js";
 import { initStatCounter } from "./statCounter.js";
-import { initGsapCardSlider } from "./gsap_cardSlider.js";
+import { initSwiperCardSlider } from "./swiper_cardSlider.js";
 import { initArcPathSlider } from "./gsap_arcSlider.js";
 import { initFeaturedWorks } from "./featured_work.js";
 import { initFeaturedMedia } from "./featured_media.js";
 import { initFaqAccordion } from "./faq-accordion.js";
 // import { initTestimonialTooltips } from "./testimonial-tooltip.js";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* --------------------------------------------------
    GLOBAL SINGLETONS
@@ -38,7 +42,7 @@ const COMPONENTS = [
   { selector: ".floating-text", init: initTextAnimation },
   { selector: ".scroll-accordion", init: initScrollAccordion },
   { selector: ".interaction_trail", init: initImageTrail },
-  { selector: ".stats-grid", init: initStatCounter },
+  { selector: ".stats-highlight-section", init: initStatCounter },
   { selector: ".arc-track", init: initArcPathSlider },
   { selector: ".featured-work-sec", init: initFeaturedWorks },
   { selector: ".featured_media-sec", init: initFeaturedMedia },
@@ -47,7 +51,7 @@ const COMPONENTS = [
   // 👇 Component that NEEDS MouseFollower
   {
     selector: ".col3Projectslider",
-    init: (section) => initGsapCardSlider({ section, mfInstance }),
+    init: (section) => initSwiperCardSlider({ section, mfInstance }),
   },
 ];
 
@@ -71,6 +75,9 @@ function initComponents() {
 function run() {
   initGlobal();      // 👈 MouseFollower once
   initComponents();  // 👈 Components only if present
+
+  // Refresh ScrollTrigger once everything is ready
+  ScrollTrigger.refresh();
 }
 
 // First load

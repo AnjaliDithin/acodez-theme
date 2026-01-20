@@ -1,4 +1,8 @@
 ---
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-coverflow';
+
 const projects = [
   {
     title: "Freemans",
@@ -39,47 +43,51 @@ const projects = [
 ];
 ---
 
-<section class="col3Projectslider" id="horizontal-Projectscroll" >
+<section class="col3Projectslider" id="horizontal-Projectscroll">
   <div class="col3Projects_container slider-container--left">
     <div class="container">
+      <div class="heading-block">
+        <h2 class="title_blk">Web Development.</h2>
+        <p class="description_blk">
+          We ensure that all our web development and mobile application development projects are not only engineered using the most cutting edge technologies, but also they're created through a human-centred design process.
+        </p>
+      </div>
 
-    <div class="heading-block">
-      <h2 class="title_blk">Web Development.</h2>
-      <p class="description_blk">
-       We ensure that all our web development and mobile application development projects are not only engineered using the most cutting edge technologies, but also they're created through a human-centred design process.
-      </p>
-    </div>
-
-    <div class="Projects-slider">
-      <div class="Projects-slidertrack">
+      <div class="Projects-slider swiper">
+        <div class="Projects-slidertrack swiper-wrapper">
         {projects.map((item) => (
-           <a
-              href={item.link}
-              class="slider-link"
-              data-cursor-text="view more"
+            <a
+            href={item.link}
+            class="slider-link swiper-slide"
+            data-cursor-text="view more"
             >
-          <article class="slider-item" key={item.title} data-color={item.color}>
-            <div class="img_blk">
-            <img src={item.image} alt={item.title} />
+            <div class="slider-item" data-color={item.color}>
+                <div class="img_blk">
+                <img src={item.image} alt={item.title} />
+                </div>
+
+                <div class="content_blk">
+                <h5>{item.title}</h5>
+                <p>{item.desc}</p>
+
+                <ul class="tag-list">
+                    {item.tags?.map((tag) => (
+                    <li class="tag-item">{tag}</li>
+                    ))}
+                </ul>
+                </div>
             </div>
-            <div class="content_blk">
-              <h5>{item.title}</h5>
-              <p>{item.desc}</p>
-              <ul class="tag-list">
-                {item.tags?.map((tag) => (
-                  <li class="tag-item">{tag}</li>
-                ))}
-              </ul>
-            </div>
-          </article>
-          </a>
+            </a>
         ))}
+        </div>
       </div>
     </div>
-
-  </div>
   </div>
 </section>
 
 
-
+<style>
+  .swiper {
+    overflow: visible;
+  }
+</style>
