@@ -8,70 +8,66 @@ export function initHoverParallax() {
   if (!boxes.length) return;
 
   let activeIndex = null;
-  let wrapRect = null;
-  let positions = [];
-
-  function calculatePositions() {
-    wrapRect = wrap.getBoundingClientRect();
-    positions = boxes.map((box) => {
-      const rect = box.getBoundingClientRect();
-      return {
-        x: rect.left - wrapRect.left,
-        y: rect.top - wrapRect.top,
-        width: rect.width,
-        height: rect.height,
-      };
-    });
-  }
-
-  calculatePositions();
-  window.addEventListener("resize", calculatePositions);
-
+  let currentPos = null;
   let moveX = null;
   let moveY = null;
 
   wrap.addEventListener("mousemove", (e) => {
-    if (activeIndex === null || !wrapRect || !moveX) return;
+    if (activeIndex === null || !moveX || !currentPos) return;
 
+    const wrapRect = wrap.getBoundingClientRect();
     const mouseX = e.clientX - wrapRect.left;
     const mouseY = e.clientY - wrapRect.top;
-    const pos = positions[activeIndex];
-    if (!pos) return;
 
-    const centerX = pos.x + pos.width / 2;
-    const centerY = pos.y + pos.height / 2;
+    const centerX = currentPos.x + currentPos.width / 2;
+    const centerY = currentPos.y + currentPos.height / 2;
+
     const deltaX = mouseX - centerX;
     const deltaY = mouseY - centerY;
 
-    const parallaxX = deltaX * 0.8; // adjust for strength
-    const parallaxY = deltaY * 0.8;
+    const parallaxX = deltaX * 0.4; // Reduced strength for more stability
+    const parallaxY = deltaY * 0.4;
 
     moveX(parallaxX);
     moveY(parallaxY);
-    gsap.to(boxes[activeIndex], { scale: 1.05, duration: 0.25, ease: "power3.out" });
   });
 
   boxes.forEach((box, index) => {
     box.style.transformOrigin = "50% 50%";
-    box.style.transition = "none";
 
     box.addEventListener("pointerenter", () => {
-      // reset previous
+      // Reset previous
       if (activeIndex !== null && activeIndex !== index) {
         const prev = boxes[activeIndex];
         gsap.killTweensOf(prev);
-        gsap.to(prev, { x: 0, y: 0, scale: 1, duration: 0.45, ease: "power3.out" });
+        gsap.to(prev, { x: 0, y: 0, scale: 1, duration: 0.5, ease: "power2.out" });
       }
-
-      // set new active
-      gsap.killTweensOf(box);
-      gsap.set(box, { x: 0, y: 0, scale: 1 });
 
       activeIndex = index;
 
-      // create quickTo for smooth movement
+      // Calculate position EXACTLY when entering to avoid jumping
+      const wrapRect = wrap.getBoundingClientRect();
+      const rect = box.getBoundingClientRect();
+
+      // We need the coordinates WITHOUT the current transform to prevent feedback loops
+      // So we temporarily clear transform if it exists
+      const currentTransform = gsap.getProperty(box, "transform");
+      gsap.set(box, { clearProps: "transform" });
+      const cleanRect = box.getBoundingClientRect();
+      gsap.set(box, { transform: currentTransform });
+
+      currentPos = {
+        x: cleanRect.left - wrapRect.left,
+        y: cleanRect.top - wrapRect.top,
+        width: cleanRect.width,
+        height: cleanRect.height
+      };
+
+      // Create quickTo for smooth movement
       moveX = gsap.quickTo(box, "x", { duration: 0.5, ease: "power2.out" });
       moveY = gsap.quickTo(box, "y", { duration: 0.5, ease: "power2.out" });
+
+      gsap.to(box, { scale: 1.05, duration: 0.5, ease: "power2.out" });
     });
   });
 
@@ -79,22 +75,9 @@ export function initHoverParallax() {
     if (activeIndex !== null) {
       const box = boxes[activeIndex];
       gsap.killTweensOf(box);
-      gsap.to(box, { x: 0, y: 0, scale: 1, duration: 0.45, ease: "power3.out" });
+      gsap.to(box, { x: 0, y: 0, scale: 1, duration: 0.5, ease: "power2.out" });
     }
     activeIndex = null;
+    currentPos = null;
   });
-
-  // ✅ image load safety
-  const imgs = wrap.querySelectorAll("img");
-  let loaded = 0;
-  imgs.forEach((img) => {
-    if (img.complete) loaded++;
-    else
-      img.addEventListener("load", () => {
-        loaded++;
-        if (loaded === imgs.length) calculatePositions();
-      });
-  });
-
-  setTimeout(calculatePositions, 400);
 }

@@ -1,94 +1,57 @@
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-gsap.ticker.lagSmoothing(0);
 
 export function initFeaturedMedia() {
-  const section = document.querySelector(".featured_media-sec");
-  if (!section) return;
 
-  const center = section.querySelector(".media_listmain");
-  const items = gsap.utils.toArray(
-    section.querySelectorAll(".media_list")
-  );
-
-  if (items.length < 3) return;
-
-  /* ----------------------------------
-     BASE SETUP
-  ---------------------------------- */
-  gsap.set(items, {
-    x: 0,
-    y: 0,
-    force3D: true,
-    willChange: "transform",
+  // Kill only previous featured media triggers
+  ScrollTrigger.getAll().forEach(st => {
+    if (st.vars.id === "featured-media-pin") st.kill();
   });
 
-  gsap.set(center, {
-    autoAlpha: 1,
-    scale: 1,
-    filter: "blur(0px)",
-    force3D: true,
-    willChange: "transform, opacity, filter",
-  });
-
-  /* ----------------------------------
-     MEDIA ITEM — 1 (LEFT)
-  ---------------------------------- */
-  gsap.to(items[0], {
-    x: "-40vw",
-    ease: "none",
+  const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: items[0],
-      start: "top center",
-      end: "bottom top",
-      scrub: 0.6,
-    },
+      trigger: ".featured_media_area",   // ✅ class selector
+      start: "top top",
+      end: () => "+=" + window.innerHeight * 1.5,
+      scrub: 1,
+      pin: ".featured_media_area",       // ✅ pin same class
+      pinSpacing: true,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      id: "featured-media-pin"
+    }
   });
 
-  /* ----------------------------------
-     MEDIA ITEM — 2 (RIGHT)
-  ---------------------------------- */
-  gsap.to(items[1], {
+  tl.to(".medialist1", {
+    x: "-45vw",
+    y: "-10vh",
+    scale: 0.8,
+    opacity: 0.6,
+    ease: "none"
+  }, 0);
+
+  tl.to(".medialist2", {
+    x: "45vw",
+    y: "-15vh",
+    scale: 0.8,
+    opacity: 0.6,
+    ease: "none"
+  }, 0);
+
+  tl.to(".medialist3", {
     x: "40vw",
-    ease: "none",
-    scrollTrigger: {
-      trigger: items[1],
-      start: "top center",
-      end: "bottom top",
-      scrub: 0.6,
-    },
-  });
+    y: "30vh",
+    scale: 0.8,
+    opacity: 0.6,
+    ease: "none"
+  }, 0);
 
-  /* ----------------------------------
-     MEDIA ITEM — 3 (RIGHT / DOWN)
-  ---------------------------------- */
-  gsap.to(items[2], {
-    x: "20vw",
-    y: "30vh",          // remove if X-only needed
-    ease: "none",
-    scrollTrigger: {
-      trigger: items[2],
-      start: "top center",
-      end: "bottom top",
-      scrub: 0.6,
-    },
-  });
-
-  /* ----------------------------------
-     CENTER CONTENT — SUBTLE REACTION
-  ---------------------------------- */
-  gsap.to(center, {
+  tl.to(".medialistmain", {
     scale: 1.05,
-    autoAlpha: 0.85,
-    filter: "blur(4px)",   // optional (remove if needed)
-    ease: "none",
-    scrollTrigger: {
-      trigger: items[0],   // reacts when first item moves
-      start: "top center",
-      end: "bottom top",
-      scrub: 0.6,
-    },
-  });
+    ease: "none"
+  }, 0);
+
+  ScrollTrigger.refresh();
 }

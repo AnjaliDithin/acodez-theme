@@ -4,72 +4,62 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export function initStatCounter(container) {
-  if (!container) return;
+    if (!container) return;
 
-  const section = container.classList.contains("stats-highlight-section")
-    ? container
-    : container.closest(".stats-highlight-section");
+    const section = container.classList.contains("stats-highlight-section")
+        ? container
+        : container.closest(".stats-highlight-section");
 
-  if (!section) return;
+    if (!section) return;
 
-  const counters = section.querySelectorAll(".stat-value");
-  if (!counters.length) return;
+    const counters = section.querySelectorAll(".stat-value");
+    if (!counters.length) return;
 
-  console.log("StatCounter: Initializing for", counters.length, "elements in", section);
+    // 🛡️ Isolated Cleanup - Only kill triggers for this section
+    const oldTrigger = ScrollTrigger.getById("stats-trigger");
+    if (oldTrigger) oldTrigger.kill();
 
-  // Setup proxies for each counter. 
-  // We DO NOT set textContent to 0 here so the default values in HTML stay visible.
-  counters.forEach(counter => {
-    counter._gsapProxy = { value: 0 };
-  });
+    const animate = () => {
+        counters.forEach(counter => {
+            const target = parseInt(counter.dataset.count, 10) || 0;
+            const suffix = counter.dataset.suffix || "";
+            const obj = { value: 0 };
 
-  const animate = () => {
-    console.log("StatCounter: Starting Animation");
-    counters.forEach(counter => {
-      const target = parseInt(counter.dataset.count, 10) || 0;
-      const suffix = counter.dataset.suffix || "";
+            gsap.to(obj, {
+                value: target,
+                duration: 2,
+                ease: "power2.out",
+                overwrite: true,
+                onUpdate: () => {
+                    counter.textContent = Math.floor(obj.value) + suffix;
+                },
+                onComplete: () => {
+                    counter.textContent = target + suffix;
+                }
+            });
+        });
+    };
 
-      gsap.fromTo(counter._gsapProxy,
-        { value: 0 },
-        {
-          value: target,
-          duration: 2,
-          ease: "power2.out",
-          overwrite: true,
-          onUpdate: () => {
-            counter.textContent = Math.floor(counter._gsapProxy.value) + suffix;
-          },
-          onComplete: () => {
-            counter.textContent = target + suffix;
-          }
-        }
-      );
-    });
-  };
+    const reset = () => {
+        counters.forEach(counter => {
+            const suffix = counter.dataset.suffix || "";
+            counter.textContent = "0" + suffix;
+        });
+    };
 
-  const reset = () => {
-    counters.forEach(counter => {
-      const suffix = counter.dataset.suffix || "";
-      gsap.killTweensOf(counter._gsapProxy);
-      counter._gsapProxy.value = 0;
-      counter.textContent = `0${suffix}`;
-    });
-  };
-
-  // Small delay for Astro/Vite mount stability
-  setTimeout(() => {
+    // 🏗️ Safe Trigger Setup
+    // We use refreshPriority: 0 so it calculates AFTER the pinned media section above (which is priority 10).
+    // This prevents the sections from overlapping.
     ScrollTrigger.create({
-      trigger: section,
-      start: "top 85%",
-      end: "bottom 15%",
-      onEnter: animate,
-      onEnterBack: animate,
-      onLeave: reset,
-      onLeaveBack: reset,
-      once: false,
+        trigger: section,
+        start: "top 90%",
+        end: "bottom 10%",
+        id: "stats-trigger",
+        onEnter: animate,
+        onEnterBack: animate,
+        onLeave: reset,
+        onLeaveBack: reset,
+        invalidateOnRefresh: true,
+        refreshPriority: 0,
     });
-
-    ScrollTrigger.refresh();
-    console.log("StatCounter: Ready and Refreshed");
-  }, 200);
 }

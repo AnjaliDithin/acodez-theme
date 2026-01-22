@@ -5,33 +5,28 @@ import Button from "../components/Button.astro";
 
 <header class="header_block header_sticky bg-change" data-color="#0E1216">
   <div class="container">
-
-    <!-- ================= DESKTOP HEADER ================= -->
-    <div class="header_area desktop-header">
-
+    <div class="header_area">
       <div class="logo-block">
         <a href="/">
-          <img src="/images/logo-header.svg" alt="acodez" width="186" height="54" />
+          <img
+            src="/images/logo-header.svg"
+            alt="acodez"
+            width="186"
+            height="54"
+          />
         </a>
       </div>
 
       <nav class="main-navigation">
         <ul class="hdr_menu">
-
-          <li class="parent-menu" id="companyMenu">
-            <a href="/company" class="nav-link"  data-cursor="-opaque">Company</a>
-
-            <button class="submenu-toggle" id="companyToggle" aria-label="Toggle submenu"></button>
-
-            <ul class="sub-menu">
-              <li><a href="/company/company-1" astro:prefetch>Company 1</a></li>
-              <li><a href="/company/company-2" astro:prefetch>Company 2</a></li>
-              <li><a href="/company/company-3" astro:prefetch>Company 3</a></li>
-            </ul>
+          <li class="parent-menu">
+            <a href="/company" class="nav-link" data-cursor="-opaque">Company</a
+            >
           </li>
 
           <li class="parent-menu">
-            <a href="/services" astro:prefetch data-cursor="-opaque">Services</a>
+            <a href="/services" astro:prefetch data-cursor="-opaque">Services</a
+            >
           </li>
 
           <li class="parent-menu">
@@ -39,61 +34,173 @@ import Button from "../components/Button.astro";
           </li>
 
           <li class="parent-menu">
-            <a href="/products" astro:prefetch data-cursor="-opaque">Products</a>
+            <a href="/products" astro:prefetch data-cursor="-opaque">Products</a
+            >
           </li>
 
           <li class="parent-menu">
             <a href="/blog" astro:prefetch data-cursor="-opaque">Blog</a>
           </li>
-
         </ul>
 
-       <Button href="#contact" text="Start a Project" variant="primary" extraClass="hdr-ct-btn" />
-       
+        <Button
+          href="#contact"
+          text="Start a Project"
+          variant="primary"
+          extraClass="hdr-ct-btn"
+        />
+
+        <div class="menuclick-block">
+          <img
+            class="open-menu"
+            src="/images/menu-icon.svg"
+            alt="open menu"
+            width="50"
+            height="50"
+          />
+        </div>
       </nav>
     </div>
+  </div>
 
-    <!-- ================= MOBILE HEADER ================= -->
-    <div class="header_area mobile-header">
+  <!-- ================= MEGAMENU OVERLAY ================= -->
+  <div class="megamenu-overlay" id="megamenuOverlay">
+    <div class="container">
+      <div class="megamenu-content container">
+        <div class="megamenu-header">
+          <ul class="megamenu-tabs">
+            <li><a href="/company">Company</a></li>
+            <li class="active"><a href="/services">Services</a></li>
+            <li><a href="/work">Work</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/resources">Resources</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+          </ul>
+          <div class="megamenu-actions">
+            <Button
+              href="#contact"
+              text="Start a Project"
+              variant="primary"
+              extraClass="hdr-ct-btn"
+            />
+            <button class="close-megamenu" id="closeMegamenu">
+              <img
+                class="close menu"
+                src="/images/menu-icon1.svg"
+                alt="close menu"
+                width="50"
+                height="50"
+              />
+            </button>
+          </div>
+        </div>
 
-      <div class="logo-block">
-        <a href="/" astro:prefetch>
-          <img src="/images/logo-header.svg" alt="acodez" width="186" height="54" />
-        </a>
-      </div>
+        <div class="megamenu-body">
+          <div class="megamenu-left">
+            <div class="services-grid">
+              <div class="service-item">
+                <h4>WordPress Development</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+              <div class="service-item">
+                <h4>eCommerce Development</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+              <div class="service-item">
+                <h4>Web Development</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+              <div class="service-item">
+                <h4>UX Design</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+              <div class="service-item">
+                <h4>Mobile Apps</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+              <div class="service-item">
+                <h4>Digital Marketing</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+              <div class="service-item">
+                <h4>Branding</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+              <div class="service-item">
+                <h4>Interface Design</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+              <div class="service-item">
+                <h4>Emerging Technology Services</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+              <div class="service-item">
+                <h4>UI Solutions</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+              <div class="service-item">
+                <h4>Talent Acquisition</h4>
+                <p>Make it easier for prospects to find you outside.</p>
+              </div>
+            </div>
+          </div>
 
-      <div class="mobile-menu" id="mobileMenuBtn">
-        <div class="menu-icon">
-          <img class="mobile-open" src="/images/arrow.svg" width="32" alt="open menu" />
-          <img class="mobile-close" src="/images/arrow.svg" width="32" alt="close menu" />
+          <div class="megamenu-right">
+            <div class="company-info-block">
+              <p class="company-desc">
+                Acodez is a multi-international <strong
+                  >award winning digital agency</strong
+                >, with offices in Gurgaon, Mumbai, Bangalore and Calicut in
+                India. <strong>Started in 2011</strong>, Acodez has more than <strong
+                  >600 satisfied customers</strong
+                > spread across <strong>70+ Countries</strong>.
+              </p>
+
+              <div class="contact-us-block">
+                <h5>Contact Us</h5>
+                <ul class="contact-links">
+                  <li>
+                    <a href="mailto:info@acodez.in">
+                      <img
+                        src="/images/mail1.svg"
+                        alt="mail"
+                        title="mail"
+                        width="25"
+                      />
+                      info@acodez.in
+                    </a>
+                  </li>
+                  <li>
+                    <a href="tel:00919544668844">
+                      <img
+                        src="/images/call1.svg"
+                        alt="call"
+                        title="call"
+                        width="23"
+                      />
+                      0091 95446 68844
+                    </a>
+                  </li>
+                  <li>
+                    <a href="tel:00919544668844">
+                      <img
+                        src="/images/whatsapp1.svg"
+                        alt="whatsapp"
+                        title="whatsapp"
+                        width="28"
+                      />
+                      0091 95446 68844
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <nav class="mobile-nav" id="mobileNav">
-        <ul class="hdr_menu">
-
-          <li class="parent-menu" id="mobileCompanyMenu">
-            <a href="/company" class="nav-link" id="mobileCompanyToggle" astro:prefetch>Company</a>
-
-            <ul class="sub-menu">
-              <li><a href="/company/company-1" astro:prefetch>Company 1</a></li>
-              <li><a href="/company/company-2" astro:prefetch>Company 2</a></li>
-              <li><a href="/company/company-3" astro:prefetch>Company 3</a></li>
-            </ul>
-          </li>
-
-          <li><a href="/services" astro:prefetch>Services</a></li>
-          <li><a href="/work" astro:prefetch>Work</a></li>
-          <li><a href="/products" astro:prefetch>Products</a></li>
-          <li><a href="/blog" astro:prefetch>Blog</a></li>
-
-        </ul>
-      </nav>
     </div>
-
   </div>
 </header>
-
 
 <script is:inline>
   function initHeader() {
@@ -115,11 +222,9 @@ import Button from "../components/Button.astro";
       if (scrollPos <= 0) {
         header.style.top = "0px";
         header.classList.remove("scrolled");
-      } 
-      else if (scrollPos > lastScroll) {
+      } else if (scrollPos > lastScroll) {
         header.style.top = `-${headerHeight}px`;
-      } 
-      else {
+      } else {
         header.style.top = "0px";
         header.classList.add("scrolled");
       }
@@ -127,61 +232,34 @@ import Button from "../components/Button.astro";
       lastScroll = scrollPos;
     });
 
-    /* ================= DESKTOP SUBMENU ================= */
+    /* ================= MEGAMENU TRIGGER ================= */
+    const openMenuBtn = document.querySelector(".open-menu");
+    const closeMenuBtn = document.getElementById("closeMegamenu");
+    const megamenuOverlay = document.getElementById("megamenuOverlay");
 
-    const companyMenu = document.getElementById("companyMenu");
-    const companyToggle = document.getElementById("companyToggle");
+    if (openMenuBtn && megamenuOverlay && closeMenuBtn) {
+      openMenuBtn.addEventListener("click", () => {
+        megamenuOverlay.classList.add("active");
+        document.body.classList.add("no-scroll");
+        document.documentElement.classList.add("no-scroll");
+      });
 
-    console.log("Desktop submenu:", companyMenu, companyToggle);
+      closeMenuBtn.addEventListener("click", () => {
+        megamenuOverlay.classList.remove("active");
+        document.body.classList.remove("no-scroll");
+        document.documentElement.classList.remove("no-scroll");
+      });
 
-    if (companyMenu && companyToggle) {
-      // Hover (desktop only)
-      companyMenu.addEventListener("mouseenter", () => {
-        if (window.innerWidth >= 1024) {
-          companyMenu.classList.add("open-sub");
+      // Close on escape
+      document.addEventListener("keydown", (e) => {
+        if (
+          e.key === "Escape" &&
+          megamenuOverlay.classList.contains("active")
+        ) {
+          megamenuOverlay.classList.remove("active");
+          document.body.classList.remove("no-scroll");
+          document.documentElement.classList.remove("no-scroll");
         }
-      });
-
-      companyMenu.addEventListener("mouseleave", () => {
-        if (window.innerWidth >= 1024) {
-          companyMenu.classList.remove("open-sub");
-        }
-      });
-
-      // Click toggle
-      companyToggle.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        companyMenu.classList.toggle("open-sub");
-      });
-    }
-
-    /* ================= MOBILE MENU ================= */
-
-    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-    const mobileNav = document.getElementById("mobileNav");
-
-    console.log("Mobile nav:", mobileMenuBtn, mobileNav);
-
-    if (mobileMenuBtn && mobileNav) {
-      mobileMenuBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        mobileNav.classList.toggle("open");
-      });
-    }
-
-    /* ================= MOBILE SUBMENU ================= */
-
-    const mobileCompanyToggle = document.getElementById("mobileCompanyToggle");
-    const mobileCompanyMenu = document.getElementById("mobileCompanyMenu");
-
-    console.log("Mobile submenu:", mobileCompanyToggle, mobileCompanyMenu);
-
-    if (mobileCompanyToggle && mobileCompanyMenu) {
-      mobileCompanyToggle.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        mobileCompanyMenu.classList.toggle("open-sub");
       });
     }
   }
@@ -196,5 +274,3 @@ import Button from "../components/Button.astro";
   /* ✅ Run on Astro navigation */
   document.addEventListener("astro:page-load", initHeader);
 </script>
-
-

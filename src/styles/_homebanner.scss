@@ -159,10 +159,14 @@
         top: 0;
         border-radius: 1px;
         left: calc(50% - 1px);
-        animation: scroll 1.7s infinite;
+        animation: mouseScrollDot 1.7s infinite;
       }
     }
-    @keyframes scroll {
+    @keyframes mouseScrollDot {
+      0% {
+        opacity: 0;
+        transform: translateY(0);
+      }
       15% {
         opacity: 1;
       }

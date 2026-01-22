@@ -2,10 +2,8 @@
 
 .featured-work-sec{
     position: relative;
-    // background: #0E1216;
-    // height: 100vh;
     min-height: 30vh;
-    padding-bottom: 8rem;
+    padding-bottom: 2rem;
     // overflow: hidden;
     // .featured-area{
     //     min-height: 100vh; 
@@ -49,58 +47,53 @@
     }
     
     .cards-grid{
-        display: flex;
-        flex-direction: column;
-        gap: 8rem;
         position: relative;
-        // background: #0E1216;
-        max-height: 100vh;
+        display: block; // Column model
+        // Height will be defined by the first relative child or set explicitly
+        min-height: 50vh; // Fallback to ensure there's a hit area
+        
         .card-wrap{
             display: flex;
             justify-content: center;
         }
         .card-block{
             width: 100%;
-            will-change: transform;
-            position: relative;
+            position: absolute; // Stack them so they don't create sequential height
+            top: 0;
+            left: 0;
             will-change: transform, opacity;
-            transform: translateZ(0);        /* ✅ REQUIRED */
-            // background: #0E1216;
-             opacity: 0;
-            transition: opacity 0.4s ease;
+            transform: translateZ(0);
+            opacity: 0;
+            // Removed CSS transitions to prevent conflict with GSAP
             &:nth-child(even){
                 .image-wrap{
                     order: 2;
                 }
                 .content-wrap{
                     padding-left: 0;
-                    padding-right: 3rem;
+                    padding-right: 6rem;
                     padding-top: 5rem;
                 }
             }
         }
         .image-wrap{
             width: 48%;
-            // background-color: #0E1216;
             img{
                 width: 100%;
                 height: auto;
                 display: block;
-                 transform: scale(0.7);
-                transition: transform 0.8s ease;
                 will-change: transform;
             }
         }
         .card-block.is-active {
             opacity: 1;
         }
-        .card-block.is-active .image-wrap img {
-            transform: scale(0.95);
-            transition: transform 0.3s cubic-bezier(.22,1,.36,1);
-        }
+        // .card-block.is-active .image-wrap img {
+        //     transform: scale(0.95);
+        // }
         .content-wrap{
             width: 48%;
-            padding-left: 3rem;
+            padding-left: 6rem;
             background-color: #0E1216;
             display: flex;
             flex-direction: column;
@@ -168,7 +161,7 @@
         text-align: center;
         display: flex;
         justify-content: center;
-        margin: 9rem auto 0 ;
+        margin: 2rem auto 0 ;
     }
     
 }

@@ -13,6 +13,7 @@
     @media screen and (min-width: 991px) {
         flex-wrap: nowrap;
         gap: 4rem;
+         align-items: center;
     }
     &.footer-ctbar__ctlinks{
       justify-content: space-between;

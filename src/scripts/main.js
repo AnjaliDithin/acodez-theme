@@ -47,6 +47,7 @@ const COMPONENTS = [
   { selector: ".featured-work-sec", init: initFeaturedWorks },
   { selector: ".featured_media-sec", init: initFeaturedMedia },
   { selector: ".FaqScrollsection", init: initFaqAccordion },
+  { selector: ".footer-ctbar", init: initHeroCrossfade },
 
   // 👇 Component that NEEDS MouseFollower
   {
