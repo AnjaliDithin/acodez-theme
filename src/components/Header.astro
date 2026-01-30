@@ -64,142 +64,156 @@ import Button from "../components/Button.astro";
   </div>
 
   <!-- ================= MEGAMENU OVERLAY ================= -->
-  <div class="megamenu-overlay" id="megamenuOverlay">
-    <div class="container">
-      <div class="megamenu-content container">
-        <div class="megamenu-header">
-          <ul class="megamenu-tabs">
-            <li><a href="/company">Company</a></li>
-            <li class="active"><a href="/services">Services</a></li>
-            <li><a href="/work">Work</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/resources">Resources</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-          </ul>
-          <div class="megamenu-actions">
-            <Button
-              href="#contact"
-              text="Start a Project"
-              variant="primary"
-              extraClass="hdr-ct-btn"
-            />
-            <button class="close-megamenu" id="closeMegamenu">
-              <img
-                class="close menu"
-                src="/images/menu-icon1.svg"
-                alt="close menu"
-                width="50"
-                height="50"
-              />
-            </button>
-          </div>
-        </div>
+    <div class="megamenu-overlay" id="megamenuOverlay">
+        <div class="container">
+            <div class="megamenu-content container">
+                <div class="megamenu-header">
+                    <ul class="megamenu-tabs">
+                        <li data-menu="company"><a href="javascript:void(0)">Company</a></li>
+                        <li data-menu="services"><a href="javascript:void(0)">Services</a></li>
+                        <li data-menu="work"><a href="javascript:void(0)">Work</a></li>
+                        <li data-menu="products"><a href="javascript:void(0)">Products</a></li>
+                        <li data-menu="resources"><a href="javascript:void(0)">Resources</a></li>
+                        <li data-menu="contact"><a href="javascript:void(0)">Contact Us</a></li>
+                    </ul>
+                    <div class="megamenu-actions">
+                        <div class="common-btn-block" data-cursor="-opaque"> <a href="#contact" target="_self"
+                                class="primary-ct-btn hdr-ct-btn"> Start a Project </a> </div>
+                        <button class="close-megamenu" id="closeMegamenu">
+                            <img class="close menu" src="images/menu-icon1.svg" alt="close menu" width="50"
+                                height="50" />
+                        </button>
+                    </div>
+                </div>
 
-        <div class="megamenu-body">
-          <div class="megamenu-left">
-            <div class="services-grid">
-              <div class="service-item">
-                <h4>WordPress Development</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
-              <div class="service-item">
-                <h4>eCommerce Development</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
-              <div class="service-item">
-                <h4>Web Development</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
-              <div class="service-item">
-                <h4>UX Design</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
-              <div class="service-item">
-                <h4>Mobile Apps</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
-              <div class="service-item">
-                <h4>Digital Marketing</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
-              <div class="service-item">
-                <h4>Branding</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
-              <div class="service-item">
-                <h4>Interface Design</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
-              <div class="service-item">
-                <h4>Emerging Technology Services</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
-              <div class="service-item">
-                <h4>UI Solutions</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
-              <div class="service-item">
-                <h4>Talent Acquisition</h4>
-                <p>Make it easier for prospects to find you outside.</p>
-              </div>
+                <div class="megamenu-body">
+                    <div class="megamenu-left">
+                        <div class="menu-grid">
+
+                            <!-- SERVICES (FULL GRID) -->
+                            <div class="submenu " data-menu="services">
+                                <div class="menu-grid-item">
+                                    <h4>WordPress Development</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>eCommerce Development</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Web Development</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>UX Design</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Mobile Apps</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Digital Marketing</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Branding</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Interface Design</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Emerging Technology Services</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>UI Solutions</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Talent Acquisition</h4>
+                                    <p>Make it easier for prospects to find you outside.</p>
+                                </div>
+                            </div>
+
+                            <!-- COMPANY -->
+                            <div class="submenu" data-menu="company">
+                                <div class="menu-grid-item">
+                                    <h4>About Us</h4>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Careers</h4>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Leadership</h4>
+                                </div>
+                            </div>
+
+                            <!-- WORK -->
+                            <div class="submenu" data-menu="work">
+                                <div class="menu-grid-item">
+                                    <h4>Case Studies</h4>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Portfolio</h4>
+                                </div>
+                            </div>
+
+                            <!-- PRODUCTS -->
+                            <div class="submenu" data-menu="products">
+                                <div class="menu-grid-item">
+                                    <h4>SaaS Products</h4>
+                                </div>
+                                <div class="menu-grid-item">
+                                    <h4>Plugins</h4>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="megamenu-right">
+                        <div class="company-info-block">
+                            <p class="company-desc">
+                                Acodez is a multi-international <strong>award winning digital agency</strong>, with
+                                offices in Gurgaon, Mumbai, Bangalore and Calicut in
+                                India. <strong>Started in 2011</strong>, Acodez has more than <strong>600 satisfied
+                                    customers</strong> spread across <strong>70+ Countries</strong>.
+                            </p>
+
+                            <div class="contact-us-block">
+                                <h5>Contact Us</h5>
+                                <ul class="contact-links">
+                                    <li>
+                                        <a href="mailto:info@acodez.in">
+                                            <img src="images/mail1.svg" alt="mail" title="mail" width="25" />
+                                            info@acodez.in
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="tel:00919544668844">
+                                            <img src="images/call1.svg" alt="call" title="call" width="23" />
+                                            0091 95446 68844
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="tel:00919544668844">
+                                            <img src="images/whatsapp1.svg" alt="whatsapp" title="whatsapp"
+                                                width="28" />
+                                            0091 95446 68844
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="megamenu-right">
-            <div class="company-info-block">
-              <p class="company-desc">
-                Acodez is a multi-international <strong
-                  >award winning digital agency</strong
-                >, with offices in Gurgaon, Mumbai, Bangalore and Calicut in
-                India. <strong>Started in 2011</strong>, Acodez has more than <strong
-                  >600 satisfied customers</strong
-                > spread across <strong>70+ Countries</strong>.
-              </p>
-
-              <div class="contact-us-block">
-                <h5>Contact Us</h5>
-                <ul class="contact-links">
-                  <li>
-                    <a href="mailto:info@acodez.in">
-                      <img
-                        src="/images/mail1.svg"
-                        alt="mail"
-                        title="mail"
-                        width="25"
-                      />
-                      info@acodez.in
-                    </a>
-                  </li>
-                  <li>
-                    <a href="tel:00919544668844">
-                      <img
-                        src="/images/call1.svg"
-                        alt="call"
-                        title="call"
-                        width="23"
-                      />
-                      0091 95446 68844
-                    </a>
-                  </li>
-                  <li>
-                    <a href="tel:00919544668844">
-                      <img
-                        src="/images/whatsapp1.svg"
-                        alt="whatsapp"
-                        title="whatsapp"
-                        width="28"
-                      />
-                      0091 95446 68844
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 <script is:inline>
@@ -274,3 +288,155 @@ import Button from "../components/Button.astro";
   /* ✅ Run on Astro navigation */
   document.addEventListener("astro:page-load", initHeader);
 </script>
+<script is:inline>
+  (() => {
+    "use strict";
+
+    /* ================= HEADER ================= */
+    function initHeader() {
+      const header = document.querySelector(".header_sticky");
+      if (!header) return;
+
+      let lastScroll = 0;
+
+      window.addEventListener("scroll", () => {
+        const scrollPos = window.pageYOffset;
+        const headerHeight = header.offsetHeight;
+
+        if (scrollPos <= 0) {
+          header.style.top = "0px";
+          header.classList.remove("scrolled");
+        } else if (scrollPos > lastScroll) {
+          header.style.top = `-${headerHeight}px`;
+        } else {
+          header.style.top = "0px";
+          header.classList.add("scrolled");
+        }
+
+        lastScroll = scrollPos;
+      });
+
+      const openMenuBtn = document.querySelector(".open-menu");
+      const closeMenuBtn = document.getElementById("closeMegamenu");
+      const megamenuOverlay = document.getElementById("megamenuOverlay");
+
+      if (!openMenuBtn || !closeMenuBtn || !megamenuOverlay) return;
+
+      openMenuBtn.onclick = () => {
+        megamenuOverlay.classList.add("active");
+        document.body.classList.add("no-scroll");
+        document.documentElement.classList.add("no-scroll");
+      };
+
+      closeMenuBtn.onclick = () => {
+        megamenuOverlay.classList.remove("active");
+        document.body.classList.remove("no-scroll");
+        document.documentElement.classList.remove("no-scroll");
+      };
+
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && megamenuOverlay.classList.contains("active")) {
+          megamenuOverlay.classList.remove("active");
+          document.body.classList.remove("no-scroll");
+          document.documentElement.classList.remove("no-scroll");
+        }
+      });
+    }
+
+    /* ================= MEGAMENU SERVICES ================= */
+    function initMegamenuServices() {
+      const megamenu = document.getElementById("megamenuOverlay");
+      const tabs = document.querySelectorAll(".megamenu-tabs li");
+      const submenus = document.querySelectorAll(".menu-grid .submenu");
+      const menuGrid = document.querySelector(".menu-grid");
+
+      if (!megamenu || !tabs.length || !menuGrid) return;
+
+      const isMobile = () => window.innerWidth < 991;
+
+      const getSubmenu = key =>
+        Array.from(submenus).find(sm => sm.dataset.menu === key);
+
+      function activateItem(item) {
+        const target = getSubmenu(item.dataset.menu);
+
+        tabs.forEach(t => t.classList.remove("active"));
+        submenus.forEach(sm => sm.classList.remove("active"));
+
+        item.classList.add("active");
+
+        if (!target) return;
+
+        target.classList.add("active");
+
+        if (isMobile()) {
+          item.appendChild(target);
+        } else if (target.parentElement !== menuGrid) {
+          menuGrid.appendChild(target);
+        }
+      }
+
+      function restoreDesktop() {
+        submenus.forEach(sm => {
+          if (sm.parentElement !== menuGrid) {
+            menuGrid.appendChild(sm);
+          }
+        });
+      }
+
+      function setFirstActive() {
+        if (!isMobile()) activateItem(tabs[0]);
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener("mouseenter", () => {
+          if (!isMobile()) activateItem(tab);
+        });
+
+        tab.addEventListener("click", () => {
+          if (!isMobile()) return;
+
+          if (tab.classList.contains("active")) {
+            tab.classList.remove("active");
+            const sm = getSubmenu(tab.dataset.menu);
+            if (sm) sm.classList.remove("active");
+          } else {
+            activateItem(tab);
+          }
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        if (!isMobile()) {
+          restoreDesktop();
+          if (!document.querySelector(".megamenu-tabs li.active")) {
+            setFirstActive();
+          }
+        } else {
+          const active = document.querySelector(".megamenu-tabs li.active");
+          if (active) activateItem(active);
+        }
+      });
+
+      const observer = new MutationObserver(() => {
+        if (megamenu.classList.contains("active") && !isMobile()) {
+          setFirstActive();
+        }
+      });
+
+      observer.observe(megamenu, { attributes: true });
+
+      setFirstActive();
+    }
+
+    /* ================= ASTRO SAFE INIT ================= */
+    function run() {
+      initHeader();
+      initMegamenuServices();
+    }
+
+    document.addEventListener("DOMContentLoaded", run);
+    document.addEventListener("astro:page-load", run);
+  })();
+</script>
+

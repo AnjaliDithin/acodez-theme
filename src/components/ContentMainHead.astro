@@ -1,0 +1,38 @@
+---
+const {
+  subhead = "",
+  description = "",
+  highlight = "",
+  align = "center",        // "center" | "left"
+  whiteText = false,      // true | false
+  subheadColor = "",      // optional custom color
+  className = "",
+} = Astro.props;
+
+const subheadClasses = [
+  "content-subhead",
+  align === "left" ? "left-align" : "center-align",
+  whiteText ? "white-text" : "",
+].join(" ");
+
+const headingClasses = [
+  "heading-block",
+  className
+].filter(Boolean).join(" ");
+
+const subheadStyle = subheadColor ? `color: ${subheadColor};` : "";
+---
+<div class={headingClasses}>
+  {subhead && (
+    <div class={subheadClasses} style={subheadStyle}>
+      {subhead}
+    </div>
+  )}
+
+  {description && (
+    <h3 class="section-description">
+      {description}
+      {highlight && <span class="highlight"> {highlight}</span>}
+    </h3>
+  )}
+</div>

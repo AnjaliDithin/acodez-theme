@@ -8,12 +8,13 @@ export function initInteractiveGlobe() {
 
   if (!container || !canvas) return;
 
-  // 🛑 prevent double-init on astro navigation
+  // 🛑 Prevent double init (Astro navigation safe)
   if (globeInstance) return;
   globeInstance = true;
 
   console.log("🌍 Interactive Globe init");
 
+  /* ---------- COLORS ---------- */
   const innerColor = container.dataset.innerColor || "#0E1216";
   const outerColor1 = container.dataset.outerColor1 || "#00CCE6";
   const outerColor2 = container.dataset.outerColor2 || "#8000CC";
@@ -33,15 +34,10 @@ export function initInteractiveGlobe() {
   const c1 = hexToRgb(outerColor1);
   const c2 = hexToRgb(outerColor2);
 
-  /* ---------- THREE ---------- */
+  /* ---------- THREE SETUP ---------- */
   const scene = new THREE.Scene();
 
-  const camera = new THREE.PerspectiveCamera(
-    60,
-    container.clientWidth / container.clientHeight,
-    0.1,
-    1000
-  );
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
   camera.position.z = 250;
 
   const renderer = new THREE.WebGLRenderer({
@@ -50,11 +46,30 @@ export function initInteractiveGlobe() {
     alpha: true,
   });
 
-  renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setClearColor(0x000000, 0);
 
+  /* ---------- RESIZE (FIXED) ---------- */
+  function resizeRenderer() {
+    const width = container.clientWidth || window.innerWidth;
+    const height =
+      container.clientHeight || Math.min(window.innerHeight, 600);
+
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+    renderer.setPixelRatio(pixelRatio);
+    renderer.setSize(width, height, true); // ✅ IMPORTANT
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+  }
+
+  resizeRenderer();
+
+  const resizeObserver = new ResizeObserver(resizeRenderer);
+  resizeObserver.observe(container);
+
   /* ---------- PARTICLES ---------- */
-  const count = 20000;
+  const count = window.innerWidth < 768 ? 12000 : 20000; // mobile perf
   const radius = 80;
 
   const geometry = new THREE.BufferGeometry();
@@ -109,7 +124,7 @@ export function initInteractiveGlobe() {
     mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1;
   });
 
-  /* ---------- ANIMATE ---------- */
+  /* ---------- ANIMATION ---------- */
   let t = 0;
 
   function animate() {
@@ -149,13 +164,4 @@ export function initInteractiveGlobe() {
   }
 
   animate();
-
-  /* ---------- RESIZE ---------- */
-  window.addEventListener("resize", () => {
-    const w = container.clientWidth;
-    const h = container.clientHeight;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-  });
 }

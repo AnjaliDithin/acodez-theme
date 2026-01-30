@@ -1,11 +1,19 @@
+@use "variables" as *;
 .Col2grid-section{
+    // background: linear-gradient(180deg, rgba(246, 248, 250, 0) 35%, #EBF1F3 100%);
+    padding: 5rem 0;
+     @media screen and (min-width: 991px) {
+       padding: 12rem 0;
+    }
     .Col2-gridarea{
         display: grid;
         align-items: center;
         grid-template-columns: 1fr;
         text-align: center;
         gap: 1.5rem;
-         @media screen and (min-width: 768px) {
+        position: relative;
+        z-index: 1;
+        @media screen and (min-width: 768px) {
             grid-template-columns: 1fr 1.2fr;
             gap: 2rem;
         }
@@ -38,18 +46,100 @@
                 color: var(--color-text-secondary);
                 line-height: 1.6;
             }
+            
         }
-
+        .right-content{
+            display: flex;
+            gap:2rem;
+            flex-direction: column;
+            max-width: 36.5rem;
+            margin: 0 auto;
+            max-width:55rem;
+            margin: 0;
+            h6{
+                color:rgba(#D4D4D4,0.8);
+                line-height: 1.4;
+                font-weight: 300;
+                @media screen and (min-width: 1300px) {
+                     line-height: 1.6;
+                }
+            }
+        }
         .right-image{
             img{
                 width: 100%;
                 height: auto;
+                object-fit: cover;
             }
         }
 
-        &.is-reverse{
+        
+    }
+    &.is-reverse{
             .Col2-gridarea{
-               
+               .left-content{
+                order:2;
+               }
+            }
+        }
+    &.content-only{
+        background: $theme-dark;
+        .Col2-gridarea{
+            text-align: left;
+            grid-template-columns: 1fr;
+             @media screen and (min-width: 768px) {
+                grid-template-columns: 1.4fr 1fr;
+                gap: 2rem;
+            }
+            .left-content{
+                align-items: flex-start;
+                max-width: 66rem;
+                margin:0;
+                h5{
+                    padding-top: 1rem;
+                    color:$theme-white;
+                    line-height: 1.4;
+                    font-weight: 300;
+                    @media screen and (min-width: 1300px) {
+                        line-height: 1.6;
+                    }
+                }
+            }
+            .primary-ct-btn.greyborder-btn{
+                color:$theme-white;
+            }
+        }
+    }
+    &.acodie-sec{
+        position: relative;
+           &::before{
+            content:"" ;
+            background: url("../images/home/cloud2.png") center no-repeat;
+            background-size: contain;
+            width: 100%;
+            max-width: 20rem;
+            height: 100%;
+            max-height: 9rem;
+            position: absolute;
+            right: 10%;
+            top: 5rem;
+           }
+            &::after{
+            content:"" ;
+            background: url("../images/home/cloud1.png") center no-repeat;
+            background-size: contain;
+            width: 100%;
+            max-width: 27rem;
+            height: 100%;
+            max-height: 13rem;
+            position: absolute;
+            left: 10%;
+            top: 5rem;
+           }
+        .right-image{
+            img{
+                mix-blend-mode: darken;
+                object-fit: cover;
             }
         }
     }

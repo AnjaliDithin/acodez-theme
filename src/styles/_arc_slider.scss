@@ -1,24 +1,85 @@
 @use "variables" as *;
 
 .awards-arc {
-padding: 9rem 0 10rem;
+padding: 9rem 0 15rem;
+background: linear-gradient(180deg, #F6F8FA 39.9%, #EBF1F3 100%);
+
 @media screen and (min-width: 991px) {
    padding: 18rem 0 18rem;
 }
 //   background: linear-gradient(180deg, #F6F8FA 39.9%, #EBF1F3 100%);
 .award-arc-area{
     position: relative;
+    display: flex;
+    flex-direction: column;
+     @media screen and (min-width: 768px) {
+       display: block;
+    }
 }
 .arc-container {
     position: relative;
-    max-width: 72rem;
-    height: 34rem;
-    margin: 0 auto;
+    height: auto;
+    @media screen and (min-width: 768px) {
+        height: 34rem;
+        max-width: 72rem;
+        margin: 0 auto;
+    }
 }
 
 .arc-track {
-position: absolute;
-inset: 0;
+    display: none;
+    @media screen and (min-width: 768px) {
+        position: absolute;
+        inset: 0;
+        display: block;
+    }
+    .arc-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.1rem;
+        // cursor: pointer;
+        // opacity: 0.4;
+        will-change: transform, opacity;
+
+        .award-img {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            background-color: $theme-snow-grey;
+            box-shadow: 0px 25px 20px rgba(177, 193, 218, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            img {
+                width: 100%;
+                height: 100%;
+                max-height: 5.6rem;
+                object-fit: contain;
+                display: block;
+            }
+        }
+
+        .aw_txt {
+            font-size: 1.4rem;
+            color:#818385;
+            line-height: 1.2;
+            text-align: center;
+            white-space: nowrap;
+            // position: absolute;
+            // bottom: -5rem;
+            font-weight: 400;
+            width: 14rem;
+            white-space: pre-wrap;
+
+        }
+    }
 }
   svg {
     position: absolute;
@@ -27,59 +88,56 @@ inset: 0;
     height: 100%;
     pointer-events: none;
 }
+.arc-trackmobile{
+    display: block;
+      @media screen and (min-width: 768px) {
+        display: none;
+    }
+    .arc-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.1rem;
+        // cursor: pointer;
+        will-change: transform, opacity;
 
-.arc-item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    // width: 10rem;
-    // height: 10rem;
-    // border-radius: 50%;
-    // background-color: $theme-snow-grey;
-    // box-shadow: 0px 25px 20px rgba(177, 193, 218, 0.2);
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1.1rem;
-    cursor: pointer;
-    // opacity: 0.4;
-    will-change: transform, opacity;
+        .award-img {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            background-color: $theme-snow-grey;
+            box-shadow: 0px 25px 20px rgba(177, 193, 218, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            img {
+                width: 100%;
+                height: 100%;
+                max-height: 5.6rem;
+                object-fit: contain;
+                display: block;
+            }
+        }
 
-.award-img {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
-    background-color: $theme-snow-grey;
-    box-shadow: 0px 25px 20px rgba(177, 193, 218, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    img {
-        width: 100%;
-        height: 100%;
-        max-height: 5.6rem;
-        object-fit: contain;
-        display: block;
+        .aw_txt {
+            font-size: 1.4rem;
+            color:#818385;
+            line-height: 1.2;
+            text-align: center;
+            white-space: nowrap;
+            // position: absolute;
+            // bottom: -5rem;
+            font-weight: 400;
+            width: 14rem;
+            white-space: pre-wrap;
+
+        }
     }
 }
 
-.aw_txt {
-    font-size: 1.4rem;
-    color:#818385;
-    line-height: 1.2;
-    text-align: center;
-    white-space: nowrap;
-    // position: absolute;
-    // bottom: -5rem;
-    font-weight: 400;
-    width: 14rem;
-    white-space: pre-wrap;
 
-}
-}
 .arc-item.active {
     opacity: 1;
     z-index: 2;
@@ -91,9 +149,12 @@ inset: 0;
 .arc-center-content{
     max-width: 61rem;
     margin: auto;
-    margin-top: -20rem;
+    margin-top: 0;
     position: relative;
     z-index: 1;
+      @media screen and (min-width: 768px) {
+        margin-top: -20rem;
+    }
     .center-icon {
         width: 14.4rem;
         height: 14.4rem;
@@ -111,6 +172,12 @@ inset: 0;
     }
     .text-wrap{
         margin-top: -3.5rem;
+        @media screen and (min-width: 768px) {
+            margin-top: 3.5rem;
+        }
+        @media screen and (min-width: 991px) {
+            margin-top: -3.5rem;
+        }
         .content-subhead {
             margin-bottom: 2rem;
         }
@@ -128,13 +195,18 @@ inset: 0;
     transform: translateX(-50%);
     width:100%;
     bottom: -12rem;
+    
     h2{
-        font-size: clamp(5rem, 10vw, 20rem);
+        font-size: clamp(6rem, 10vw, 20rem);
         color:rgba($theme-white,0.9);
         line-height: 1.2;
         font-weight: 500;
         @media screen and (min-width: 1300px) {
             font-size: 20rem;
+        }
+        span{
+              display: inline-block;
+  white-space: nowrap;
         }
     }
 }

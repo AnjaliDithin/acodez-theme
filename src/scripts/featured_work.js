@@ -45,7 +45,7 @@ export function initFeaturedWorks() {
 
         cards.forEach((card, i) => {
             gsap.set(card, {
-                y: "110vh",
+                y: "200vh",
                 opacity: 0,
                 zIndex: 10 + i,
                 force3D: true,

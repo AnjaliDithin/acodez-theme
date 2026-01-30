@@ -2,6 +2,7 @@
 
 .FaqScrollsection {
      padding: 5rem 0 0;
+     background: $theme-snow-grey;
    @media screen and (min-width: 991px) {
        padding: 12.6rem 0 0 0 
     }
@@ -32,13 +33,19 @@
         justify-content: space-between;
         gap: 2rem;
         align-items: center;
-        cursor: pointer;
+        // cursor: pointer;
         }
 
         .heading-row {
         display: flex;
-        gap: 6rem;
+        gap: 2rem;
         align-items: center;
+         @media screen and (min-width: 580px) {
+            gap: 4rem;
+        }
+        @media screen and (min-width: 991px) {
+            gap: 6rem;
+        }
 
         h5 {
             font-size: clamp(1.6rem, 1vw + 1rem, 2.5rem);
@@ -50,8 +57,16 @@
         color: #4284F4;
         font-weight: 300;
         font-size: clamp(1.8rem, 1vw + 1.2rem, 2.2rem);
+        display: none;
+            @media screen and (min-width: 580px) {
+               display: block;
+            }
         }
         .icon-wrapper {
+             display: none;
+            @media screen and (min-width: 580px) {
+               display: block;
+            }
             .close-icon {
                 display: none;
             }
@@ -61,8 +76,15 @@
         overflow: hidden;
         opacity: 0;
         transition: height 0.4s ease, opacity 0.3s ease;
-        padding-left: 9rem;
-        max-width: 90%;
+        padding-left: 0;
+        max-width: 100%;
+        @media screen and (min-width: 580px) {
+            padding-left: 6rem;
+             max-width: 90%;
+        }
+        @media screen and (min-width: 991px) {
+           padding-left: 9rem;
+        }
         .content-box-col {
             padding-top: 2rem;
         }
@@ -71,12 +93,14 @@
     }
     .scroll-block.is_open {
         .icon-wrapper {
+           
             .open-icon {
                 display: none;
             }
             .close-icon {
                 display: inline-block;
             }
+            
         }
         .text__wrapper {
             opacity: 1;

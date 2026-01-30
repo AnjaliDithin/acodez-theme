@@ -4,11 +4,20 @@ const {
   subtitle = "OUR MASCOT",
   description = "We love illustrations and Acodie, our mascot, is a cool showcase of our creativity. You could find Acodie in every page of this site in various styles and emotions.",
   image = "/images/home/acodie.png",
-  reverse = false, // set true to swap columns
+  reverse = false,
+  contentOnly = false,
+   acodieSec = false, // set true to swap columns
 } = Astro.props;
 ---
 
-<section class={`Col2grid-section bg-change ${reverse ? "is-reverse" : ""}`} data-color="#FFFFFF">
+<section
+  class={`Col2grid-section bg-change
+    ${reverse ? "is-reverse" : ""}
+    ${contentOnly ? "content-only" : ""}
+    ${acodieSec ? "acodie-sec" : ""}`
+  }
+  data-color="#FFFFFF"
+>
   <div class="container">
     <div class="Col2-gridarea">
       

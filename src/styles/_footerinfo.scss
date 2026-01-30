@@ -2,22 +2,37 @@
 
 .footer-info-sec{
     position: relative;
-    padding: 9.2rem 0 7.2rem;
+    padding: 5rem 0 5rem;
+    @media screen and (min-width: 768px) {
+        padding: 9.2rem 0 7.2rem;
+    }
     .footer-top{
         display: flex;
         flex-direction: column;
         gap:3.2rem;
+       
     }
     .footer-socials{
         display: flex;
         gap:3rem;
+         justify-content: center;
+        @media screen and (min-width: 580px) {
+            justify-content: flex-start;
+        }
     }
     .footer-links{
         display: flex;
         align-items: center;
         gap:2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+         @media screen and (min-width: 580px) {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+        }
         .footebtmlink{
             position: relative;
+            
             &::before{
                 content: "";
                 background-color: #ADADAD;
@@ -28,33 +43,60 @@
                 transform: translateY(-50%);
                 position: absolute;
             }
+            &:first-child{
+                    &::before{
+                        display: none;
+                    }
+                }
+             @media screen and (min-width: 580px) {
+                &:first-child{
+                    &::before{
+                        display:block;
+                    }
+                }
+            }
+            
         }
     }
     .footer-brand {
+        text-align: center;
       .brand-text {
-        font-size: 40rem;
         line-height: 1;
         font-weight: 700;
         display: inline-flex;
+        font-size: clamp(9rem, 1.5vw + 1.5rem, 40rem);
+        color:#F6F8FA;
+        text-align: center;
+        @media screen and (min-width: 768px) {
+            font-size: 20rem;
+        }
+         @media screen and (min-width: 991px) {
+            font-size: 30rem;
+        }
+        @media screen and (min-width: 1300px) {
+            font-size: 40rem;
+        }
       }
 
       .brand-text span {
         --spot: 0; 
         color:#F6F8FA;
-        &.is-active{
-            background: radial-gradient(
+        
+        &.is-active {
+        background: radial-gradient(
             100% 100% at var(--lx, 50%) var(--ly, 50%),
-            rgba(0, 174, 239, var(--spot)) 0%,
+            rgba(0, 174, 239, calc(var(--spot) * 0.5)) 0%,
             $theme-snow-grey 50%
-          );
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
 
-          transition:
-          background-position 0.08s linear,
-          --spot 0.15s ease;
+        transition:
+            background-position 0.08s linear,
+            --spot 0.15s ease;
         }
+
       }
     }
 

@@ -55,6 +55,10 @@
         .card-wrap{
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
+             @media screen and (min-width: 768px) {
+             flex-wrap: nowrap;
+          }
         }
         .card-block{
             width: 100%;
@@ -75,9 +79,13 @@
                     padding-top: 5rem;
                 }
             }
+             background-color: #0E1216;
         }
         .image-wrap{
-            width: 48%;
+            width: 100%;
+                @media screen and (min-width: 768px) {
+                width: 48%;
+            }
             img{
                 width: 100%;
                 height: auto;
@@ -92,7 +100,10 @@
         //     transform: scale(0.95);
         // }
         .content-wrap{
-            width: 48%;
+             width: 100%;
+                @media screen and (min-width: 768px) {
+                width: 48%;
+            }
             padding-left: 6rem;
             background-color: #0E1216;
             display: flex;

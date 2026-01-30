@@ -16,9 +16,10 @@
     display: flex;
     align-items: center;
     height: 4.5rem;
-    padding-right: 4rem;
     width: fit-content;
-
+    &.with-arrow{
+         padding-right: 4.5rem;
+    }
     &:visited{
         color:#282828;
     }
@@ -28,15 +29,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 2rem;
-        width: 2rem;
+        height: 2.5rem;
+        width: 2.5rem;
         right: 1.1rem;
         transition: all 0.3s;
-        background: url('/images/arrow-right1.svg') center no-repeat;
+        background: url('../images/arrow-right1.svg') center no-repeat;
         background-size: contain;
     }
     &:hover {
         color: $theme-white;
+        background: transparent;
         &:visited{
              color: $theme-white;
         }
@@ -57,6 +59,30 @@
         transform: skewX(-45deg) scale(1, 1);
         transition: 0.7s ease all;
     }
+    &.greyborder-btn{
+       border: 1.5px solid #D4D4D4;
+       background: transparent;
+       &:hover {
+            border: 1.5px solid transparent;
+        }
+    }
+    &.darkborder-btn{
+       border: 1.5px solid #B1C1DA;
+       background: transparent;
+        &:hover {
+            border: 1.5px solid transparent;
+        }
+    }
+    &.bluebg-btn{
+        background: $theme-lightblue;
+        color:$theme-white;
+        &:visited{
+            color:$theme-white;
+        }
+        &:hover {
+            background: transparent;
+        }
+    }
     &.hdr-ct-btn{
         font-size: 1.5rem;
         padding-right: 2.4rem;
@@ -69,6 +95,7 @@
         }
          &:hover {
             color: #282828;
+            border: 2px solid transparent;
             &:visited{
                 color:#282828;
             }
@@ -78,9 +105,5 @@
             background: white;
         }
     }
-    &.small-icon-btn{
-
-    }
-
 
 }

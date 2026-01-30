@@ -1,89 +1,132 @@
 import gsap from "gsap";
+import Swiper from "swiper";
+import "swiper/css";
 
-export function initArcPathSlider() {
-  const items = gsap.utils.toArray(".arc-item");
-  const path = document.querySelector("#arcPath");
+export function initArcSliderResponsive() {
+  if (typeof window === "undefined") return;
 
-  if (!items.length || !path) return;
+  const isDesktop = () => window.innerWidth >= 768;
+  const isMobile = () => window.innerWidth < 768;
 
-  const TOTAL = items.length;
-  const VISIBLE = 5;
-  const CENTER_OFFSET = Math.floor(VISIBLE / 2);
-  const pathLength = path.getTotalLength();
+  let mobileSwiper = null;
+  let arcRunning = false;
+  let stopArc = null;
 
-  const AUTO_DELAY = 3000; // ⏱ autoplay time (ms)
+  /* ================= DESKTOP: GSAP ARC ================= */
+  function initArcSlider() {
+    if (!isDesktop() || arcRunning) return;
 
-  let activeIndex = 0;
-  let autoTimer = null;
+    const items = gsap.utils.toArray(".arc-track .arc-item");
+    const path = document.querySelector("#arcPath");
+    const container = document.querySelector(".arc-container");
 
-  const ARC_START = 0.15;
-  const ARC_END = 0.85;
-  const STEP = (ARC_END - ARC_START) / (VISIBLE - 1);
+    if (!items.length || !path) return;
 
-  function layout(index) {
-    items.forEach((item, i) => {
-      let offset = i - index;
+    arcRunning = true;
 
-      // Infinite loop correction
-      if (offset > TOTAL / 2) offset -= TOTAL;
-      if (offset < -TOTAL / 2) offset += TOTAL;
+    const TOTAL = items.length;
+    const VISIBLE = 5;
+    const CENTER = Math.floor(VISIBLE / 2);
+    const ARC_START = 0.1;
+    const ARC_END = 0.9;
+    const SLOT_GAP = (ARC_END - ARC_START) / (VISIBLE - 1);
+    const pathLength = path.getTotalLength();
 
-      // Hide items outside visible window
-      if (offset < -CENTER_OFFSET || offset > CENTER_OFFSET) {
-        gsap.to(item, {
-          opacity: 0,
-          scale: 0.8,
-          pointerEvents: "none",
-          duration: 0.3,
-          overwrite: "auto"
+    let offset = 0;
+    const speed = 0.01;
+    let paused = false;
+
+    gsap.set(items, {
+      position: "absolute",
+      xPercent: -50,
+      yPercent: -50,
+      willChange: "transform",
+    });
+
+    function render() {
+      if (paused) return;
+      offset += speed;
+
+      items.forEach((item, i) => {
+        let d = i - offset;
+        d = ((d % TOTAL) + TOTAL) % TOTAL;
+        if (d > TOTAL / 2) d -= TOTAL;
+
+        if (Math.abs(d) > CENTER + 0.5) {
+          item.style.visibility = "hidden";
+          return;
+        }
+
+        const slot = Math.floor(d + 0.5) + CENTER;
+        const point = path.getPointAtLength(
+          (ARC_START + slot * SLOT_GAP) * pathLength
+        );
+
+        gsap.set(item, {
+          x: point.x,
+          y: point.y,
+          scale: Math.abs(d) < 0.5 ? 1.25 : 1,
+          visibility: "visible",
+          zIndex: 10 - Math.abs(d),
         });
-        return;
-      }
-
-      // Map visible items to arc slots
-      const slot = offset + CENTER_OFFSET;
-      const progress = ARC_START + STEP * slot;
-      const point = path.getPointAtLength(progress * pathLength);
-
-      gsap.to(item, {
-        x: point.x,
-        y: point.y,
-        xPercent: -20,
-        yPercent: -50,
-        opacity: 1,
-        scale: offset === 0 ? 1.25 : 1,
-        pointerEvents: "auto",
-        duration: 0.6,
-        ease: "power3.out",
-        overwrite: "auto"
       });
+    }
 
-      item.classList.toggle("active", offset === 0);
+    gsap.ticker.add(render);
+
+    if (container) {
+      container.addEventListener("mouseenter", () => (paused = true));
+      container.addEventListener("mouseleave", () => (paused = false));
+    }
+
+    return () => {
+      gsap.ticker.remove(render);
+      arcRunning = false;
+    };
+  }
+
+  /* ================= MOBILE: SWIPER ================= */
+  function initMobileSwiper() {
+    if (!isMobile() || mobileSwiper) return;
+
+    const el = document.querySelector(".arc-trackmobile");
+    if (!el) return;
+
+    mobileSwiper = new Swiper(el, {
+      slidesPerView: 2,
+      spaceBetween: 20,
+      speed: 1000,
+      loop: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        640: { slidesPerView: 3 },
+      },
     });
   }
 
-  /* AUTOPLAY ONLY */
-  function startAutoplay() {
-    stopAutoplay();
-    autoTimer = setInterval(() => {
-      activeIndex = (activeIndex + 1) % TOTAL;
-      layout(activeIndex);
-    }, AUTO_DELAY);
-  }
-
-  function stopAutoplay() {
-    if (autoTimer) {
-      clearInterval(autoTimer);
-      autoTimer = null;
+  function destroyMobileSwiper() {
+    if (mobileSwiper) {
+      mobileSwiper.destroy(true, true);
+      mobileSwiper = null;
     }
   }
 
-  /* INITIAL */
-  layout(activeIndex);
-  startAutoplay();
+  function handleResize() {
+    if (isDesktop()) {
+      destroyMobileSwiper();
+      if (!stopArc) stopArc = initArcSlider();
+    } else {
+      if (stopArc) {
+        stopArc();
+        stopArc = null;
+      }
+      initMobileSwiper();
+    }
+  }
 
-  /* Resize safety */
-  window.addEventListener("resize", () => {
-    layout(activeIndex);
-  });
+  handleResize();
+  window.addEventListener("resize", handleResize);
 }

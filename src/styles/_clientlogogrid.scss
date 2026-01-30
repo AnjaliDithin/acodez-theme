@@ -1,8 +1,12 @@
 @use "variables" as *;
 
 .client-logo-section {
-  padding: 14.5rem 0 0 0;
-      .heading-block{
+  padding: 5rem 0 5rem 0;
+  background-color: $theme-dark;
+   @media screen and (min-width: 991px) {
+       padding: 14.5rem 0 0 0;
+    }
+    .heading-block{
         padding-bottom: 6rem;
         width: 100%;
         display: flex;
@@ -18,16 +22,25 @@
             .highlight{
                 color:$theme-lightblue;
             }
-        }
+    }
   .client-logogrid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     gap: 0.2rem;
     width: 100%;
-
-   
-
+    @media screen and (min-width: 580px) {
+          grid-template-columns: repeat(3, 1fr);
+      }
+    @media screen and (min-width: 991px) {
+          grid-template-columns: repeat(4, 1fr);
+      }
+     @media screen and (min-width: 1180px) {
+          grid-template-columns: repeat(5, 1fr);
+      }
+     @media screen and (min-width: 1300px) {
+          grid-template-columns: repeat(6, 1fr);
+      }
     .cross-fade-wrap {
       width: 100%;
       display: flex;
@@ -43,15 +56,19 @@
         border-radius: 0;
 
         img {
-          /* ✅ FIX */
-        //   max-width: 100%;
-        //   max-height: 100%;
+         
             height: auto;
             width: auto;
             object-fit: contain;
             margin: auto;
             display: block;
             border-radius: 0;
+        }
+        &:hover {
+          img {
+            transition:0.7s ease all;
+            filter: grayscale(0) sepia(100%) saturate(500%) hue-rotate(190deg);
+          }
         }
       }
     }

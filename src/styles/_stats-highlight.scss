@@ -2,67 +2,95 @@
 
 .stats-highlight-section {
   padding: clamp(5rem, 10vw, 14rem) 0;
+  background-color: $theme-dark;
   .section-header{
    display: inline;
    padding-bottom: 6rem;
    width: 100%;
    display: flex;
    flex-wrap: wrap;
+   justify-content: center;
+   text-align: center;
+    @media screen and (min-width: 580px) {
+        text-align: left;
+        justify-content: flex-start;
+    } 
     h4{
         font-size: clamp(2.2rem, 1.5vw + 1.5rem, 3.5rem);
         font-weight: 200;
         color:$theme-white;
-        width: 70%;
+        width: 100%;
+        @media screen and (min-width: 580px) {
+            width: 70%;
         margin-left: auto;
+        } 
         @media screen and (min-width: 1300px) {
             font-size: 3.5rem;
         }
     }
     h2{
-       font-size: clamp(5rem, 1.5vw + 1.5rem, 10rem);
+       font-size: clamp(4rem, 1.5vw + 1.5rem, 10rem);
        color:$theme-white;
+        margin-bottom: 2rem;
         @media screen and (min-width: 1300px) {
             font-size: 10rem;
+            margin-bottom: 3rem;
         } 
     }
     .highlight{
         color:$theme-lightblue;
+     
     }
   }
-  .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
-    .stat-value {
-        font-size: clamp(4rem, 4vw, 8rem);
-        font-weight: 500;
-        margin-bottom: 0.4rem;
-        line-height: 1.1;
-        color:$theme-white
-    }
-
-    .stat-label {
-        color: #9C9C9C;
-    }
-    .stat-icon{
-        width: 6rem;
-        height: 6rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        img{
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        @media screen and (min-width: 580px) {
+            grid-template-columns: repeat(2, 1fr);
+        } 
+        @media screen and (min-width: 991px) {
+            grid-template-columns: repeat(4, 1fr);
+        } 
+        .stat-value {
+            font-size: clamp(4rem, 4vw, 8rem);
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            line-height: 1.1;
+            color:$theme-white
         }
-    }
-    .stat-card {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-    }
+
+        .stat-label {
+            color: #9C9C9C;
+            font-size: clamp(1.6rem, 1vw + 1.2rem, 2rem);
+            @media screen and (min-width: 1300px) {
+                font-size: 2rem;
+            }
+        }
+        .stat-icon{
+            width: 6rem;
+            height: 6rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+
+            }
+        }
+        .stat-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap:1rem;
+            @media screen and (min-width: 580px) {
+                  align-items: flex-start;
+                  text-align: left;
+            } 
+        }
     }
   
 }
