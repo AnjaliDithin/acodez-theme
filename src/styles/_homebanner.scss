@@ -5,6 +5,7 @@
   display: grid;
   place-items: center; 
   padding: 8rem 0;
+  background-color: $theme-dark;
     @media screen and (min-width:991px) {
         min-height: 100svh; 
       }

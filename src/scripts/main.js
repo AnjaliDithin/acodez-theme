@@ -6,6 +6,7 @@ import { initHeroCrossfade } from "./hero_crossfade.js";
 import { initVideoControls } from "./video_player.js";
 import { initHoverParallax } from "./hover_parallax.js";
 // import { initSplittext } from "./splittext.js";
+import { initClientLogoCrossfade } from "./crossFadeRandom.js";
 import { initTextAnimation } from "./textanimation.js";
 import { initScrollAccordion } from "./scrolltrigger_accordion.js";
 import { initImageTrail } from "./image_trail.js";
@@ -39,6 +40,7 @@ const COMPONENTS = [
   { selector: ".full-video-block", init: initVideoControls },
   { selector: ".image-hover-section", init: initHoverParallax },
   // { selector: ".split-text", init: initSplittext },
+  { selector: ".client-logogrid", init: initClientLogoCrossfade },
   { selector: ".floating-text", init: initTextAnimation },
   { selector: ".scroll-accordion", init: initScrollAccordion },
   { selector: ".interaction_trail", init: initImageTrail },

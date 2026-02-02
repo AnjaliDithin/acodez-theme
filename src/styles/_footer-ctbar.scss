@@ -2,7 +2,7 @@
 
 .footer-ctbar {
   position: relative;
-  padding: 5rem 0 5rem;
+  padding: 5rem 0 3rem;
   background-color: $theme-snow-grey;
    @media screen and (min-width: 768px) {
        padding: 11.5rem 0 11.5rem;
@@ -147,9 +147,13 @@
       border: none;
       background: $theme-lightblue;
       color: #fff;
-      width: 5rem;
-      height: 5rem;
+      height: 4rem;
+        width: 4rem;
       border-radius: 50%;
+       @media screen and (min-width: 580px) {
+           width: 5rem;
+      height: 5rem;
+        }
       position: relative;
       // cursor: pointer;
       &::before{
@@ -158,8 +162,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 2.3rem;
-        width: 2.3rem;
+        height: 1.5rem;
+        width: 1.5rem;
         right: 1.1rem;
         transition: all 0.3s;
         background: url("../images/arrow-right2.svg") center no-repeat;
@@ -167,6 +171,10 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        @media screen and (min-width: 580px) {
+          height: 2.3rem;
+        width: 2.3rem;
+        }
       }
     }
     button[type="submit"]:hover,
@@ -187,8 +195,18 @@ input[type="email"]:focus-visible {
     }
     .subscribe-label{
       position: relative;
+      padding-right: 0;
+      margin-right: 0;
+      @media screen and (min-width: 580px) {
       padding-right: 2rem;
       margin-right: 3.6rem;
+      }
+      br{
+         display: none;
+        @media screen and (min-width: 580px) {
+            display: block;
+        }
+      }
       &::after{
         content: "";
         display: block;

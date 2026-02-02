@@ -19,7 +19,6 @@
     display: inline-flex;
     align-items: center;
     gap: 2.5rem;
-    animation: scroll 35s linear infinite;
     will-change: transform;
   }
 
@@ -80,8 +79,24 @@
       transform: translateX(-50%);
     }
   }
+  @keyframes scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 
   .awards-ticker:hover .ticker-track {
     animation-play-state: paused;
+  }
+   .awards-ticker-block.left-moving .ticker-track{
+    animation: scroll 35s linear infinite;
+      animation-duration: 55s;
+  }
+   .awards-ticker-block.right-moving .ticker-track{
+    animation: scroll-reverse 35s linear infinite;
+    animation-duration: 70s;
   }
 }
