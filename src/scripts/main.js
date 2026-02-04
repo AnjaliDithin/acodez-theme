@@ -12,7 +12,7 @@ import { initScrollAccordion } from "./scrolltrigger_accordion.js";
 import { initImageTrail } from "./image_trail.js";
 import { initStatCounter } from "./statCounter.js";
 import { initSwiperCardSlider } from "./swiper_cardSlider.js";
-import { initArcSliderResponsive} from "./gsap_arcSlider.js";
+import { initArcSlider} from "./gsap_arcSlider.js";
 import { initFeaturedWorks } from "./featured_work.js";
 import { initFeaturedMedia } from "./featured_media.js";
 import { initFaqAccordion } from "./faq-accordion.js";
@@ -45,7 +45,7 @@ const COMPONENTS = [
   { selector: ".scroll-accordion", init: initScrollAccordion },
   { selector: ".interaction_trail", init: initImageTrail },
   { selector: ".stats-highlight-section", init: initStatCounter },
-  { selector: ".arc-track", init: initArcSliderResponsive },
+  { selector: ".award-arc-area", init: initArcSlider },
   { selector: ".featured-work-sec", init: initFeaturedWorks },
   { selector: ".featured_media-sec", init: initFeaturedMedia },
   { selector: ".FaqScrollsection", init: initFaqAccordion },

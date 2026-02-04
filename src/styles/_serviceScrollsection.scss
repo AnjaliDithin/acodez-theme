@@ -19,6 +19,28 @@
           line-height: 1;
         }
     }
+    .scrollingText{
+      line-height: 1;
+        font-weight: 600;
+        display: inline-flex;
+        gap: 10rem;
+        font-size: clamp(9rem, 1.5vw + 1.5rem, 18rem);
+        color:rgba(#BDC5CA,0.2);
+        text-align: center;
+         @media screen and (min-width: 768px) {
+            font-size: 12rem;
+        }
+         @media screen and (min-width: 991px) {
+            font-size: 15rem;
+        }
+        @media screen and (min-width: 1300px) {
+            font-size: 18rem;
+        }
+        span{
+          white-space: nowrap;
+
+        }
+    }
   
 .highlight-img{
         width: clamp(8rem, 8vw, 15rem);

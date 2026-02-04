@@ -1,20 +1,17 @@
-import gsap from "gsap";
+import { gsap } from "gsap";
 import Swiper from "swiper";
-import "swiper/css";
 
-export function initArcSliderResponsive() {
+let mobileSwiper = null;
+let gsapRenderFn = null;
+
+/* =========================
+   MAIN INIT FUNCTION
+========================= */
+export function initArcSlider() {
   if (typeof window === "undefined") return;
 
-  const isDesktop = () => window.innerWidth >= 768;
-  const isMobile = () => window.innerWidth < 768;
-
-  let mobileSwiper = null;
-  let arcRunning = false;
-  let stopArc = null;
-
-  /* ================= DESKTOP: GSAP ARC ================= */
-  function initArcSlider() {
-    if (!isDesktop() || arcRunning) return;
+  const initDesktop = () => {
+    if (window.innerWidth < 768 || gsapRenderFn) return;
 
     const items = gsap.utils.toArray(".arc-track .arc-item");
     const path = document.querySelector("#arcPath");
@@ -22,81 +19,96 @@ export function initArcSliderResponsive() {
 
     if (!items.length || !path) return;
 
-    arcRunning = true;
-
     const TOTAL = items.length;
     const VISIBLE = 5;
-    const CENTER = Math.floor(VISIBLE / 2);
+    const CENTER_IDX = Math.floor(VISIBLE / 2);
     const ARC_START = 0.1;
     const ARC_END = 0.9;
-    const SLOT_GAP = (ARC_END - ARC_START) / (VISIBLE - 1);
+    const ARC_RANGE = ARC_END - ARC_START;
+    const SLOT_GAP = ARC_RANGE / (VISIBLE - 1);
     const pathLength = path.getTotalLength();
 
     let offset = 0;
-    const speed = 0.01;
+    const autoSpeed = 0.005;
     let paused = false;
 
     gsap.set(items, {
       position: "absolute",
       xPercent: -50,
       yPercent: -50,
-      willChange: "transform",
+      opacity: 0,
+      scale: 0.5,
+      willChange: "transform, opacity",
     });
 
-    function render() {
+    gsapRenderFn = () => {
       if (paused) return;
-      offset += speed;
+      offset += autoSpeed;
 
       items.forEach((item, i) => {
-        let d = i - offset;
-        d = ((d % TOTAL) + TOTAL) % TOTAL;
+        let d = (i - offset) % TOTAL;
+        if (d < 0) d += TOTAL;
         if (d > TOTAL / 2) d -= TOTAL;
 
-        if (Math.abs(d) > CENTER + 0.5) {
+        const dist = Math.abs(d);
+        if (dist > CENTER_IDX + 0.6) {
           item.style.visibility = "hidden";
+          item.style.opacity = 0;
           return;
         }
 
-        const slot = Math.floor(d + 0.5) + CENTER;
-        const point = path.getPointAtLength(
-          (ARC_START + slot * SLOT_GAP) * pathLength
+        const arcProgress = ARC_START + (d + CENTER_IDX) * SLOT_GAP;
+        const p = Math.max(0, Math.min(1, arcProgress)) * pathLength;
+        const point = path.getPointAtLength(p);
+
+        const scale =
+          dist < 0.5
+            ? gsap.utils.mapRange(0, 0.5, 1.35, 1, dist)
+            : 1;
+
+        const opacity = gsap.utils.mapRange(
+          CENTER_IDX,
+          CENTER_IDX + 0.6,
+          1,
+          0,
+          dist
         );
 
         gsap.set(item, {
           x: point.x,
           y: point.y,
-          scale: Math.abs(d) < 0.5 ? 1.25 : 1,
+          scale,
+          opacity,
           visibility: "visible",
-          zIndex: 10 - Math.abs(d),
+          zIndex: Math.round(10 - dist),
         });
       });
-    }
-
-    gsap.ticker.add(render);
-
-    if (container) {
-      container.addEventListener("mouseenter", () => (paused = true));
-      container.addEventListener("mouseleave", () => (paused = false));
-    }
-
-    return () => {
-      gsap.ticker.remove(render);
-      arcRunning = false;
     };
-  }
 
-  /* ================= MOBILE: SWIPER ================= */
-  function initMobileSwiper() {
-    if (!isMobile() || mobileSwiper) return;
+    gsap.ticker.add(gsapRenderFn);
 
-    const el = document.querySelector(".arc-trackmobile");
-    if (!el) return;
+    container?.addEventListener("mouseenter", () => (paused = true));
+    container?.addEventListener("mouseleave", () => (paused = false));
+  };
 
-    mobileSwiper = new Swiper(el, {
+  const destroyDesktop = () => {
+    if (gsapRenderFn) {
+      gsap.ticker.remove(gsapRenderFn);
+      gsapRenderFn = null;
+      gsap.set(".arc-track", { clearProps: "all" });
+    }
+  };
+
+  const initMobile = () => {
+    if (window.innerWidth >= 768 || mobileSwiper) return;
+
+    mobileSwiper = new Swiper(".arc-trackmobile", {
       slidesPerView: 2,
       spaceBetween: 20,
       speed: 1000,
       loop: true,
+      loopedSlides: 6,
+      loopAdditionalSlides: 2,
       autoplay: {
         delay: 2000,
         disableOnInteraction: false,
@@ -105,28 +117,28 @@ export function initArcSliderResponsive() {
         640: { slidesPerView: 3 },
       },
     });
-  }
+  };
 
-  function destroyMobileSwiper() {
+  const destroyMobile = () => {
     if (mobileSwiper) {
       mobileSwiper.destroy(true, true);
       mobileSwiper = null;
     }
-  }
+  };
 
-  function handleResize() {
-    if (isDesktop()) {
-      destroyMobileSwiper();
-      if (!stopArc) stopArc = initArcSlider();
+  const handleResize = () => {
+    if (window.innerWidth < 768) {
+      destroyDesktop();
+      initMobile();
     } else {
-      if (stopArc) {
-        stopArc();
-        stopArc = null;
-      }
-      initMobileSwiper();
+      destroyMobile();
+      initDesktop();
     }
-  }
+  };
 
+  // INITIAL RUN
   handleResize();
+
+  // LISTEN ONCE
   window.addEventListener("resize", handleResize);
 }

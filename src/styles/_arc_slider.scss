@@ -88,7 +88,7 @@ background: linear-gradient(180deg, #F6F8FA 39.9%, #EBF1F3 100%);
                 width: 10rem;
             }
               @media screen and (min-width: 991px) {
-                 width: 14rem;
+                 width: 11rem;
             }
 
         }
@@ -161,13 +161,13 @@ background: linear-gradient(180deg, #F6F8FA 39.9%, #EBF1F3 100%);
     }
 }
 .arc-center-content{
-    max-width: 61rem;
+    max-width: 50rem;
     margin: auto;
     margin-top: 0;
     position: relative;
     z-index: 1;
       @media screen and (min-width: 768px) {
-        margin-top: -20rem;
+        margin-top: -15rem;
     }
     .center-icon {
         width: 14.4rem;
