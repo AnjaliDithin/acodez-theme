@@ -5,14 +5,14 @@ import { initInteractiveGlobe } from "./interactiveGlobe.js";
 import { initHeroCrossfade } from "./hero_crossfade.js";
 import { initVideoControls } from "./video_player.js";
 import { initHoverParallax } from "./hover_parallax.js";
-// import { initSplittext } from "./splittext.js";
+import { initScrolltext } from "./scrollinglText.js";
 import { initClientLogoCrossfade } from "./crossFadeRandom.js";
 import { initTextAnimation } from "./textanimation.js";
 import { initScrollAccordion } from "./scrolltrigger_accordion.js";
 import { initImageTrail } from "./image_trail.js";
 import { initStatCounter } from "./statCounter.js";
 import { initSwiperCardSlider } from "./swiper_cardSlider.js";
-import { initArcSlider} from "./gsap_arcSlider.js";
+import { initArcSlider } from "./gsap_arcSlider.js";
 import { initFeaturedWorks } from "./featured_work.js";
 import { initFeaturedMedia } from "./featured_media.js";
 import { initFaqAccordion } from "./faq-accordion.js";
@@ -37,9 +37,9 @@ function initGlobal() {
 const COMPONENTS = [
   { selector: ".hero-section", init: initHeroCrossfade },
   { selector: ".interactive-globe-container", init: initInteractiveGlobe },
-  { selector: ".full-video-block", init: initVideoControls },
+  { selector: ".full-video-block", init: (section) => initVideoControls(section, mfInstance) },
   { selector: ".image-hover-section", init: initHoverParallax },
-  // { selector: ".split-text", init: initSplittext },
+  { selector: ".scrollingText", init: initScrolltext },
   { selector: ".client-logogrid", init: initClientLogoCrossfade },
   { selector: ".floating-text", init: initTextAnimation },
   { selector: ".scroll-accordion", init: initScrollAccordion },

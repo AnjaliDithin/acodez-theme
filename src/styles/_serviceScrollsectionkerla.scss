@@ -164,21 +164,28 @@
       z-index: 2;
     }
     #grid_container {
-      display: block;
+      display: grid;
+      grid-template-columns: 1fr;
       position: relative;
     }
 
     .scroll-accordion {
+     grid-area: 1 / 1;
       position: relative;
-      width: 100%;
-      padding: 3.7rem 0;
+      background-color: $theme-snow-grey;
       background-clip: padding-box;
-      will-change: height, opacity;
-      transition: none !important;
-
-      &.is-active {
-        z-index: 2;
+      will-change: transform;
+      overflow: visible;
+      padding: 0 0 3.7rem 0;
+      width: 100%;
+      &:first-child{
+        padding-top:0;
       }
+    }
+     .scroll-accordion.is-active {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
     }
     .scroll-accordion::after {
       content: "";
@@ -213,7 +220,7 @@
     }
     .text__wrapper:not(.is-open) {
       visibility: hidden;
-      // pointer-events: none;
+      pointer-events: none;
       // padding: 3.7rem 0 0;
     }
 

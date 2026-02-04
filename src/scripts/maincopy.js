@@ -1,19 +1,19 @@
 
 import { initMouseFollower } from "./mouse_follower.js";
 import { initInteractiveGlobe } from "./interactiveGlobe.js";
-import { initHeroCrossfade }from "./hero_crossfade.js";
+import { initHeroCrossfade } from "./hero_crossfade.js";
 import { initVideoControls } from "./video_player.js";
 import { initHoverParallax } from "./hover_parallax.js";
-import { initSplittext } from "./splittext.js";
+import { initSplittext } from "./scrollinglText.js";
 import { initTextAnimation } from "./textanimation.js";
-import { initScrollAccordion } from "./scrolltrigger_accordion.js";
+import { initScrollAccordion } from "./scrolltrigger_accordion-kerla.js";
 import { initImageTrail } from "./image_trail.js";
 import { initStatCounter } from "./statCounter.js";
 import { initGsapCardSlider } from "./gsap_cardSlider.js";
 import { initArcPathSlider } from "./gsap_arcSlider.js";
 import { initFeaturedWorks } from "./featured_work.js";
 import { initFeaturedMedia } from "./featured_media.js";
-import { initFaqAccordion }from  "./faq-accordion.js";
+import { initFaqAccordion } from "./faq-accordion.js";
 // import { initTestimonialTooltips }from  "./testimonial-tooltip.js";
 
 
@@ -39,11 +39,11 @@ function initAll() {
 }
 
 // First load
- if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initAll);
-    } else {
-      initAll();
-    }
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initAll);
+} else {
+  initAll();
+}
 
 // Astro navigation
 document.addEventListener("astro:page-load", initAll);

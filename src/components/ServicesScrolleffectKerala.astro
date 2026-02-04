@@ -105,11 +105,7 @@ const bottomServices = services.slice(4);
           {/* TOP: only first 4 services in scroll-accordion */}
           {
             topServices.map((service, idx) => (
-              <div
-                class="scroll-accordion scroll-block"
-                key={service.id}
-                data-index={idx}
-              >
+              <div class="scroll-accordion scroll-block" data-index={idx}>
                 <div class="title-row">
                   <div class="heading-row">
                     <h6 class="title__number">({service.id})</h6>
@@ -132,10 +128,8 @@ const bottomServices = services.slice(4);
                     <div class="content-box">
                       <p>{service.description}</p>
                       <ul class="features-list">
-                        {service.features.map((f, idx) => (
-                          <li class="feature-item" key={idx}>
-                            {f}
-                          </li>
+                        {service.features?.map((f) => (
+                          <li class="feature-item">{f}</li>
                         ))}
                       </ul>
                       <Button
@@ -155,22 +149,27 @@ const bottomServices = services.slice(4);
           {/* BOTTOM: render remaining services after the first 4 */}
           {
             bottomServices.length > 0 && (
-              <div class="scroll-bttom-row scroll-block" id="scroll-bttom-row">
-                {bottomServices.map((s) => (
-                  <div class="btm-col" key={s.id}>
-                    <div class="title-btm-row">
-                      <div class="heading-btm-row">
-                        <h6 class="title__number">({s.id})</h6>
-                        <h4>{s.title}</h4>
-                      </div>
-                      <div class="content-btmbox-col reveal">
-                        <div class="content-box">
-                          <p>{s.description}</p>
+              <div
+                class="scroll-accordion scroll-block"
+                data-index={topServices.length}
+              >
+                <div class="scroll-bttom-row " id="scroll-bttom-row">
+                  {bottomServices.map((s) => (
+                    <div class="btm-col" key={s.id}>
+                      <div class="title-btm-row">
+                        <div class="heading-btm-row">
+                          <h6 class="title__number">({s.id})</h6>
+                          <h4>{s.title}</h4>
+                        </div>
+                        <div class="content-btmbox-col reveal">
+                          <div class="content-box">
+                            <p>{s.description}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )
           }
